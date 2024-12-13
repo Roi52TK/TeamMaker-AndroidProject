@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "273220290461",
+    "firebase_url": "https://teammeet-d7a04-default-rtdb.firebaseio.com",
+    "project_id": "teammeet-d7a04",
+    "storage_bucket": "teammeet-d7a04.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273220290461:android:104d4c9afef2523ca1d174",
+        "android_client_info": {
+          "package_name": "com.roi.teammeet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB66hg2cfbBmgdCsS6vEEmRpMP2lui4WMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
