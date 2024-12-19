@@ -1,4 +1,4 @@
-package com.roi.teammeet.model;
+package com.roi.teammeet.models;
 
 import androidx.annotation.NonNull;
 

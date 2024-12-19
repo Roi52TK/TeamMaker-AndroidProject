@@ -1,4 +1,4 @@
-package com.roi.teammeet.model;
+package com.roi.teammeet.models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.Date;
 public class Match {
     private Player creatorPlayer;
     private Date date;
+    private MatchLocation matchLocation;
     private Range ageRange;
     private GroupSize groupSize;
     private ArrayList<Player> players;

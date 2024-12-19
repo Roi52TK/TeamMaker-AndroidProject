@@ -1,4 +1,4 @@
-package com.roi.teammeet;
+package com.roi.teammeet.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.roi.teammeet.R;
+
+public class LandingActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnReg, btnLogin;
 
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_landing);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initViews() {
-        btnReg = findViewById(R.id.btnReg);
-        btnLogin = findViewById(R.id.btnLogin);
+        btnReg = findViewById(R.id.btnSignUp_landing);
+        btnLogin = findViewById(R.id.btnLogin_landing);
 
         btnReg.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
@@ -50,12 +52,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void goToRegister() {
-        Intent go = new Intent(this, Register.class);
+        Intent go = new Intent(this, RegisterActivity.class);
         startActivity(go);
+        finish();
     }
 
     private void goToLogin() {
-        Intent go = new Intent(this, Login.class);
+        Intent go = new Intent(this, LoginActivity.class);
         startActivity(go);
+        finish();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }
