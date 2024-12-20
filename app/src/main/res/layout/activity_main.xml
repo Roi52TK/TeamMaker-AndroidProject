@@ -9,8 +9,17 @@
     android:orientation="vertical"
     tools:context=".screens.MainActivity">
 
+    <TextView
+        android:id="@+id/tvWelcome_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textSize="26sp"
+        android:layout_gravity="center"
+        android:text="Welcome back!" />
+
     <Button
-        android:id="@+id/btnSignOut"
+        android:id="@+id/btnSignOut_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -19,4 +28,15 @@
         android:paddingHorizontal="40dp"
         android:backgroundTint="@color/btnBG"
         android:text="GET OUT" />
+
+    <Button
+        android:id="@+id/btnMaps_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="36sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="@color/btnBG"
+        android:text="Open Maps" />
 </LinearLayout>

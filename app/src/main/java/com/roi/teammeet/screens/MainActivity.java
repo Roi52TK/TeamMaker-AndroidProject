@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.roi.teammeet.R;
+import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
@@ -20,8 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MainActivity";
     private AuthenticationService authenticationService;
+    TextView tvWelcome;
 
     private Button btnSignOut;
+    private Button btnMaps;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +50,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initViews();
         btnSignOut.setOnClickListener(this);
+        btnMaps.setOnClickListener(this);
+
+        currentUser = SharedPreferencesUtil.getUser(this);
+        if (currentUser != null) {
+            String str = "Welcome back " + currentUser.getUsername() + "!";
+            tvWelcome.setText(str);
+        }
     }
 
     private void initViews() {
-        btnSignOut = findViewById(R.id.btnSignOut);
+        tvWelcome = findViewById(R.id.tvWelcome_main);
+        btnSignOut = findViewById(R.id.btnSignOut_main);
+        btnMaps = findViewById(R.id.btnMaps_main);
     }
 
     @Override
     public void onClick(View v) {
         if(v == btnSignOut){
-            authenticationService.signOut();
-            SharedPreferencesUtil.signOutUser(this);
+            SignOut();
             Intent landingIntent = new Intent(this, LandingActivity.class);
             startActivity(landingIntent);
             finish();
         }
+        if(v == btnMaps){
+            Intent mapsIntent = new Intent(this, MapsActivity.class);
+            startActivity(mapsIntent);
+            finish();
+        }
+    }
+
+    private void SignOut(){
+        authenticationService.signOut();
+        SharedPreferencesUtil.signOutUser(this);
     }
 }

@@ -104,9 +104,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onCompleted(Object object) {
                 Log.d(TAG, "onCompleted: User logged in successfully");
                 String uid = authenticationService.getCurrentUser().getUid();
-                //String phone = authenticationService.getCurrentUser().getPhoneNumber();
-                //User user = databaseService.getUser(uid, );
-                //SharedPreferencesUtil.saveUser(LoginActivity.this, user);
+                String phone = authenticationService.getCurrentUser().getPhoneNumber();
+                databaseService.getUser(uid, new DatabaseService.DatabaseCallback<User>() {
+                    @Override
+                    public void onCompleted(User user) {
+                        SharedPreferencesUtil.saveUser(LoginActivity.this, user);
+                    }
+
+                    @Override
+                    public void onFailed(Exception e) {
+                        Log.e(TAG, "onFailed: Failed to login user", e);
+                    }
+                });
                 // Redirect to main activity and clear back stack to prevent user from going back to login screen
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
