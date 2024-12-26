@@ -7,9 +7,9 @@ import java.io.Serializable;
 public class Player implements Serializable {
     private String name;
     private int age;
-    private Gender gender;
+    private String gender;
 
-    public Player(String name, int age, Gender gender){
+    public Player(String name, int age, String gender){
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -23,7 +23,7 @@ public class Player implements Serializable {
         return age;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 

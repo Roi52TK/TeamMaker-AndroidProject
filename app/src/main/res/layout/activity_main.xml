@@ -19,24 +19,47 @@
         android:text="Welcome back!" />
 
     <Button
+        android:id="@+id/btnAvailableMatches_main"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="36sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="@color/btnBG"
+        android:text="משחקים זמינים" />
+
+    <Button
+        android:id="@+id/btnMyMatches_main"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="36sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="@color/btnBG"
+        android:text="המשחקים שלי" />
+
+    <Button
+        android:id="@+id/btnCreateMatch_main"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:textSize="36sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="@color/btnBG"
+        android:text="צור משחק!" />
+
+    <Button
         android:id="@+id/btnSignOut_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="10dp"
         android:textSize="36sp"
         android:paddingHorizontal="40dp"
-        android:backgroundTint="@color/btnBG"
-        android:text="GET OUT" />
-
-    <Button
-        android:id="@+id/btnMaps_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textSize="36sp"
-        android:paddingHorizontal="40dp"
-        android:backgroundTint="@color/btnBG"
-        android:text="Open Maps" />
+        android:backgroundTint="#A10000"
+        android:text="התנתק" />
 </LinearLayout>

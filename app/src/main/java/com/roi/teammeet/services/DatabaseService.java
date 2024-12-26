@@ -10,7 +10,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
+
+import org.jetbrains.annotations.NotNull;
 
 public class DatabaseService {
 
@@ -52,27 +55,32 @@ public class DatabaseService {
         return databaseReference.child(path);
     }
 
+    private <T> void getData(@NotNull final String path, @NotNull final Class<T> clazz, @NotNull final DatabaseCallback<T> callback) {
+        readData(path).get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e(TAG, "Error getting data", task.getException());
+                callback.onFailed(task.getException());
+                return;
+            }
+            T data = task.getResult().getValue(clazz);
+            callback.onCompleted(data);
+        });
+    }
+
+    public void createNewMatch(Match match, DatabaseCallback<Object> callback){
+        writeData("matches/" + match.getId(), match, callback);
+    }
+
+    public void getMatch(String matchId, DatabaseCallback<Match> callback){
+        getData("matches/" + matchId, Match.class, callback);
+    }
+
     public void createNewUser(User user, DatabaseCallback<Object> callback) {
         writeData("users/" + user.getId(), user, callback);
     }
 
     public void getUser(String userId, DatabaseCallback<User> callback) {
-        readData("users/" + userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e(TAG, "Error getting data", task.getException());
-                    if (callback != null) {
-                        callback.onFailed(task.getException());
-                    }
-                    return;
-                }
-                User user = task.getResult().getValue(User.class);
-                if (callback != null) {
-                    callback.onCompleted(user);
-                }
-            }
-        });
+        getData("users/" + userId, User.class, callback);
     }
 
 }

@@ -14,18 +14,26 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.roi.teammeet.R;
+import com.roi.teammeet.models.Match;
+import com.roi.teammeet.models.Player;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
+import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
     private AuthenticationService authenticationService;
-    TextView tvWelcome;
+    private TextView tvWelcome;
 
+    private Button btnAvailableMatches;
+    private Button btnMyMatches;
+    private Button btnCreateMatch;
     private Button btnSignOut;
-    private Button btnMaps;
+    private String welcomeMsg;
     private User currentUser;
 
     @Override
@@ -49,33 +57,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         initViews();
+        btnAvailableMatches.setOnClickListener(this);
+        btnMyMatches.setOnClickListener(this);
+        btnCreateMatch.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
-        btnMaps.setOnClickListener(this);
 
         currentUser = SharedPreferencesUtil.getUser(this);
         if (currentUser != null) {
-            String str = "Welcome back " + currentUser.getUsername() + "!";
-            tvWelcome.setText(str);
+            welcomeMsg = "Welcome back " + currentUser.getUsername() + "!";
+            tvWelcome.setText(welcomeMsg);
         }
     }
 
     private void initViews() {
         tvWelcome = findViewById(R.id.tvWelcome_main);
+        btnAvailableMatches = findViewById(R.id.btnAvailableMatches_main);
+        btnMyMatches = findViewById(R.id.btnMyMatches_main);
+        btnCreateMatch = findViewById(R.id.btnCreateMatch_main);
         btnSignOut = findViewById(R.id.btnSignOut_main);
-        btnMaps = findViewById(R.id.btnMaps_main);
     }
 
     @Override
     public void onClick(View v) {
-        if(v == btnSignOut){
+        if(v == btnAvailableMatches){
+            Intent availableMatchesIntent = new Intent(this, AvailableMatchesActivity.class);
+            startActivity(availableMatchesIntent);
+        }
+        else if(v == btnMyMatches){
+            Intent myMatchesIntent = new Intent(this, MyMatchesActivity.class);
+            startActivity(myMatchesIntent);
+        }
+        else if(v == btnCreateMatch){
+
+        }
+        else if(v == btnSignOut){
             SignOut();
             Intent landingIntent = new Intent(this, LandingActivity.class);
             startActivity(landingIntent);
-            finish();
-        }
-        if(v == btnMaps){
-            Intent mapsIntent = new Intent(this, MapsActivity.class);
-            startActivity(mapsIntent);
             finish();
         }
     }
