@@ -15,7 +15,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
-import com.roi.teammeet.models.Player;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
 import com.roi.teammeet.services.DatabaseService;
@@ -67,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             welcomeMsg = "Welcome back " + currentUser.getUsername() + "!";
             tvWelcome.setText(welcomeMsg);
         }
+
+
+        //TODO: Delete
+        Intent i = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void initViews() {

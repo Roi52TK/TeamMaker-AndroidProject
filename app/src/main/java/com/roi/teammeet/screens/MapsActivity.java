@@ -20,11 +20,38 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 
-public class MapsActivity extends AppCompatActivity implements MapListener, GpsStatus.Listener {
+import android.location.Address;
+import android.location.Geocoder;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.overlay.Marker;
+
+import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.events.MapEventsReceiver;
+
+public class MapsActivity extends AppCompatActivity implements MapListener, GpsStatus.Listener, View.OnClickListener {
 
     private MapView mMap;
     private IMapController controller;
     private MyLocationNewOverlay mMyLocationOverlay;
+    private Marker activeMarker;
+    EditText etStreet;
+    EditText etStreetNumber;
+    EditText etCity;
+    String street;
+    String streetNumber;
+    String city;
+    String address;
+    Button btnGetAddress;
+    Button btnSetMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +71,24 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         mMap.setMultiTouchControls(true);
         mMap.getLocalVisibleRect(new Rect());
 
+        // Add MapEventsOverlay to listen for taps
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
+                // Reposition the marker at the new tap location
+                moveMarkerTo(geoPoint);
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint geoPoint) {
+                return false; // Handle long press if needed
+            }
+        });
+
+        // Add the overlay to the map
+        mMap.getOverlays().add(mapEventsOverlay);
+
         // Initialize location overlay
         mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mMap);
         controller = mMap.getController();
@@ -57,15 +102,21 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         mMyLocationOverlay.runOnFirstFix(new Runnable() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        controller.setCenter(mMyLocationOverlay.getMyLocation());
-                        controller.animateTo(mMyLocationOverlay.getMyLocation());
-                    }
-                });
+                GeoPoint location = mMyLocationOverlay.getMyLocation();
+                if (location != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            controller.setCenter(location);
+                            controller.animateTo(location);
+                        }
+                    });
+                } else {
+                    Log.e("Location", "My location is null");
+                }
             }
         });
+
 
         controller.setZoom(6.0);
 
@@ -78,6 +129,21 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
 
         // Add map listener
         mMap.addMapListener(this);
+
+        // Initial Views
+        initViews();
+
+        // Set OnClickListeners
+        btnGetAddress.setOnClickListener(this);
+        btnSetMarker.setOnClickListener(this);
+    }
+
+    private void initViews(){
+        etStreet = findViewById(R.id.etStreet_maps);
+        etStreetNumber = findViewById(R.id.etStreetNumber_maps);
+        etCity = findViewById(R.id.etCity_maps);
+        btnGetAddress = findViewById(R.id.btnGetAddress_maps);
+        btnSetMarker = findViewById(R.id.btnSetMarker_maps);
     }
 
     @Override
@@ -98,5 +164,112 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         // Not yet implemented
     }
 
+    // Method to move the marker to a new position
+    private void moveMarkerTo(GeoPoint geoPoint) {
+        if (activeMarker == null) {
+            // Create a new marker if it doesn't exist
+            activeMarker = new Marker(mMap);
+            activeMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            mMap.getOverlays().add(activeMarker);
+        }
 
+        // Update the marker's position
+        activeMarker.setPosition(geoPoint);
+        // Marker's title
+        activeMarker.setTitle("Lat: " + geoPoint.getLatitude() + ", Lon: " + geoPoint.getLongitude());
+
+        // Refresh the map to display changes
+        mMap.invalidate();
+    }
+
+
+    public void reverseGeocode(double latitude, double longitude) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                StringBuilder addressText = new StringBuilder();
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                    addressText.append(address.getAddressLine(i)).append("\n");
+                }
+                // Display the address
+                Toast.makeText(this, "Address: " + addressText.toString(), Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Geocoder service not available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void geocodeAndCenterMap(String address) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            // Get the list of addresses for the input address
+            List<Address> addresses = geocoder.getFromLocationName(address, 1);
+
+            if (addresses != null && !addresses.isEmpty()) {
+                Address location = addresses.get(0);
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+
+                // Log the coordinates for debugging
+                Log.d("Geocode", "Lat: " + latitude + ", Lon: " + longitude);
+
+                // Create a GeoPoint from the coordinates
+                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+
+                // Move the map to the geocoded coordinates
+                mMap.getController().setCenter(geoPoint);
+                mMap.getController().animateTo(geoPoint);
+
+                // Set zoom level to focus closer
+                mMap.getController().setZoom(20.0);
+
+                //Add a marker at the location
+                moveMarkerTo(geoPoint);
+
+            } else {
+                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Geocoder service not available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == btnGetAddress){
+            if (activeMarker != null) {
+                // Get the marker's coordinates
+                double latitude = activeMarker.getPosition().getLatitude();
+                double longitude = activeMarker.getPosition().getLongitude();
+
+                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+
+                // Move the map to the geocoded coordinates
+                mMap.getController().setCenter(geoPoint);
+                mMap.getController().animateTo(geoPoint);
+
+                // Set zoom level to focus closer
+                mMap.getController().setZoom(20.0);
+
+                // Reverse geocode the marker's location
+                reverseGeocode(latitude, longitude);
+            } else {
+                Toast.makeText(this, "No marker is placed on the map!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(view == btnSetMarker){
+            street = etStreet.getText().toString();
+            streetNumber = etStreetNumber.getText().toString();
+            city = etCity.getText().toString();
+
+            address = street + " St " + streetNumber + "," + city;
+            geocodeAndCenterMap(address);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.roi.teammeet.models;
 
 import com.roi.teammeet.R;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,32 +11,33 @@ public class Match {
     protected String id;
     protected String name;
     protected String details;
-    private Player creatorPlayer;
+    private User creatorUser;
     private Date date;
     protected String city;
     protected double lang,lat;
     private Range ageRange;
     private GroupSize groupSize;
-    private ArrayList<Player> players;
+    private ArrayList<User> players;
     protected MatchStatus status;
 
     public Match(){
 
     }
 
-    public Match(String name, String details, Player creatorPlayer, Date date, String city, int minAge, int maxAge, int groupSize){
+    public Match(String id, String name, String details, User creatorUser, Date date, String city, int minAge, int maxAge, int groupSize){
+        this.id = id;
         this.name = name;
         this.details = details;
-        this.creatorPlayer = creatorPlayer;
+        this.creatorUser = creatorUser;
         this.date = date;
         this.city = city;
         this.ageRange = new Range(minAge, maxAge);
         this.groupSize = new GroupSize(groupSize);
         this.players = new ArrayList<>();
-        Join(this.creatorPlayer);
+        Join(this.creatorUser);
     }
 
-    public void Join(Player player){
+    public void Join(User player){
         if(canJoin(player)){
             this.players.add(player);
             this.groupSize.add();
@@ -43,7 +45,7 @@ public class Match {
         }
     }
 
-    public void Leave(Player player){
+    public void Leave(User player){
         this.players.remove(player);
         this.groupSize.remove();
         UpdateStatus();
@@ -66,8 +68,9 @@ public class Match {
         }
     }
 
-    private boolean canJoin(Player player){
-        return ageRange.isInRange(player.getAge()) && !groupSize.isFull();
+    private boolean canJoin(User player){
+        int age = Year.now().getValue() - Integer.parseInt(player.getBirthYear());
+        return ageRange.isInRange(age) && !groupSize.isFull();
     }
 
     public String getId() {
@@ -94,12 +97,12 @@ public class Match {
         this.details = details;
     }
 
-    public Player getCreatorPlayer() {
-        return creatorPlayer;
+    public User getCreatorPlayer() {
+        return creatorUser;
     }
 
-    public void setCreatorPlayer(Player creatorPlayer) {
-        this.creatorPlayer = creatorPlayer;
+    public void setCreatorPlayer(User creatorUser) {
+        this.creatorUser = creatorUser;
     }
 
     public Date getDate() {
@@ -150,11 +153,11 @@ public class Match {
         this.groupSize = groupSize;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public ArrayList<User> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
+    public void setPlayers(ArrayList<User> players) {
         this.players = players;
     }
 
@@ -172,7 +175,7 @@ public class Match {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", details='" + details + '\'' +
-                ", creatorPlayer=" + creatorPlayer +
+                ", creatorPlayer=" + creatorUser +
                 ", date=" + date +
                 ", city='" + city + '\'' +
                 ", lang=" + lang +

@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".screens.MapsActivity">
 
     <org.osmdroid.views.MapView
         android:id="@+id/osmmap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <EditText
+            android:id="@+id/etStreet_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Street"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/etStreetNumber_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Number"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etCity_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btnSetMarker_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Set Marker"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnGetAddress_maps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Address"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</LinearLayout>

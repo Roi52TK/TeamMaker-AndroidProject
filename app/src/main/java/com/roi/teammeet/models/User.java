@@ -18,6 +18,15 @@ public class User {
         this.password = password;
     }
 
+    public User(String id, String username, String birthYear) {
+        this.id = id;
+        this.username = username;
+        this.birthYear = birthYear;
+        this.gender = "";
+        this.phone = "";
+        this.email = "";
+        this.password = "";
+    }
 
 
     public String getBirthYear() {

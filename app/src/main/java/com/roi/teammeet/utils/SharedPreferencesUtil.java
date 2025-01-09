@@ -63,10 +63,6 @@ public class SharedPreferencesUtil {
         editor.putString("uid", user.getId());
         editor.putString("username", user.getUsername());
         editor.putString("birthYear", user.getBirthYear());
-        editor.putString("gender", user.getGender());
-        editor.putString("phone", user.getPhone());
-        editor.putString("email", user.getEmail());
-        editor.putString("password", user.getPassword());
         editor.apply();
     }
 
@@ -79,11 +75,7 @@ public class SharedPreferencesUtil {
         String uid = sharedPreferences.getString("uid", "");
         String username = sharedPreferences.getString("username", "");
         String birthYear = sharedPreferences.getString("birthYear", "");
-        String gender = sharedPreferences.getString("gender", "");
-        String phone = sharedPreferences.getString("phone", "");
-        String email = sharedPreferences.getString("email", "");
-        String password = sharedPreferences.getString("password", "");
-        return new User(uid, username, birthYear, gender, phone, email, password);
+        return new User(uid, username, birthYear);
     }
 
     public static void signOutUser(Context context) {
@@ -92,10 +84,6 @@ public class SharedPreferencesUtil {
         editor.remove("uid");
         editor.remove("username");
         editor.remove("birthYear");
-        editor.remove("gender");
-        editor.remove("phone");
-        editor.remove("email");
-        editor.remove("password");
         editor.apply();
     }
 
