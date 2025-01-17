@@ -66,12 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             welcomeMsg = "Welcome back " + currentUser.getUsername() + "!";
             tvWelcome.setText(welcomeMsg);
         }
-
-
-        //TODO: Delete
-        Intent i = new Intent(MainActivity.this, MapsActivity.class);
-        startActivity(i);
-        finish();
     }
 
     private void initViews() {
@@ -93,7 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(myMatchesIntent);
         }
         else if(v == btnCreateMatch){
-
+            Intent createMatchIntent = new Intent(this, NewMatchActivity.class);
+            startActivity(createMatchIntent);
+            finish();
         }
         else if(v == btnSignOut){
             SignOut();

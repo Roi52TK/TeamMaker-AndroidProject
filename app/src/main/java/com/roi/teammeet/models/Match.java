@@ -1,15 +1,12 @@
 package com.roi.teammeet.models;
 
-import com.roi.teammeet.R;
-
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Match {
     protected String id;
-    protected String name;
+    protected String title;
     protected String details;
     private User creatorUser;
     private Date date;
@@ -24,9 +21,9 @@ public class Match {
 
     }
 
-    public Match(String id, String name, String details, User creatorUser, Date date, String city, int minAge, int maxAge, int groupSize){
+    public Match(String id, String title, String details, User creatorUser, Date date, String city, int minAge, int maxAge, int groupSize){
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.details = details;
         this.creatorUser = creatorUser;
         this.date = date;
@@ -81,12 +78,12 @@ public class Match {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDetails() {
@@ -173,7 +170,7 @@ public class Match {
     public String toString() {
         return "Match{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
                 ", details='" + details + '\'' +
                 ", creatorPlayer=" + creatorUser +
                 ", date=" + date +
