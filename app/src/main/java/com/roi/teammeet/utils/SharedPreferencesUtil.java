@@ -2,6 +2,7 @@ package com.roi.teammeet.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.roi.teammeet.models.User;
 
@@ -70,6 +71,7 @@ public class SharedPreferencesUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         // check if user is logged in
         if (!isUserLoggedIn(context)) {
+            Log.d("Alon", "null toilet");
             return null;
         }
         String uid = sharedPreferences.getString("uid", "");

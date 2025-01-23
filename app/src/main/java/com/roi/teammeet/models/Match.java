@@ -9,19 +9,18 @@ public class Match {
     protected String title;
     protected String details;
     private User creatorUser;
-    private Date date;
+    private String date;
     protected String city;
     protected double lang,lat;
     private Range ageRange;
     private GroupSize groupSize;
     private ArrayList<User> players;
-    protected MatchStatus status;
 
     public Match(){
 
     }
 
-    public Match(String id, String title, String details, User creatorUser, Date date, String city, int minAge, int maxAge, int groupSize){
+    public Match(String id, String title, String details, User creatorUser, String date, String city, int minAge, int maxAge, int groupSize){
         this.id = id;
         this.title = title;
         this.details = details;
@@ -38,31 +37,12 @@ public class Match {
         if(canJoin(player)){
             this.players.add(player);
             this.groupSize.add();
-            UpdateStatus();
         }
     }
 
     public void Leave(User player){
         this.players.remove(player);
         this.groupSize.remove();
-        UpdateStatus();
-    }
-
-    private void UpdateStatus(){
-        Date currentDate = new Date();
-
-        if(this.date.after(currentDate)){
-            this.status = MatchStatus.OutDated;
-        }
-        else if(this.groupSize.isFull()){
-            this.status = MatchStatus.Full;
-        }
-        else if(this.groupSize.getCurrent() == 1){
-            this.status = MatchStatus.Empty;
-        }
-        else{
-            this.status = MatchStatus.Open;
-        }
     }
 
     private boolean canJoin(User player){
@@ -102,11 +82,11 @@ public class Match {
         this.creatorUser = creatorUser;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -158,14 +138,6 @@ public class Match {
         this.players = players;
     }
 
-    public MatchStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(MatchStatus status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Match{" +
@@ -180,7 +152,6 @@ public class Match {
                 ", ageRange=" + ageRange +
                 ", groupSize=" + groupSize +
                 ", players=" + players +
-                ", status=" + status +
                 '}';
     }
 }
