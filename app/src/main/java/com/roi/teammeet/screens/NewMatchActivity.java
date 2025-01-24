@@ -1,6 +1,8 @@
 package com.roi.teammeet.screens;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.roi.teammeet.R;
 import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
-import com.roi.teammeet.utils.Validator;
+import com.roi.teammeet.utils.TimeUtil;
 
 public class NewMatchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,15 +29,19 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     EditText etTitle;
     EditText etDetails;
     Button btnDate;
-    EditText etTime;
+    TextView tvDate;
+    Button btnTime;
+    TextView tvTime;
     EditText etCity;
     EditText etMinAge;
     EditText etMaxAge;
     EditText etSize;
-    String chosen_date;
-    TextView tvDate;
+    String chosenDate;
+    String chosenTime;
     Button btnCreate;
-    boolean is_date_picked;
+    Button btnMap;
+    String today;
+    boolean isDatePicked;
 
 
     @Override
@@ -50,42 +57,104 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
 
         initViews();
         btnDate.setOnClickListener(this);
+        btnTime.setOnClickListener(this);
+        btnMap.setOnClickListener(this);
         btnCreate.setOnClickListener(this);
+
+        today = DateUtil.getToday();
+        tvDate.setText(today);
     }
 
     private void initViews() {
         etTitle = findViewById(R.id.etTitle_newMatch);
         etDetails = findViewById(R.id.etDetails_newMatch);
         btnDate = findViewById(R.id.btnDate_newMatch);
-        etTime = findViewById(R.id.etTime_newMatch);
+        tvDate = findViewById(R.id.tvDate_newMatch);
+        btnTime = findViewById(R.id.btnTime_newMatch);
+        tvTime = findViewById(R.id.tvTime_newMatch);
         etCity = findViewById(R.id.etCity_newMatch);
         etMinAge = findViewById(R.id.etMinAge_newMatch);
         etMaxAge = findViewById(R.id.etMaxAge_newMatch);
         etSize = findViewById(R.id.etSize_newMatch);
-        tvDate = findViewById(R.id.tvDate_newMatch);
+        btnMap = findViewById(R.id.btnMap_newMatch);
         btnCreate = findViewById(R.id.btnCreate_newMatch);
     }
 
-    private void createDialog(){
-        String today = DateUtil.getToday();
+    private void createDateDialog(){
         DatePickerDialog dialog = new DatePickerDialog(NewMatchActivity.this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                chosen_date = dayOfMonth + "/" + (month+1) + "/" + year;
-                is_date_picked = true;
-                tvDate.setText(chosen_date);
+                chosenDate = dayOfMonth + "/" + (month+1) + "/" + year;
+                isDatePicked = true;
+                tvDate.setText(chosenDate);
             }
         }, DateUtil.getYear(today), DateUtil.getMonth(today), DateUtil.getDay(today));
 
         dialog.show();
     }
 
-    private boolean checkInput(String title, String details, String time, String city, int min, int max, int size){
+    private void createTimeDialog(){
+        TimePickerDialog dialog = new TimePickerDialog(NewMatchActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                chosenTime = String.format("%d:%02d", i, i1);
+                tvTime.setText(chosenTime);
+            }
+        }, 12, 0, true);
+
+        dialog.show();
+    }
+
+    private boolean checkInput(String title, String details, String date, String time, String city, String min, String max, String size){
         if (!MatchValidator.isTitleValid(title)) {
             Log.e(TAG, "checkInput: Title must be between 4-12 characters long");
             etTitle.setError("Title must be between 4-12 characters long");
             etTitle.requestFocus();
+            return false;
+        }
+
+        if(!MatchValidator.isDetailsValid(details)){
+            Log.e(TAG, "checkInput: Details must be 20 characters long at most");
+            etDetails.setError("Details must be 20 characters long at most");
+            etDetails.requestFocus();
+            return false;
+        }
+
+        /*if(!MatchValidator.isDateValid(date)){
+
+        }
+
+        if(!MatchValidator.isTimeValid(time)){
+
+        }*/
+
+        if(!MatchValidator.isCityValid(city)){
+            Log.e(TAG, "checkInput: City must be at least 3 characters long");
+            etCity.setError("City must be at least 3 characters long");
+            etCity.requestFocus();
+            return false;
+        }
+
+        if(!MatchValidator.isMinAgeValid(min)){
+            int minAge = MatchValidator.MIN_AGE;
+            Log.e(TAG, "checkInput: Minimum age must be at least " + minAge);
+            etMinAge.setError("Minimum age must be at least " + minAge);
+            etMinAge.requestFocus();
+            return false;
+        }
+
+        if(!MatchValidator.isAgeRangeValid(min, max)){
+            Log.e(TAG, "checkInput: Maximum age must be bigger than or equal to minimum age");
+            etMaxAge.setError("Maximum age must be bigger than or equal to minimum age");
+            etMaxAge.requestFocus();
+            return false;
+        }
+
+        if(!MatchValidator.isSizeValid(size)){
+            Log.e(TAG, "checkInput: Size must be between 2-99");
+            etSize.setError("Size must be between 2-99");
+            etSize.requestFocus();
             return false;
         }
 
@@ -97,27 +166,42 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if(v == btnDate){
-            createDialog();
+            createDateDialog();
+        }
+        if(v == btnTime){
+            createTimeDialog();
+        }
+        if(v == btnMap){
+            Intent mapsIntent = new Intent(this, MapsActivity.class);
+            startActivity(mapsIntent);
+            finish();
         }
         if(v == btnCreate){
-            String title = etTitle.getText().toString();
-            String details = etDetails.getText().toString();
-            String time = etTime.getText().toString();
-            String city = etCity.getText().toString();
-            int min = Integer.parseInt(etMinAge.getText().toString());
-            int max = Integer.parseInt(etMaxAge.getText().toString());
-            int size = Integer.parseInt(etSize.getText().toString());
-            //TODO add address by the map
-
-            if(!checkInput(title, details, time, city, min, max, size)){
-                return;
-            }
-            
-            createMatch(title, details, time, city, min, max, size);
+            onClickCreate();
         }
     }
 
-    private void createMatch(String title, String details, String time, String city, int min, int max, int size) {
+    private void onClickCreate() {
+        String title = etTitle.getText().toString();
+        String details = etDetails.getText().toString();
+        String city = etCity.getText().toString();
+        String min = etMinAge.getText().toString();
+        String max = etMaxAge.getText().toString();
+        String size = etSize.getText().toString();
+        //TODO add address by the map
+
+        if(!checkInput(title, details, chosenDate, chosenTime, city, min, max, size)){
+            return;
+        }
+
+        int minNum = Integer.parseInt(min);
+        int maxNum = Integer.parseInt(max);
+        int sizeNum = Integer.parseInt(size);
+
+        createMatch(title, details, chosenDate, chosenTime, city, minNum, maxNum, sizeNum);
+    }
+
+    private void createMatch(String title, String details, String date, String time, String city, int min, int max, int size) {
         //TODO createNewMatch through DatabaseService
     }
 }

@@ -28,14 +28,6 @@ public class DateUtil {
         return date;
     }
 
-    public static boolean isExpired(String str){
-        String today = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-        Date current_date = convertStringToDate(today);
-        Date expiration_date = convertStringToDate(str);
-
-        return current_date.after(expiration_date) || current_date.equals(expiration_date);
-    }
-
     public static int getYear(String str){
         Date date = convertStringToDate(str);
 
@@ -49,7 +41,7 @@ public class DateUtil {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        Log.d(TAG, calendar.get(Calendar.MONTH)+1+" monthhhhhh");
+        Log.d(TAG, calendar.get(Calendar.MONTH)+1+" month");
         return calendar.get(Calendar.MONTH);
     }
     public static int getDay(String str){

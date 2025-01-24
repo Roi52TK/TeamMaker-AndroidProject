@@ -20,7 +20,7 @@
             android:textColor="@color/textColor"
             android:textSize="42sp"
             android:layout_gravity="center"
-            android:text="צור משחק!" />
+            android:text="צור מפגש!" />
 
         <EditText
             android:id="@+id/etTitle_newMatch"
@@ -61,16 +61,22 @@
             android:textSize="24sp"
             android:text="" />
 
-        <EditText
-            android:id="@+id/etTime_newMatch"
-            android:layout_marginTop="15dp"
-            android:layout_width="300dp"
+        <Button
+            android:id="@+id/btnTime_newMatch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="time"
-            android:textColorHint="@color/etHintTextColor"
-            android:hint="שעה" />
+            android:text="בחר שעה"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvTime_newMatch"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="" />
 
         <EditText
             android:id="@+id/etCity_newMatch"
@@ -141,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:textSize="36sp"
             android:paddingHorizontal="40dp"
             android:backgroundTint="#208F0F"
