@@ -52,7 +52,15 @@
             android:id="@+id/btnGetAddress_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Get Address"
+            android:text="Set Address"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/btnFinish_maps"
+            android:backgroundTint="#5DAA19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Finish"
             android:layout_marginTop="8dp" />
     </LinearLayout>
 

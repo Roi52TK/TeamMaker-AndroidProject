@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -32,7 +33,9 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     TextView tvDate;
     Button btnTime;
     TextView tvTime;
-    EditText etCity;
+    double lang, lat;
+    String address;
+    TextView tvAddress;
     EditText etMinAge;
     EditText etMaxAge;
     EditText etSize;
@@ -72,12 +75,31 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         tvDate = findViewById(R.id.tvDate_newMatch);
         btnTime = findViewById(R.id.btnTime_newMatch);
         tvTime = findViewById(R.id.tvTime_newMatch);
-        etCity = findViewById(R.id.etCity_newMatch);
         etMinAge = findViewById(R.id.etMinAge_newMatch);
         etMaxAge = findViewById(R.id.etMaxAge_newMatch);
         etSize = findViewById(R.id.etSize_newMatch);
         btnMap = findViewById(R.id.btnMap_newMatch);
+        tvAddress = findViewById(R.id.tvAddress_newMatch);
         btnCreate = findViewById(R.id.btnCreate_newMatch);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 200 && resultCode == RESULT_OK) {
+            // Retrieve the location data passed from MapsActivity
+            String langSt = data.getStringExtra("lang");
+            String latSt = data.getStringExtra("lat");
+            address = data.getStringExtra("address");
+
+            if(langSt != null && latSt != null && address != null){
+                lang = Double.parseDouble(langSt);
+                lat = Double.parseDouble(latSt);
+
+                tvAddress.setText(address);
+            }
+        }
     }
 
     private void createDateDialog(){
@@ -106,7 +128,7 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         dialog.show();
     }
 
-    private boolean checkInput(String title, String details, String date, String time, String city, String min, String max, String size){
+    private boolean checkInput(String title, String details, String date, String time, String min, String max, String size){
         if (!MatchValidator.isTitleValid(title)) {
             Log.e(TAG, "checkInput: Title must be between 4-12 characters long");
             etTitle.setError("Title must be between 4-12 characters long");
@@ -128,13 +150,6 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         if(!MatchValidator.isTimeValid(time)){
 
         }*/
-
-        if(!MatchValidator.isCityValid(city)){
-            Log.e(TAG, "checkInput: City must be at least 3 characters long");
-            etCity.setError("City must be at least 3 characters long");
-            etCity.requestFocus();
-            return false;
-        }
 
         if(!MatchValidator.isMinAgeValid(min)){
             int minAge = MatchValidator.MIN_AGE;
@@ -173,8 +188,7 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         }
         if(v == btnMap){
             Intent mapsIntent = new Intent(this, MapsActivity.class);
-            startActivity(mapsIntent);
-            finish();
+            startActivityForResult(mapsIntent, 200);
         }
         if(v == btnCreate){
             onClickCreate();
@@ -184,13 +198,12 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     private void onClickCreate() {
         String title = etTitle.getText().toString();
         String details = etDetails.getText().toString();
-        String city = etCity.getText().toString();
         String min = etMinAge.getText().toString();
         String max = etMaxAge.getText().toString();
         String size = etSize.getText().toString();
         //TODO add address by the map
 
-        if(!checkInput(title, details, chosenDate, chosenTime, city, min, max, size)){
+        if(!checkInput(title, details, chosenDate, chosenTime, min, max, size)){
             return;
         }
 
@@ -198,10 +211,10 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         int maxNum = Integer.parseInt(max);
         int sizeNum = Integer.parseInt(size);
 
-        createMatch(title, details, chosenDate, chosenTime, city, minNum, maxNum, sizeNum);
+        createMatch(title, details, chosenDate, chosenTime, minNum, maxNum, sizeNum);
     }
 
-    private void createMatch(String title, String details, String date, String time, String city, int min, int max, int size) {
+    private void createMatch(String title, String details, String date, String time, int min, int max, int size) {
         //TODO createNewMatch through DatabaseService
     }
 }

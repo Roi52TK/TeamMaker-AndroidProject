@@ -1,5 +1,6 @@
 package com.roi.teammeet.screens;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.location.GpsStatus;
 import android.os.Bundle;
@@ -49,9 +50,10 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
     String street;
     String streetNumber;
     String city;
-    String address;
-    Button btnGetAddress;
+    String finalAddress;
+    Button btnSetAddress;
     Button btnSetMarker;
+    Button btnFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,16 +136,18 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         initViews();
 
         // Set OnClickListeners
-        btnGetAddress.setOnClickListener(this);
+        btnSetAddress.setOnClickListener(this);
         btnSetMarker.setOnClickListener(this);
+        btnFinish.setOnClickListener(this);
     }
 
     private void initViews(){
         etStreet = findViewById(R.id.etStreet_maps);
         etStreetNumber = findViewById(R.id.etStreetNumber_maps);
         etCity = findViewById(R.id.etCity_maps);
-        btnGetAddress = findViewById(R.id.btnGetAddress_maps);
+        btnSetAddress = findViewById(R.id.btnGetAddress_maps);
         btnSetMarker = findViewById(R.id.btnSetMarker_maps);
+        btnFinish = findViewById(R.id.btnFinish_maps);
     }
 
     @Override
@@ -193,8 +197,9 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
                 for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
                     addressText.append(address.getAddressLine(i)).append("\n");
                 }
-                // Display the address
-                Toast.makeText(this, "Address: " + addressText.toString(), Toast.LENGTH_LONG).show();
+                //Set the address
+                finalAddress = addressText.toString();
+                Toast.makeText(this, finalAddress, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show();
             }
@@ -242,34 +247,54 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
 
     @Override
     public void onClick(View view) {
-        if(view == btnGetAddress){
-            if (activeMarker != null) {
-                // Get the marker's coordinates
-                double latitude = activeMarker.getPosition().getLatitude();
-                double longitude = activeMarker.getPosition().getLongitude();
-
-                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-
-                // Move the map to the geocoded coordinates
-                mMap.getController().setCenter(geoPoint);
-                mMap.getController().animateTo(geoPoint);
-
-                // Set zoom level to focus closer
-                mMap.getController().setZoom(20.0);
-
-                // Reverse geocode the marker's location
-                reverseGeocode(latitude, longitude);
-            } else {
-                Toast.makeText(this, "No marker is placed on the map!", Toast.LENGTH_SHORT).show();
-            }
+        if(view == btnSetAddress){
+            setAddress();
         }
         if(view == btnSetMarker){
-            street = etStreet.getText().toString();
-            streetNumber = etStreetNumber.getText().toString();
-            city = etCity.getText().toString();
-
-            address = street + " St " + streetNumber + "," + city;
-            geocodeAndCenterMap(address);
+            setMarker();
         }
+        if(view == btnFinish){
+            if(!finalAddress.isEmpty()){
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("lang", String.valueOf(activeMarker.getPosition().getLongitude()));
+                resultIntent.putExtra("lat", String.valueOf(activeMarker.getPosition().getLatitude()));
+                resultIntent.putExtra("address", finalAddress);
+                setResult(RESULT_OK, resultIntent);
+                finish();
+            }
+        }
+    }
+
+
+
+    private void setAddress() {
+        if (activeMarker != null) {
+            // Get the marker's coordinates
+            double latitude = activeMarker.getPosition().getLatitude();
+            double longitude = activeMarker.getPosition().getLongitude();
+
+            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+
+            // Move the map to the geocoded coordinates
+            mMap.getController().setCenter(geoPoint);
+            mMap.getController().animateTo(geoPoint);
+
+            // Set zoom level to focus closer
+            mMap.getController().setZoom(20.0);
+
+            // Reverse geocode the marker's location
+            reverseGeocode(latitude, longitude);
+        } else {
+            Toast.makeText(this, "No marker is placed on the map!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setMarker() {
+        street = etStreet.getText().toString();
+        streetNumber = etStreetNumber.getText().toString();
+        city = etCity.getText().toString();
+
+        String address = street + " St " + streetNumber + "," + city;
+        geocodeAndCenterMap(address);
     }
 }

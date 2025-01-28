@@ -2,7 +2,6 @@ package com.roi.teammeet.models;
 
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Match {
     protected String id;
@@ -10,7 +9,6 @@ public class Match {
     protected String details;
     private User creatorUser;
     private String date;
-    protected String city;
     protected double lang,lat;
     private Range ageRange;
     private GroupSize groupSize;
@@ -20,27 +18,28 @@ public class Match {
 
     }
 
-    public Match(String id, String title, String details, User creatorUser, String date, String city, int minAge, int maxAge, int groupSize){
+    public Match(String id, String title, String details, User creatorUser, String date, double lang, double lat, int minAge, int maxAge, int groupSize){
         this.id = id;
         this.title = title;
         this.details = details;
         this.creatorUser = creatorUser;
         this.date = date;
-        this.city = city;
+        this.lang = lang;
+        this.lat = lat;
         this.ageRange = new Range(minAge, maxAge);
         this.groupSize = new GroupSize(groupSize);
         this.players = new ArrayList<>();
-        Join(this.creatorUser);
+        Add(this.creatorUser);
     }
 
-    public void Join(User player){
+    public void Add(User player){
         if(canJoin(player)){
             this.players.add(player);
             this.groupSize.add();
         }
     }
 
-    public void Leave(User player){
+    public void Remove(User player){
         this.players.remove(player);
         this.groupSize.remove();
     }
@@ -88,14 +87,6 @@ public class Match {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public double getLang() {
@@ -146,7 +137,6 @@ public class Match {
                 ", details='" + details + '\'' +
                 ", creatorPlayer=" + creatorUser +
                 ", date=" + date +
-                ", city='" + city + '\'' +
                 ", lang=" + lang +
                 ", lat=" + lat +
                 ", ageRange=" + ageRange +
