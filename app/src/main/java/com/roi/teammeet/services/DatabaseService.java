@@ -67,6 +67,10 @@ public class DatabaseService {
         });
     }
 
+    private String generateNewId(@NotNull final String path) {
+        return databaseReference.child(path).push().getKey();
+    }
+
     public void createNewMatch(Match match, DatabaseCallback<Object> callback){
         writeData("matches/" + match.getId(), match, callback);
     }
@@ -81,6 +85,10 @@ public class DatabaseService {
 
     public void getUser(String userId, DatabaseCallback<User> callback) {
         getData("users/" + userId, User.class, callback);
+    }
+
+    public String generateMatchId() {
+        return generateNewId("matches");
     }
 
 }

@@ -1,5 +1,7 @@
 package com.roi.teammeet.models;
 
+import java.time.Year;
+
 public class User {
     String id;
     String username, birthYear, gender, phone, email, password;
@@ -26,6 +28,10 @@ public class User {
         this.phone = "";
         this.email = "";
         this.password = "";
+    }
+
+    public int calculateAge(){
+        return Year.now().getValue() - Integer.parseInt(this.birthYear);
     }
 
 

@@ -1,52 +1,60 @@
 package com.roi.teammeet.models;
 
-import java.time.Year;
+import com.roi.teammeet.services.DatabaseService;
+
 import java.util.ArrayList;
 
 public class Match {
     protected String id;
     protected String title;
     protected String details;
-    private User creatorUser;
+    private String creatorUserId;
     private String date;
+    private String time;
     protected double lang,lat;
+    private String address;
     private Range ageRange;
     private GroupSize groupSize;
-    private ArrayList<User> players;
+    private ArrayList<String> playersId;
 
     public Match(){
 
     }
 
-    public Match(String id, String title, String details, User creatorUser, String date, double lang, double lat, int minAge, int maxAge, int groupSize){
+    public Match(String id, String title, String details, String creatorUserId, String date, String time, double lang, double lat, String address, int minAge, int maxAge, int groupSize){
         this.id = id;
         this.title = title;
         this.details = details;
-        this.creatorUser = creatorUser;
+        this.creatorUserId = creatorUserId;
         this.date = date;
+        this.time = time;
         this.lang = lang;
         this.lat = lat;
+        this.address = address;
         this.ageRange = new Range(minAge, maxAge);
         this.groupSize = new GroupSize(groupSize);
-        this.players = new ArrayList<>();
-        Add(this.creatorUser);
+        this.playersId = new ArrayList<>();
+        add(this.creatorUserId);
     }
 
-    public void Add(User player){
-        if(canJoin(player)){
-            this.players.add(player);
-            this.groupSize.add();
+    public void join(User user){
+        if(canJoin(user)){
+            add(user.getId());
         }
     }
 
-    public void Remove(User player){
-        this.players.remove(player);
+    private void add(String userId){
+        this.playersId.add(userId);
+        this.groupSize.add();
+    }
+
+    public void remove(String userId){
+        this.playersId.remove(userId);
         this.groupSize.remove();
     }
 
-    private boolean canJoin(User player){
-        int age = Year.now().getValue() - Integer.parseInt(player.getBirthYear());
-        return ageRange.isInRange(age) && !groupSize.isFull();
+    private boolean canJoin(User user){
+        return ageRange.isInRange(user.calculateAge()) && !groupSize.isFull();
     }
 
     public String getId() {
@@ -73,12 +81,12 @@ public class Match {
         this.details = details;
     }
 
-    public User getCreatorPlayer() {
-        return creatorUser;
+    public String getCreatorUserId() {
+        return creatorUserId;
     }
 
-    public void setCreatorPlayer(User creatorUser) {
-        this.creatorUser = creatorUser;
+    public void setCreatorUserId(String creatorUserId) {
+        this.creatorUserId = creatorUserId;
     }
 
     public String getDate() {
@@ -87,6 +95,14 @@ public class Match {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public double getLang() {
@@ -105,6 +121,14 @@ public class Match {
         this.lat = lat;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Range getAgeRange() {
         return ageRange;
     }
@@ -121,12 +145,12 @@ public class Match {
         this.groupSize = groupSize;
     }
 
-    public ArrayList<User> getPlayers() {
-        return players;
+    public ArrayList<String> getPlayersId() {
+        return playersId;
     }
 
-    public void setPlayers(ArrayList<User> players) {
-        this.players = players;
+    public void setPlayersId(ArrayList<String> playersId) {
+        this.playersId = playersId;
     }
 
     @Override
@@ -135,13 +159,15 @@ public class Match {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", details='" + details + '\'' +
-                ", creatorPlayer=" + creatorUser +
-                ", date=" + date +
+                ", creatorUserId='" + creatorUserId + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
                 ", lang=" + lang +
                 ", lat=" + lat +
+                ", address='" + address + '\'' +
                 ", ageRange=" + ageRange +
                 ", groupSize=" + groupSize +
-                ", players=" + players +
+                ", playersId=" + playersId +
                 '}';
     }
 }

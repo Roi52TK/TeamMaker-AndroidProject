@@ -2,9 +2,15 @@ package com.roi.teammeet.models;
 
 import androidx.annotation.NonNull;
 
-public class GroupSize {
+import java.io.Serializable;
+
+public class GroupSize implements Serializable {
     private int current;
     private final int max;
+
+    public GroupSize() {
+        max = 0;
+    }
 
     public GroupSize(int max){
         this.current = 0;
@@ -33,6 +39,10 @@ public class GroupSize {
 
     public int getMax(){
         return this.max;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
     }
 
     @NonNull

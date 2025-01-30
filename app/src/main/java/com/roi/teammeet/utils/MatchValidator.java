@@ -1,5 +1,6 @@
 package com.roi.teammeet.utils;
 
+import java.time.Year;
 import java.util.Date;
 
 public class MatchValidator {
@@ -39,6 +40,13 @@ public class MatchValidator {
         }
         return Integer.parseInt(min) <= Integer.parseInt(max);
     }
+
+    public static boolean isUserAgeValid(String min, String max, String birthYear) {
+        int age = Year.now().getValue() - Integer.parseInt(birthYear);
+
+        return age >= Integer.parseInt(min) && age <= Integer.parseInt(max);
+    }
+
     public static boolean isSizeValid(String size){
         if(size.isEmpty()){
             return false;

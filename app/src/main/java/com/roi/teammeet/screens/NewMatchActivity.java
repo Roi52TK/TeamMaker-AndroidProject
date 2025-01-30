@@ -45,7 +45,6 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     String chosenTime;
     Button btnCreate;
     Button btnMap;
-    String today;
     boolean isDatePicked;
     private DatabaseService databaseService;
     private User currentUser;
@@ -63,6 +62,7 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         });
 
         databaseService = DatabaseService.getInstance();
+        currentUser = SharedPreferencesUtil.getUser(this);
 
         initViews();
         btnDate.setOnClickListener(this);
@@ -70,8 +70,8 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         btnMap.setOnClickListener(this);
         btnCreate.setOnClickListener(this);
 
-        today = DateUtil.getToday();
-        tvDate.setText(today);
+        chosenDate = DateUtil.getToday();
+        tvDate.setText(chosenDate);
     }
 
     private void initViews() {
@@ -117,7 +117,7 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
                 isDatePicked = true;
                 tvDate.setText(chosenDate);
             }
-        }, DateUtil.getYear(today), DateUtil.getMonth(today), DateUtil.getDay(today));
+        }, DateUtil.getYear(chosenDate), DateUtil.getMonth(chosenDate), DateUtil.getDay(chosenDate));
 
         dialog.show();
     }
@@ -179,6 +179,13 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
             return false;
         }
 
+        if(!MatchValidator.isUserAgeValid(min, max, currentUser.getBirthYear())){
+            Log.e(TAG, "checkInput: Your age is not in range");
+            etMaxAge.setError("Your age is not in range");
+            etMaxAge.requestFocus();
+            return false;
+        }
+
         if(!MatchValidator.isSizeValid(size)){
             Log.e(TAG, "checkInput: Size must be between 2-99");
             etSize.setError("Size must be between 2-99");
@@ -228,9 +235,18 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void createMatch(String title, String details, int min, int max, int size) {
-        //TODO createNewMatch through DatabaseService
-        /*currentUser = SharedPreferencesUtil.getUser(this);
-        Match newMatch = new Match(title, details, currentUser, chosenDate, chosenTime, address, min, max, size);
-        databaseService.createNewMatch();*/
+        String matchId = databaseService.generateMatchId();
+        Match newMatch = new Match(matchId, title, details, currentUser.getId(), chosenDate, chosenTime, lang, lat, address, min, max, size);
+        databaseService.createNewMatch(newMatch, new DatabaseService.DatabaseCallback<Object>() {
+            @Override
+            public void onCompleted(Object object) {
+                Log.d(TAG, "onCompleted: Created a match");
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.e(TAG, "onFailed: Failed to create match", e);
+            }
+        });
     }
 }
