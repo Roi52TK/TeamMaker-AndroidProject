@@ -22,9 +22,14 @@ public class MatchValidator {
     public static boolean isTimeValid(String time){
 
     }*/
-    public static boolean isCityValid(String city){
-        return city.length() >= 3;
+
+    public static boolean isAddressValid(String address){
+        return !address.isEmpty();
     }
+
+    /*public static boolean isCityValid(String city){
+        return city.length() >= 3;
+    }*/
     public static boolean isMinAgeValid(String min){
         return !min.isEmpty() && Integer.parseInt(min) >= MIN_AGE;
     }

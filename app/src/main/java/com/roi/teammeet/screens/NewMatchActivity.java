@@ -13,15 +13,17 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.roi.teammeet.R;
+import com.roi.teammeet.models.Match;
+import com.roi.teammeet.models.User;
+import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
-import com.roi.teammeet.utils.TimeUtil;
+import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 public class NewMatchActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +47,8 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
     Button btnMap;
     String today;
     boolean isDatePicked;
+    private DatabaseService databaseService;
+    private User currentUser;
 
 
     @Override
@@ -57,6 +61,8 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        databaseService = DatabaseService.getInstance();
 
         initViews();
         btnDate.setOnClickListener(this);
@@ -151,6 +157,13 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
 
         }*/
 
+        if(!MatchValidator.isAddressValid(address)){
+            Log.e(TAG, "checkInput: Address cannot be empty");
+            tvAddress.setError("Address cannot be empty");
+            tvAddress.requestFocus();
+            return false;
+        }
+
         if(!MatchValidator.isMinAgeValid(min)){
             int minAge = MatchValidator.MIN_AGE;
             Log.e(TAG, "checkInput: Minimum age must be at least " + minAge);
@@ -201,7 +214,7 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         String min = etMinAge.getText().toString();
         String max = etMaxAge.getText().toString();
         String size = etSize.getText().toString();
-        //TODO add address by the map
+
 
         if(!checkInput(title, details, chosenDate, chosenTime, min, max, size)){
             return;
@@ -211,10 +224,13 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         int maxNum = Integer.parseInt(max);
         int sizeNum = Integer.parseInt(size);
 
-        createMatch(title, details, chosenDate, chosenTime, minNum, maxNum, sizeNum);
+        createMatch(title, details, minNum, maxNum, sizeNum);
     }
 
-    private void createMatch(String title, String details, String date, String time, int min, int max, int size) {
+    private void createMatch(String title, String details, int min, int max, int size) {
         //TODO createNewMatch through DatabaseService
+        /*currentUser = SharedPreferencesUtil.getUser(this);
+        Match newMatch = new Match(title, details, currentUser, chosenDate, chosenTime, address, min, max, size);
+        databaseService.createNewMatch();*/
     }
 }
