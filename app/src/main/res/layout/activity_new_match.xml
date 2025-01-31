@@ -34,7 +34,7 @@
             android:hint="כותרת" />
 
         <EditText
-            android:id="@+id/etDetails_newMatch"
+            android:id="@+id/etDescription_newMatch"
             android:layout_marginTop="15dp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

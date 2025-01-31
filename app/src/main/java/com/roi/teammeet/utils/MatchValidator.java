@@ -8,10 +8,10 @@ public class MatchValidator {
 
     public static boolean isTitleValid(String title){
         int length = title.length();
-        return length >= 4 && length <= 12;
+        return length >= 4 && length <= 16;
     }
-    public static boolean isDetailsValid(String details){
-        return details.length() <= 20;
+    public static boolean isDescriptionValid(String description){
+        return description.length() <= 50;
     }
     public static boolean isDateValid(Date date){
         Date today = new Date();

@@ -1,0 +1,53 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:cardElevation="4dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle_itemCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvDescription_itemCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvDate_itemCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date and Time"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvGroupSize_itemCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date and Time"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btnDetails_itemCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

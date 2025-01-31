@@ -40,6 +40,8 @@ import org.osmdroid.events.MapEventsReceiver;
 
 public class MapsActivity extends AppCompatActivity implements MapListener, GpsStatus.Listener, View.OnClickListener {
 
+    private static final String TAG = "MapsActivity";
+
     private MapView mMap;
     private IMapController controller;
     private MyLocationNewOverlay mMyLocationOverlay;
@@ -54,6 +56,7 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
     Button btnSetAddress;
     Button btnSetMarker;
     Button btnFinish;
+    Intent mapsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +126,8 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         controller.setZoom(6.0);
 
         // Log zoom levels
-        Log.e("TAG", "onCreate: in " + controller.zoomIn());
-        Log.e("TAG", "onCreate: out " + controller.zoomOut());
+        Log.e(TAG, "onCreate: in " + controller.zoomIn());
+        Log.e(TAG, "onCreate: out " + controller.zoomOut());
 
         // Add location overlay to the map
         mMap.getOverlays().add(mMyLocationOverlay);
@@ -139,7 +142,27 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         btnSetAddress.setOnClickListener(this);
         btnSetMarker.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
+
+        // Set marker to selected address
+        mapsIntent = getIntent();
+        String intentLatSt = mapsIntent.getStringExtra("lat");
+        String intentLangSt = mapsIntent.getStringExtra("lang");
+        double intentLat;
+        double intentLang;
+        if(intentLatSt != null && intentLangSt != null){
+            intentLat = Double.parseDouble(intentLatSt);
+            intentLang = Double.parseDouble(intentLangSt);
+
+            if(intentLat != 0 && intentLang != 0){
+                Log.e(TAG, "Lat: " + intentLat + "; Lang: " + intentLang);
+                setMarker(intentLat, intentLang);
+                reverseGeocode(intentLat, intentLang);
+                //TODO: Fix zoom in not working issue
+            }
+        }
     }
+
+
 
     private void initViews(){
         etStreet = findViewById(R.id.etStreet_maps);
@@ -152,14 +175,14 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
 
     @Override
     public boolean onScroll(ScrollEvent event) {
-        Log.e("TAG", "onScroll: la " + event.getSource().getMapCenter().getLatitude());
-        Log.e("TAG", "onScroll: lo " + event.getSource().getMapCenter().getLongitude());
+        Log.e(TAG, "onScroll: la " + event.getSource().getMapCenter().getLatitude());
+        Log.e(TAG, "onScroll: lo " + event.getSource().getMapCenter().getLongitude());
         return true;
     }
 
     @Override
     public boolean onZoom(ZoomEvent event) {
-        Log.e("TAG", "onZoom zoom level: " + event.getZoomLevel() + " source: " + event.getSource());
+        Log.e(TAG, "onZoom zoom level: " + event.getZoomLevel() + " source: " + event.getSource());
         return false;
     }
 
@@ -256,8 +279,8 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         if(view == btnFinish){
             if(!finalAddress.isEmpty()){
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("lang", String.valueOf(activeMarker.getPosition().getLongitude()));
                 resultIntent.putExtra("lat", String.valueOf(activeMarker.getPosition().getLatitude()));
+                resultIntent.putExtra("lang", String.valueOf(activeMarker.getPosition().getLongitude()));
                 resultIntent.putExtra("address", finalAddress);
                 setResult(RESULT_OK, resultIntent);
                 finish();
@@ -296,5 +319,19 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
 
         String address = street + " St " + streetNumber + "," + city;
         geocodeAndCenterMap(address);
+    }
+
+    private void setMarker(double lat, double lang) {
+        GeoPoint geoPoint = new GeoPoint(lat, lang);
+
+        // Move the map to the geocoded coordinates
+        mMap.getController().setCenter(geoPoint);
+        mMap.getController().animateTo(geoPoint);
+
+        // Set zoom level to focus closer
+        mMap.getController().setZoom(20.0);
+
+        //Add a marker at the location
+        moveMarkerTo(geoPoint);
     }
 }

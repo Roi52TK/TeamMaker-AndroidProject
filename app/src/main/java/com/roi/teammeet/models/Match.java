@@ -1,17 +1,15 @@
 package com.roi.teammeet.models;
 
-import com.roi.teammeet.services.DatabaseService;
-
 import java.util.ArrayList;
 
 public class Match {
     protected String id;
     protected String title;
-    protected String details;
+    protected String description;
     private String creatorUserId;
     private String date;
     private String time;
-    protected double lang,lat;
+    protected double lat, lang;
     private String address;
     private Range ageRange;
     private GroupSize groupSize;
@@ -21,15 +19,15 @@ public class Match {
 
     }
 
-    public Match(String id, String title, String details, String creatorUserId, String date, String time, double lang, double lat, String address, int minAge, int maxAge, int groupSize){
+    public Match(String id, String title, String description, String creatorUserId, String date, String time, double lat, double lang, String address, int minAge, int maxAge, int groupSize){
         this.id = id;
         this.title = title;
-        this.details = details;
+        this.description = description;
         this.creatorUserId = creatorUserId;
         this.date = date;
         this.time = time;
-        this.lang = lang;
         this.lat = lat;
+        this.lang = lang;
         this.address = address;
         this.ageRange = new Range(minAge, maxAge);
         this.groupSize = new GroupSize(groupSize);
@@ -73,12 +71,12 @@ public class Match {
         this.title = title;
     }
 
-    public String getDetails() {
-        return details;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCreatorUserId() {
@@ -105,20 +103,20 @@ public class Match {
         this.time = time;
     }
 
-    public double getLang() {
-        return lang;
-    }
-
-    public void setLang(double lang) {
-        this.lang = lang;
-    }
-
     public double getLat() {
         return lat;
     }
 
     public void setLat(double lat) {
         this.lat = lat;
+    }
+
+    public double getLang() {
+        return lang;
+    }
+
+    public void setLang(double lang) {
+        this.lang = lang;
     }
 
     public String getAddress() {
@@ -158,12 +156,12 @@ public class Match {
         return "Match{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", details='" + details + '\'' +
+                ", description='" + description + '\'' +
                 ", creatorUserId='" + creatorUserId + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
-                ", lang=" + lang +
                 ", lat=" + lat +
+                ", lang=" + lang +
                 ", address='" + address + '\'' +
                 ", ageRange=" + ageRange +
                 ", groupSize=" + groupSize +
