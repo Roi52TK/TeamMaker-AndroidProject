@@ -234,6 +234,10 @@ public class NewMatchActivity extends AppCompatActivity implements View.OnClickL
         int sizeNum = Integer.parseInt(size);
 
         createMatch(title, description, minNum, maxNum, sizeNum);
+
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        startActivity(mainIntent);
+        finish();
     }
 
     private void createMatch(String title, String description, int min, int max, int size) {

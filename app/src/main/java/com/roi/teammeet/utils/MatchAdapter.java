@@ -1,17 +1,23 @@
 package com.roi.teammeet.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
+import com.roi.teammeet.models.User;
+import com.roi.teammeet.screens.MainActivity;
+import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
 
@@ -19,6 +25,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
 
     private Context context;
     private List<Match> matchList;
+    private User currentUser;
 
     public MatchAdapter(Context context, List<Match> matchList) {
         this.context = context;
@@ -37,11 +44,32 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.tvTitle.setText(match.getTitle());
         holder.tvDescription.setText(match.getDescription());
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
+        holder.tvGroupSize.setText(match.getGroupSize().toString());
 
         // Handle button click to show the dialog
         holder.btnDetails.setOnClickListener(v -> {
             // Create and show the dialog with more match details
             showDetailsDialog(match);
+        });
+
+        holder.btnJoin.setOnClickListener(v -> {
+            currentUser = SharedPreferencesUtil.getUser(context);
+            if(match.join(currentUser)){
+                DatabaseService.getInstance().createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
+                    @Override
+                    public void onCompleted(Object object) {
+                        Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailed(Exception e) {
+
+                    }
+                });
+            }
+            else{
+                Toast.makeText(context, "Could not join the match!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -57,6 +85,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         TextView tvDate;
         TextView tvGroupSize;
         Button btnDetails;
+        Button btnJoin;
 
         public MatchViewHolder(View itemView) {
             super(itemView);
@@ -65,6 +94,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             tvDate = itemView.findViewById(R.id.tvDate_itemCard);
             tvGroupSize = itemView.findViewById(R.id.tvGroupSize_itemCard);
             btnDetails = itemView.findViewById(R.id.btnDetails_itemCard);
+            btnJoin = itemView.findViewById(R.id.btnJoin_itemCard);
         }
     }
 
@@ -73,8 +103,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         // Create the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(match.getTitle())
-                .setMessage("Details: " + match.getDescription() +
-                        "\nDate: " + match.getDate() + " " + match.getTime() +
+                .setMessage("Description: " + match.getDescription() +
+                        "\nDate: " + match.getDate() + " at " + match.getTime() +
                         "\nAddress: " + match.getAddress() +
                         "\nAge Range: " + match.getAgeRange() +
                         "\nGroup Size: " + match.getGroupSize())

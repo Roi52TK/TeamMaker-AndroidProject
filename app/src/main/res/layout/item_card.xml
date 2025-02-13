@@ -2,8 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:cardElevation="4dp">
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,39 +14,62 @@
             android:id="@+id/tvTitle_itemCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="Title"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvDescription_itemCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="Description"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/tvDate_itemCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="Date and Time"
-            android:textSize="12sp"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/tvGroupSize_itemCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date and Time"
-            android:textSize="12sp"
+            android:layout_gravity="right"
+            android:text="Group Size"
+            android:textSize="16sp"
             android:layout_marginTop="8dp"/>
 
-        <Button
-            android:id="@+id/btnDetails_itemCard"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Details"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnJoin_itemCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#2AC318"
+                android:text="Join"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btnDetails_itemCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"/>
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

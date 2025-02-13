@@ -30,7 +30,7 @@ public class User {
         this.password = "";
     }
 
-    public int calculateAge(){
+    public int getCalculatedAge(){
         return Year.now().getValue() - Integer.parseInt(this.birthYear);
     }
 

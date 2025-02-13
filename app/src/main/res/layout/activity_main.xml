@@ -27,7 +27,7 @@
         android:textSize="36sp"
         android:paddingHorizontal="40dp"
         android:backgroundTint="@color/btnBG"
-        android:text="משחקים זמינים" />
+        android:text="מפגשים זמינים" />
 
     <Button
         android:id="@+id/btnMyMatches_main"
@@ -38,7 +38,7 @@
         android:textSize="36sp"
         android:paddingHorizontal="40dp"
         android:backgroundTint="@color/btnBG"
-        android:text="המשחקים שלי" />
+        android:text="המפגשים שלי" />
 
     <Button
         android:id="@+id/btnCreateMatch_main"
@@ -49,7 +49,7 @@
         android:textSize="36sp"
         android:paddingHorizontal="40dp"
         android:backgroundTint="@color/btnBG"
-        android:text="צור משחק!" />
+        android:text="צור מפגש!" />
 
     <Button
         android:id="@+id/btnSignOut_main"

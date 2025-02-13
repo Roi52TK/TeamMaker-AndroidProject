@@ -35,10 +35,12 @@ public class Match {
         add(this.creatorUserId);
     }
 
-    public void join(User user){
+    public boolean join(User user){
         if(canJoin(user)){
             add(user.getId());
+            return true;
         }
+        return false;
     }
 
     private void add(String userId){
@@ -52,7 +54,11 @@ public class Match {
     }
 
     private boolean canJoin(User user){
-        return ageRange.isInRange(user.calculateAge()) && !groupSize.isFull();
+        return !hasJoined(user) && ageRange.isInRange(user.getCalculatedAge()) && !groupSize.isFull();
+    }
+
+    public boolean hasJoined(User user){
+        return playersId.contains(user.getId());
     }
 
     public String getId() {
