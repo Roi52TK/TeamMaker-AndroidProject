@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,30 +22,25 @@ import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
 
-public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHolder> {
+public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.JoinedMatchViewHolder> {
 
     private Context context;
     private List<Match> matchList;
-    private User currentUser;
 
-    public MatchAdapter(Context context, List<Match> matchList) {
+    public JoinedMatchAdapter(Context context, List<Match> matchList) {
         this.context = context;
         this.matchList = matchList;
     }
 
-    public void setFilteredList(List<Match> filteredList){
-        this.matchList = filteredList;
-        notifyDataSetChanged();
+    @NonNull
+    @Override
+    public JoinedMatchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.joined_match_card, parent, false);
+        return new JoinedMatchViewHolder(view);
     }
 
     @Override
-    public MatchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_card, parent, false);
-        return new MatchViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(MatchViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JoinedMatchViewHolder holder, int position) {
         Match match = matchList.get(position);
         holder.tvTitle.setText(match.getTitle());
         holder.tvDescription.setText(match.getDescription());
@@ -56,26 +52,6 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             // Create and show the dialog with more match details
             showDetailsDialog(match);
         });
-
-        holder.btnJoin.setOnClickListener(v -> {
-            currentUser = SharedPreferencesUtil.getUser(context);
-            if(match.join(currentUser)){
-                DatabaseService.getInstance().createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
-                    @Override
-                    public void onCompleted(Object object) {
-                        Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailed(Exception e) {
-
-                    }
-                });
-            }
-            else{
-                Toast.makeText(context, "Could not join the match!", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -83,23 +59,23 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         return matchList.size();
     }
 
-    public static class MatchViewHolder extends RecyclerView.ViewHolder {
+    public static class JoinedMatchViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle;
         TextView tvDescription;
         TextView tvDate;
         TextView tvGroupSize;
         Button btnDetails;
-        Button btnJoin;
+        Button btnLeave;
 
-        public MatchViewHolder(View itemView) {
+        public JoinedMatchViewHolder(View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle_itemCard);
-            tvDescription = itemView.findViewById(R.id.tvDescription_itemCard);
-            tvDate = itemView.findViewById(R.id.tvDate_itemCard);
-            tvGroupSize = itemView.findViewById(R.id.tvGroupSize_itemCard);
-            btnDetails = itemView.findViewById(R.id.btnDetails_itemCard);
-            btnJoin = itemView.findViewById(R.id.btnJoin_itemCard);
+            tvTitle = itemView.findViewById(R.id.tvTitle_joinedMatchCard);
+            tvDescription = itemView.findViewById(R.id.tvDescription_joinedMatchCard);
+            tvDate = itemView.findViewById(R.id.tvDate_joinedMatchCard);
+            tvGroupSize = itemView.findViewById(R.id.tvGroupSize_joinedMatchCard);
+            btnDetails = itemView.findViewById(R.id.btnDetails_joinedMatchCard);
+            btnLeave = itemView.findViewById(R.id.btnLeave_joinedMatchCard);
         }
     }
 
