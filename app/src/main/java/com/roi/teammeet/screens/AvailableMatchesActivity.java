@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.services.DatabaseService;
@@ -25,6 +26,8 @@ public class AvailableMatchesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MatchAdapter matchAdapter;
     private List<Match> matchList;
+
+    ValueEventListener matchListRealtime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class AvailableMatchesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         matchList = new ArrayList<>();
-        databaseService.getMatchList(new DatabaseService.DatabaseCallback<List<Match>>() {
+        matchListRealtime = databaseService.getMatchListRealtime(new DatabaseService.DatabaseCallback<List<Match>>() {
             @Override
             public void onCompleted(List<Match> object) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
@@ -79,5 +82,11 @@ public class AvailableMatchesActivity extends AppCompatActivity {
         if(!filteredList.isEmpty()){
             matchAdapter.setFilteredList(filteredList);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        databaseService.stopListenMatchRealtime(this.matchListRealtime);
+        super.onDestroy();
     }
 }

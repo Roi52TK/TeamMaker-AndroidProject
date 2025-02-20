@@ -23,9 +23,11 @@ import java.util.List;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHolder> {
 
+    private static final String TAG = "MatchAdapter";
     private Context context;
     private List<Match> matchList;
     private User currentUser;
+    private DatabaseService databaseService;
 
     public MatchAdapter(Context context, List<Match> matchList) {
         this.context = context;
@@ -51,6 +53,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
         holder.tvGroupSize.setText(match.getGroupSize().toString());
 
+        databaseService = DatabaseService.getInstance();
+
         // Handle button click to show the dialog
         holder.btnDetails.setOnClickListener(v -> {
             // Create and show the dialog with more match details
@@ -60,10 +64,25 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.btnJoin.setOnClickListener(v -> {
             currentUser = SharedPreferencesUtil.getUser(context);
             if(match.join(currentUser)){
-                DatabaseService.getInstance().createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
+                databaseService.getMatch(match.getId(), new DatabaseService.DatabaseCallback<Match>() {
                     @Override
-                    public void onCompleted(Object object) {
-                        Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
+                    public void onCompleted(Match object) {
+                        if(object == null){
+                            Toast.makeText(context, "Match has already got deleted.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            databaseService.createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
+                                @Override
+                                public void onCompleted(Object object) {
+                                    Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailed(Exception e) {
+
+                                }
+                            });
+                        }
                     }
 
                     @Override

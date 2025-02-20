@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
@@ -30,6 +31,7 @@ public class MyMatchesActivity extends AppCompatActivity {
     private List<Match> myMatchList;
     private List<Match> joinedMatchList;
     private User currentUser;
+    ValueEventListener matchListRealtime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +47,13 @@ public class MyMatchesActivity extends AppCompatActivity {
         rvJoinedMatches = findViewById(R.id.rv_joinedMatches);
         rvJoinedMatches.setLayoutManager(new LinearLayoutManager(this));
 
-        myMatchList = new ArrayList<>();
-        joinedMatchList = new ArrayList<>();
-        databaseService.getMatchList(new DatabaseService.DatabaseCallback<List<Match>>() {
+        matchListRealtime = databaseService.getMatchListRealtime(new DatabaseService.DatabaseCallback<List<Match>>() {
             @Override
             public void onCompleted(List<Match> object) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
+                myMatchList = new ArrayList<>();
+                joinedMatchList = new ArrayList<>();
+
                 for (Match m: object) {
                     if(m.isHost(currentUser)){
                         myMatchList.add(m);

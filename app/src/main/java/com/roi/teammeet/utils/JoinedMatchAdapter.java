@@ -1,7 +1,6 @@
 package com.roi.teammeet.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
-import com.roi.teammeet.screens.MainActivity;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -26,6 +24,8 @@ public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.
 
     private Context context;
     private List<Match> matchList;
+    private User currentUser;
+    private DatabaseService databaseService;
 
     public JoinedMatchAdapter(Context context, List<Match> matchList) {
         this.context = context;
@@ -47,10 +47,45 @@ public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
         holder.tvGroupSize.setText(match.getGroupSize().toString());
 
+        databaseService = DatabaseService.getInstance();
+
         // Handle button click to show the dialog
         holder.btnDetails.setOnClickListener(v -> {
             // Create and show the dialog with more match details
             showDetailsDialog(match);
+        });
+
+        holder.btnLeave.setOnClickListener(v -> {
+            holder.btnLeave.setEnabled(false);
+            currentUser = SharedPreferencesUtil.getUser(context);
+            match.leave(currentUser);
+
+            databaseService.getMatch(match.getId(), new DatabaseService.DatabaseCallback<Match>() {
+                @Override
+                public void onCompleted(Match object) {
+                    if(object == null){
+                        Toast.makeText(context, "Match has already got deleted.", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        databaseService.createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
+                            @Override
+                            public void onCompleted(Object object) {
+                                Toast.makeText(context, "Left the match!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailed(Exception e) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailed(Exception e) {
+
+                }
+            });
         });
     }
 

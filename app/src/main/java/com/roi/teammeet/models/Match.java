@@ -48,8 +48,8 @@ public class Match {
         this.groupSize.add();
     }
 
-    public void remove(String userId){
-        this.playersId.remove(userId);
+    public void leave(User user){
+        this.playersId.remove(user.getId());
         this.groupSize.remove();
     }
 

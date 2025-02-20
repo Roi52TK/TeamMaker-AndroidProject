@@ -2,8 +2,14 @@ package com.roi.teammeet.services;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 
@@ -54,6 +60,22 @@ public class DatabaseService {
         });
     }
 
+    /// remove data from the database at a specific path
+    /// @param path the path to remove the data from
+    /// @param callback the callback to call when the operation is completed
+    /// @see DatabaseCallback
+    private void deleteData(@NotNull final String path, @Nullable final DatabaseCallback<Void> callback) {
+        databaseReference.child(path).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                if (callback == null) return;
+                callback.onCompleted(null);
+            } else {
+                if (callback == null) return;
+                callback.onFailed(task.getException());
+            }
+        });
+    }
+
     private DatabaseReference readData(String path) {
         return databaseReference.child(path);
     }
@@ -81,20 +103,47 @@ public class DatabaseService {
             dbRef = dbRef.orderByChild(entry.getKey()).equalTo(entry.getValue());
         }
 
-        dbRef.get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e(TAG, "Error getting data", task.getException());
-                callback.onFailed(task.getException());
-                return;
-            }
-            List<T> tList = new ArrayList<>();
-            task.getResult().getChildren().forEach(dataSnapshot -> {
-                T t = dataSnapshot.getValue(clazz);
-                tList.add(t);
-            });
+        dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e(TAG, "Error getting data", task.getException());
+                    callback.onFailed(task.getException());
+                    return;
+                }
+                List<T> tList = new ArrayList<>();
+                task.getResult().getChildren().forEach(dataSnapshot -> {
+                    T t = dataSnapshot.getValue(clazz);
+                    tList.add(t);
+                });
 
-            callback.onCompleted(tList);
+                callback.onCompleted(tList);
+            }
         });
+    }
+
+
+    private <T> ValueEventListener getDataListListener(@NotNull final String path, @NotNull final Class<T> clazz, @NotNull final DatabaseCallback<List<T>> callback) {
+        return readData(path).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<T> tList = new ArrayList<>();
+                snapshot.getChildren().forEach(dataSnapshot -> {
+                    T t = dataSnapshot.getValue(clazz);
+                    tList.add(t);
+                });
+                callback.onCompleted(tList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onFailed(error.toException());
+            }
+        });
+    }
+
+    private void stopListen(@NotNull final String path, @NotNull final ValueEventListener listener) {
+        readData(path).removeEventListener(listener);
     }
 
     private String generateNewId(@NotNull final String path) {
@@ -111,6 +160,18 @@ public class DatabaseService {
 
     public void getMatchList(@NotNull final DatabaseCallback<List<Match>> callback) {
         getDataList("matches/", Match.class, new HashMap<>(), callback);
+    }
+
+    public ValueEventListener getMatchListRealtime(@NotNull final DatabaseCallback<List<Match>> callback) {
+        return getDataListListener("matches/", Match.class, callback);
+    }
+
+    public void stopListenMatchRealtime(ValueEventListener listener) {
+        stopListen("matches/", listener);
+    }
+
+    public void deleteMatch(@NotNull final String matchId, @Nullable final DatabaseCallback<Void> callback) {
+        deleteData("matches/" + matchId, callback);
     }
 
     public void createNewUser(User user, DatabaseCallback<Object> callback) {

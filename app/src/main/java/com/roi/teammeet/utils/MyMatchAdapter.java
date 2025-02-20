@@ -52,6 +52,21 @@ public class MyMatchAdapter extends RecyclerView.Adapter<MyMatchAdapter.MyMatchV
             // Create and show the dialog with more match details
             showDetailsDialog(match);
         });
+
+        holder.btnDelete.setOnClickListener(v -> {
+            holder.btnDelete.setEnabled(false);
+            DatabaseService.getInstance().deleteMatch(match.getId(), new DatabaseService.DatabaseCallback<Void>() {
+                @Override
+                public void onCompleted(Void object) {
+                    Toast.makeText(context, "Deleted the match!", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailed(Exception e) {
+
+                }
+            });
+        });
     }
 
     @Override
