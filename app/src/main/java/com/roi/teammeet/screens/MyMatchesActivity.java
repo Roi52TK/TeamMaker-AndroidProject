@@ -75,4 +75,10 @@ public class MyMatchesActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        databaseService.stopListenMatchRealtime(this.matchListRealtime);
+        super.onDestroy();
+    }
 }

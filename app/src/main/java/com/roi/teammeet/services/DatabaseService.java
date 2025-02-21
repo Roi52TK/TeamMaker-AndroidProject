@@ -182,6 +182,22 @@ public class DatabaseService {
         getData("users/" + userId, User.class, callback);
     }
 
+    public void getUserList(@NotNull final DatabaseCallback<List<User>> callback) {
+        getDataList("users/", User.class, new HashMap<>(), callback);
+    }
+
+    public ValueEventListener getUserListRealtime(@NotNull final DatabaseCallback<List<User>> callback) {
+        return getDataListListener("users/", User.class, callback);
+    }
+
+    public void stopListenUserRealtime(ValueEventListener listener) {
+        stopListen("users/", listener);
+    }
+
+    public void deleteUser(@NotNull final String userId, @Nullable final DatabaseCallback<Void> callback) {
+        deleteData("users/" + userId, callback);
+    }
+
     public String generateMatchId() {
         return generateNewId("matches");
     }

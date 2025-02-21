@@ -52,6 +52,16 @@
         android:text="צור מפגש!" />
 
     <Button
+        android:id="@+id/btnAdminPage_main"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="36sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="#CD7E1D"
+        android:text="דף מנהל" />
+
+    <Button
         android:id="@+id/btnSignOut_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnAvailableMatches;
     private Button btnMyMatches;
     private Button btnCreateMatch;
+    private Button btnAdminPage;
     private Button btnSignOut;
     private String welcomeMsg;
     private User currentUser;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAvailableMatches.setOnClickListener(this);
         btnMyMatches.setOnClickListener(this);
         btnCreateMatch.setOnClickListener(this);
+        btnAdminPage.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
 
         currentUser = SharedPreferencesUtil.getUser(this);
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAvailableMatches = findViewById(R.id.btnAvailableMatches_main);
         btnMyMatches = findViewById(R.id.btnMyMatches_main);
         btnCreateMatch = findViewById(R.id.btnCreateMatch_main);
+        btnAdminPage = findViewById(R.id.btnAdminPage_main);
         btnSignOut = findViewById(R.id.btnSignOut_main);
     }
 
@@ -89,6 +92,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(v == btnCreateMatch){
             Intent createMatchIntent = new Intent(this, NewMatchActivity.class);
             startActivity(createMatchIntent);
+            finish();
+        }
+        else if(v == btnAdminPage){
+            Intent adminPageIntent = new Intent(this, AdminPageActivity.class);
+            startActivity(adminPageIntent);
             finish();
         }
         else if(v == btnSignOut){
