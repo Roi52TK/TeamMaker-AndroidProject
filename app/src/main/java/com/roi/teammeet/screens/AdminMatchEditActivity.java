@@ -3,12 +3,8 @@ package com.roi.teammeet.screens;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,31 +13,31 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.MatchAdapter;
-import com.roi.teammeet.utils.UserAdapter;
+import com.roi.teammeet.utils.MatchEditAdapter;
+import com.roi.teammeet.utils.UserEditAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminPageActivity extends AppCompatActivity {
+public class AdminMatchEditActivity extends AppCompatActivity {
 
-    private static final String TAG = "AvailableMatchesActivity";
+    private static final String TAG = "AdminMatchEditActivity";
 
     private DatabaseService databaseService;
     private SearchView searchView;
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
-    private List<User> userList;
+    private MatchEditAdapter matchAdapter;
+    private List<Match> matchList;
 
-    ValueEventListener userListRealtime;
+    ValueEventListener matchListRealtime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_page);
+        setContentView(R.layout.activity_admin_match_edit);
 
         databaseService = DatabaseService.getInstance();
 
-        searchView = findViewById(R.id.sv_adminPage);
+        searchView = findViewById(R.id.sv_adminMatchEdit);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -56,17 +52,17 @@ public class AdminPageActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rv_adminPage);
+        recyclerView = findViewById(R.id.rv_adminMatchEdit);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        userList = new ArrayList<>();
-        userListRealtime = databaseService.getUserListRealtime(new DatabaseService.DatabaseCallback<List<User>>() {
+        matchList = new ArrayList<>();
+        matchListRealtime = databaseService.getMatchListRealtime(new DatabaseService.DatabaseCallback<List<Match>>() {
             @Override
-            public void onCompleted(List<User> object) {
+            public void onCompleted(List<Match> object) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
-                userList = object;
-                userAdapter = new UserAdapter(AdminPageActivity.this, userList);
-                recyclerView.setAdapter(userAdapter);
+                matchList = object;
+                matchAdapter = new MatchEditAdapter(AdminMatchEditActivity.this, matchList);
+                recyclerView.setAdapter(matchAdapter);
             }
 
             @Override
@@ -77,21 +73,21 @@ public class AdminPageActivity extends AppCompatActivity {
     }
 
     private void filterList(String text){
-        List<User> filteredList = new ArrayList<>();
-        for(User user : userList){
-            if(user.getUsername().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(user);
+        List<Match> filteredList = new ArrayList<>();
+        for(Match match : matchList){
+            if(match.getTitle().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(match);
             }
         }
 
         if(!filteredList.isEmpty()){
-            userAdapter.setFilteredList(filteredList);
+            matchAdapter.setFilteredList(filteredList);
         }
     }
 
     @Override
     protected void onDestroy() {
-        databaseService.stopListenUserRealtime(this.userListRealtime);
+        databaseService.stopListenUserRealtime(this.matchListRealtime);
         super.onDestroy();
     }
 }

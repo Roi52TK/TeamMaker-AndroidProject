@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     android:weightSum="10"
     android:orientation="vertical"
-    tools:context=".screens.AdminPageActivity">
+    tools:context=".screens.AdminMatchEditActivity">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_adminPage"
+        android:id="@+id/sv_adminMatchEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:queryHint="Search users..."/>
+        app:queryHint="Search matches..."/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_adminPage"
+        android:id="@+id/rv_adminMatchEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

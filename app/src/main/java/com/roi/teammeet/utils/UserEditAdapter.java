@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,18 +16,16 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserViewHolder> {
 
-    private static final String TAG = "UserAdapter";
+    private static final String TAG = "UserEditAdapter";
     private Context context;
     private List<User> userList;
     private DatabaseService databaseService;
 
-    public UserAdapter(Context context, List<User> userList) {
+    public UserEditAdapter(Context context, List<User> userList) {
         this.context = context;
         this.userList = userList;
     }
@@ -123,21 +120,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             btnUpdate = itemView.findViewById(R.id.btnUpdate_userCard);
             btnDelete = itemView.findViewById(R.id.btnDelete_userCard);
         }
-    }
-
-    // Method to show the custom dialog with match details
-    private void showDetailsDialog(Match match) {
-        // Create the dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(match.getTitle())
-                .setMessage("Description: " + match.getDescription() +
-                        "\nDate: " + match.getDate() + " at " + match.getTime() +
-                        "\nAddress: " + match.getAddress() +
-                        "\nAge Range: " + match.getAgeRange() +
-                        "\nGroup Size: " + match.getGroupSize())
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .setCancelable(true)
-                .show();
     }
 }
 

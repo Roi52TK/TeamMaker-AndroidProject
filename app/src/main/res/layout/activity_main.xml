@@ -52,14 +52,24 @@
         android:text="צור מפגש!" />
 
     <Button
-        android:id="@+id/btnAdminPage_main"
+        android:id="@+id/btnAdminUserEdit_main"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="36sp"
+        android:textSize="18sp"
         android:paddingHorizontal="40dp"
         android:backgroundTint="#CD7E1D"
-        android:text="דף מנהל" />
+        android:text="מנהל משתמשים" />
+
+    <Button
+        android:id="@+id/btnAdminMatchEdit_main"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:paddingHorizontal="40dp"
+        android:backgroundTint="#CD7E1D"
+        android:text="מנהל מפגשים" />
 
     <Button
         android:id="@+id/btnSignOut_main"

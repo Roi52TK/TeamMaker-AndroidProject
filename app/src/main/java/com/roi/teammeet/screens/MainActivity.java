@@ -14,13 +14,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.roi.teammeet.R;
-import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
-import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
-
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnAvailableMatches;
     private Button btnMyMatches;
     private Button btnCreateMatch;
-    private Button btnAdminPage;
+    private Button btnAdminUserEdit;
+    private Button btnAdminMatchEdit;
     private Button btnSignOut;
     private String welcomeMsg;
     private User currentUser;
@@ -60,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAvailableMatches.setOnClickListener(this);
         btnMyMatches.setOnClickListener(this);
         btnCreateMatch.setOnClickListener(this);
-        btnAdminPage.setOnClickListener(this);
+        btnAdminUserEdit.setOnClickListener(this);
+        btnAdminMatchEdit.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
 
         currentUser = SharedPreferencesUtil.getUser(this);
@@ -75,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAvailableMatches = findViewById(R.id.btnAvailableMatches_main);
         btnMyMatches = findViewById(R.id.btnMyMatches_main);
         btnCreateMatch = findViewById(R.id.btnCreateMatch_main);
-        btnAdminPage = findViewById(R.id.btnAdminPage_main);
+        btnAdminUserEdit = findViewById(R.id.btnAdminUserEdit_main);
+        btnAdminMatchEdit = findViewById(R.id.btnAdminMatchEdit_main);
         btnSignOut = findViewById(R.id.btnSignOut_main);
     }
 
@@ -94,9 +93,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(createMatchIntent);
             finish();
         }
-        else if(v == btnAdminPage){
-            Intent adminPageIntent = new Intent(this, AdminPageActivity.class);
-            startActivity(adminPageIntent);
+        else if(v == btnAdminUserEdit){
+            Intent adminUserEditIntent = new Intent(this, AdminUserEditActivity.class);
+            startActivity(adminUserEditIntent);
+            finish();
+        }
+        else if(v == btnAdminMatchEdit){
+            Intent adminMatchEditIntent = new Intent(this, AdminMatchEditActivity.class);
+            startActivity(adminMatchEditIntent);
             finish();
         }
         else if(v == btnSignOut){
