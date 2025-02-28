@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
@@ -51,6 +52,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         holder.etPhone.setText(user.getPhone());
         holder.etEmail.setText(user.getEmail());
         holder.etPassword.setText(user.getPassword());
+        holder.switchAdmin.setChecked(user.isAdmin());
 
         databaseService = DatabaseService.getInstance();
 
@@ -61,8 +63,9 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
             String phone = holder.etPhone.getText().toString();
             String email = holder.etEmail.getText().toString();
             String password = holder.etPassword.getText().toString();
+            boolean isAdmin = holder.switchAdmin.isChecked();
 
-            User updatedUser = new User(user.getId(), userName, birthYear, gender, phone, email, password);
+            User updatedUser = new User(user.getId(), userName, birthYear, gender, phone, email, password, isAdmin);
 
             databaseService.createNewUser(updatedUser, new DatabaseService.DatabaseCallback<Object>() {
                 @Override
@@ -105,6 +108,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         EditText etPhone;
         EditText etEmail;
         EditText etPassword;
+        SwitchCompat switchAdmin;
         Button btnUpdate;
         Button btnDelete;
 
@@ -117,6 +121,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
             etPhone = itemView.findViewById(R.id.etPhone_userCard);
             etEmail = itemView.findViewById(R.id.etEmail_userCard);
             etPassword = itemView.findViewById(R.id.etPassword_userCard);
+            switchAdmin = itemView.findViewById(R.id.switchAdmin_userCard);
             btnUpdate = itemView.findViewById(R.id.btnUpdate_userCard);
             btnDelete = itemView.findViewById(R.id.btnDelete_userCard);
         }

@@ -64,6 +64,7 @@ public class SharedPreferencesUtil {
         editor.putString("uid", user.getId());
         editor.putString("username", user.getUsername());
         editor.putString("birthYear", user.getBirthYear());
+        editor.putBoolean("isAdmin", user.isAdmin());
         editor.apply();
     }
 
@@ -71,13 +72,14 @@ public class SharedPreferencesUtil {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         // check if user is logged in
         if (!isUserLoggedIn(context)) {
-            Log.d("Alon", "null toilet");
+            Log.d("SharedPreferences", "null");
             return null;
         }
         String uid = sharedPreferences.getString("uid", "");
         String username = sharedPreferences.getString("username", "");
         String birthYear = sharedPreferences.getString("birthYear", "");
-        return new User(uid, username, birthYear);
+        boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
+        return new User(uid, username, birthYear, isAdmin);
     }
 
     public static void signOutUser(Context context) {
@@ -86,6 +88,7 @@ public class SharedPreferencesUtil {
         editor.remove("uid");
         editor.remove("username");
         editor.remove("birthYear");
+        editor.remove("isAdmin");
         editor.apply();
     }
 

@@ -5,12 +5,13 @@ import java.time.Year;
 public class User {
     String id;
     String username, birthYear, gender, phone, email, password;
+    boolean isAdmin;
 
     public User(){
 
     }
 
-    public User(String id, String username, String birthYear, String gender, String phone, String email, String password) {
+    public User(String id, String username, String birthYear, String gender, String phone, String email, String password, boolean isAdmin) {
         this.id = id;
         this.username = username;
         this.birthYear = birthYear;
@@ -18,9 +19,10 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    public User(String id, String username, String birthYear) {
+    public User(String id, String username, String birthYear, boolean isAdmin) {
         this.id = id;
         this.username = username;
         this.birthYear = birthYear;
@@ -28,6 +30,7 @@ public class User {
         this.phone = "";
         this.email = "";
         this.password = "";
+        this.isAdmin = isAdmin;
     }
 
     public int getCalculatedAge(){
@@ -77,6 +80,14 @@ public class User {
         this.id = id;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -85,12 +96,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone() {
-        return phone;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     @Override
@@ -103,6 +114,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", isAdmin='" + isAdmin + '\'' +
                 '}';
     }
 

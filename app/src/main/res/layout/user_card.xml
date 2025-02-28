@@ -67,6 +67,12 @@
             android:inputType="textVisiblePassword"
             android:text="Password" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchAdmin_userCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

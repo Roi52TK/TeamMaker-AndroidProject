@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.databinding.ActivityMapsBinding;
+import com.roi.teammeet.utils.GeneralMapsActivity;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -38,21 +39,16 @@ import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.events.MapEventsReceiver;
 
-public class MapsActivity extends AppCompatActivity implements MapListener, GpsStatus.Listener, View.OnClickListener {
+public class MapsActivity extends GeneralMapsActivity implements MapListener, GpsStatus.Listener, View.OnClickListener {
 
     private static final String TAG = "MapsActivity";
 
-    private MapView mMap;
-    private IMapController controller;
-    private MyLocationNewOverlay mMyLocationOverlay;
-    private Marker activeMarker;
     EditText etStreet;
     EditText etStreetNumber;
     EditText etCity;
     String street;
     String streetNumber;
     String city;
-    String finalAddress;
     Button btnSetAddress;
     Button btnSetMarker;
     Button btnFinish;
@@ -61,22 +57,7 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
-        // Load settings
-        Configuration.getInstance().load(
-                getApplicationContext(),
-                getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE)
-        );
-
-        // Initialize the map
-        mMap = binding.osmmap;
-        mMap.setTileSource(TileSourceFactory.MAPNIK);
-        mMap.setMultiTouchControls(true);
-        mMap.getLocalVisibleRect(new Rect());
-
-        // Add MapEventsOverlay to listen for taps
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
@@ -91,59 +72,13 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
             }
         });
 
-        // Add the overlay to the map
         mMap.getOverlays().add(mapEventsOverlay);
 
-        // Initialize location overlay
-        mMyLocationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this), mMap);
-        controller = mMap.getController();
-
-        // Enable my location overlay
-        mMyLocationOverlay.enableMyLocation();
-        mMyLocationOverlay.enableFollowLocation();
-        mMyLocationOverlay.setDrawAccuracyEnabled(true);
-
-        // Center map on first location fix
-        mMyLocationOverlay.runOnFirstFix(new Runnable() {
-            @Override
-            public void run() {
-                GeoPoint location = mMyLocationOverlay.getMyLocation();
-                if (location != null) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            controller.setCenter(location);
-                            controller.animateTo(location);
-                        }
-                    });
-                } else {
-                    Log.e("Location", "My location is null");
-                }
-            }
-        });
-
-
-        controller.setZoom(6.0);
-
-        // Log zoom levels
-        Log.e(TAG, "onCreate: in " + controller.zoomIn());
-        Log.e(TAG, "onCreate: out " + controller.zoomOut());
-
-        // Add location overlay to the map
-        mMap.getOverlays().add(mMyLocationOverlay);
-
-        // Add map listener
-        mMap.addMapListener(this);
-
-        // Initial Views
         initViews();
-
-        // Set OnClickListeners
         btnSetAddress.setOnClickListener(this);
         btnSetMarker.setOnClickListener(this);
         btnFinish.setOnClickListener(this);
 
-        // Set marker to selected address
         mapsIntent = getIntent();
         String intentLatSt = mapsIntent.getStringExtra("lat");
         String intentLangSt = mapsIntent.getStringExtra("lang");
@@ -162,7 +97,12 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
         }
     }
 
-
+    @Override
+    protected void initializeMap() {
+        ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        mMap = binding.osmmap;
+    }
 
     private void initViews(){
         etStreet = findViewById(R.id.etStreet_maps);
@@ -174,164 +114,30 @@ public class MapsActivity extends AppCompatActivity implements MapListener, GpsS
     }
 
     @Override
-    public boolean onScroll(ScrollEvent event) {
-        Log.e(TAG, "onScroll: la " + event.getSource().getMapCenter().getLatitude());
-        Log.e(TAG, "onScroll: lo " + event.getSource().getMapCenter().getLongitude());
-        return true;
-    }
-
-    @Override
-    public boolean onZoom(ZoomEvent event) {
-        Log.e(TAG, "onZoom zoom level: " + event.getZoomLevel() + " source: " + event.getSource());
-        return false;
-    }
-
-    @Override
-    public void onGpsStatusChanged(int event) {
-        // Not yet implemented
-    }
-
-    // Method to move the marker to a new position
-    private void moveMarkerTo(GeoPoint geoPoint) {
-        if (activeMarker == null) {
-            // Create a new marker if it doesn't exist
-            activeMarker = new Marker(mMap);
-            activeMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-            mMap.getOverlays().add(activeMarker);
-        }
-
-        // Update the marker's position
-        activeMarker.setPosition(geoPoint);
-        // Marker's title
-        activeMarker.setTitle("Lat: " + geoPoint.getLatitude() + ", Lon: " + geoPoint.getLongitude());
-
-        // Refresh the map to display changes
-        mMap.invalidate();
-    }
-
-
-    public void reverseGeocode(double latitude, double longitude) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                StringBuilder addressText = new StringBuilder();
-                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
-                    addressText.append(address.getAddressLine(i)).append("\n");
-                }
-                //Set the address
-                finalAddress = addressText.toString();
-                Toast.makeText(this, finalAddress, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Geocoder service not available", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void geocodeAndCenterMap(String address) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            // Get the list of addresses for the input address
-            List<Address> addresses = geocoder.getFromLocationName(address, 1);
-
-            if (addresses != null && !addresses.isEmpty()) {
-                Address location = addresses.get(0);
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-
-                // Log the coordinates for debugging
-                Log.d("Geocode", "Lat: " + latitude + ", Lon: " + longitude);
-
-                // Create a GeoPoint from the coordinates
-                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-
-                // Move the map to the geocoded coordinates
-                mMap.getController().setCenter(geoPoint);
-                mMap.getController().animateTo(geoPoint);
-
-                // Set zoom level to focus closer
-                mMap.getController().setZoom(20.0);
-
-                //Add a marker at the location
-                moveMarkerTo(geoPoint);
-
-            } else {
-                Toast.makeText(this, "Address not found", Toast.LENGTH_SHORT).show();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Geocoder service not available", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
     public void onClick(View view) {
         if(view == btnSetAddress){
             setAddress();
         }
         if(view == btnSetMarker){
-            setMarker();
+            onClickSetMarker();
         }
         if(view == btnFinish){
-            if(!finalAddress.isEmpty()){
+            if(!currentAddress.isEmpty()){
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("lat", String.valueOf(activeMarker.getPosition().getLatitude()));
                 resultIntent.putExtra("lang", String.valueOf(activeMarker.getPosition().getLongitude()));
-                resultIntent.putExtra("address", finalAddress);
+                resultIntent.putExtra("address", currentAddress);
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }
         }
     }
 
-
-
-    private void setAddress() {
-        if (activeMarker != null) {
-            // Get the marker's coordinates
-            double latitude = activeMarker.getPosition().getLatitude();
-            double longitude = activeMarker.getPosition().getLongitude();
-
-            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-
-            // Move the map to the geocoded coordinates
-            mMap.getController().setCenter(geoPoint);
-            mMap.getController().animateTo(geoPoint);
-
-            // Set zoom level to focus closer
-            mMap.getController().setZoom(20.0);
-
-            // Reverse geocode the marker's location
-            reverseGeocode(latitude, longitude);
-        } else {
-            Toast.makeText(this, "No marker is placed on the map!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void setMarker() {
+    private void onClickSetMarker() {
         street = etStreet.getText().toString();
         streetNumber = etStreetNumber.getText().toString();
         city = etCity.getText().toString();
 
-        String address = street + " St " + streetNumber + "," + city;
-        geocodeAndCenterMap(address);
-    }
-
-    private void setMarker(double lat, double lang) {
-        GeoPoint geoPoint = new GeoPoint(lat, lang);
-
-        // Move the map to the geocoded coordinates
-        mMap.getController().setCenter(geoPoint);
-        mMap.getController().animateTo(geoPoint);
-
-        // Set zoom level to focus closer
-        mMap.getController().setZoom(20.0);
-
-        //Add a marker at the location
-        moveMarkerTo(geoPoint);
+        setMarker(street, streetNumber, city);
     }
 }

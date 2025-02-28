@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -65,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (currentUser != null) {
             welcomeMsg = "Welcome back " + currentUser.getUsername() + "!";
             tvWelcome.setText(welcomeMsg);
+
+            if(!currentUser.isAdmin()){
+                ((ViewGroup) btnAdminUserEdit.getParent()).removeView(btnAdminUserEdit);
+                ((ViewGroup) btnAdminMatchEdit.getParent()).removeView(btnAdminMatchEdit);
+            }
         }
     }
 
