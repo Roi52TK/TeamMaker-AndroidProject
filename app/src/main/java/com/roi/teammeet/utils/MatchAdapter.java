@@ -1,8 +1,6 @@
 package com.roi.teammeet.utils;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
-import com.roi.teammeet.screens.MainActivity;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -51,7 +48,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
         holder.tvTitle.setText(match.getTitle());
         holder.tvDescription.setText(match.getDescription());
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroupSize().toString());
+        holder.tvGroupSize.setText(match.getGroup().toString());
 
         databaseService = DatabaseService.getInstance();
 
@@ -131,7 +128,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                         "\nDate: " + match.getDate() + " at " + match.getTime() +
                         "\nAddress: " + match.getAddress() +
                         "\nAge Range: " + match.getAgeRange() +
-                        "\nGroup Size: " + match.getGroupSize())
+                        "\nGroup Size: " + match.getGroup())
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .setCancelable(true)
                 .show();

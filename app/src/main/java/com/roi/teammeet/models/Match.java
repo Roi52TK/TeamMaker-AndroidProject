@@ -12,8 +12,7 @@ public class Match {
     protected double lat, lang;
     private String address;
     private Range ageRange;
-    private GroupSize groupSize;
-    private ArrayList<String> playersId;
+    private Group group;
 
     public Match(){
 
@@ -30,8 +29,7 @@ public class Match {
         this.lang = lang;
         this.address = address;
         this.ageRange = new Range(minAge, maxAge);
-        this.groupSize = new GroupSize(groupSize);
-        this.playersId = new ArrayList<>();
+        this.group = new Group(groupSize);
         add(this.hostUserId);
     }
 
@@ -44,21 +42,19 @@ public class Match {
     }
 
     private void add(String userId){
-        this.playersId.add(userId);
-        this.groupSize.add();
+        this.group.add(userId);
     }
 
     public void leave(User user){
-        this.playersId.remove(user.getId());
-        this.groupSize.remove();
+        this.group.remove(user.getId());
     }
 
     private boolean canJoin(User user){
-        return !hasJoined(user) && ageRange.isInRange(user.getCalculatedAge()) && !groupSize.isFull();
+        return !hasJoined(user) && ageRange.isInRange(user.getCalculatedAge()) && !group.isFull();
     }
 
     public boolean hasJoined(User user){
-        return playersId.contains(user.getId());
+        return this.group.contains(user.getId());
     }
 
     public boolean isHost(User user){
@@ -145,20 +141,12 @@ public class Match {
         this.ageRange = ageRange;
     }
 
-    public GroupSize getGroupSize() {
-        return groupSize;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupSize(GroupSize groupSize) {
-        this.groupSize = groupSize;
-    }
-
-    public ArrayList<String> getPlayersId() {
-        return playersId;
-    }
-
-    public void setPlayersId(ArrayList<String> playersId) {
-        this.playersId = playersId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     @Override
@@ -174,8 +162,7 @@ public class Match {
                 ", lang=" + lang +
                 ", address='" + address + '\'' +
                 ", ageRange=" + ageRange +
-                ", groupSize=" + groupSize +
-                ", playersId=" + playersId +
+                ", group=" + group +
                 '}';
     }
 }

@@ -5,17 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
-import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -50,7 +47,7 @@ public class MatchEditAdapter extends RecyclerView.Adapter<MatchEditAdapter.Matc
         holder.tvTitle.setText(match.getTitle());
         holder.tvDescription.setText(match.getDescription());
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroupSize().toString());
+        holder.tvGroupSize.setText(match.getGroup().toString());
 
 
         holder.btnUpdate.setOnClickListener(v -> {

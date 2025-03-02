@@ -1,7 +1,6 @@
 package com.roi.teammeet.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.
         holder.tvTitle.setText(match.getTitle());
         holder.tvDescription.setText(match.getDescription());
         holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroupSize().toString());
+        holder.tvGroupSize.setText(match.getGroup().toString());
 
         databaseService = DatabaseService.getInstance();
 
@@ -123,7 +122,7 @@ public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.
                         "\nDate: " + match.getDate() + " at " + match.getTime() +
                         "\nAddress: " + match.getAddress() +
                         "\nAge Range: " + match.getAgeRange() +
-                        "\nGroup Size: " + match.getGroupSize())
+                        "\nGroup Size: " + match.getGroup())
                 .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                 .setCancelable(true)
                 .show();
