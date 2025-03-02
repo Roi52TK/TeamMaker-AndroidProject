@@ -58,6 +58,14 @@ public class Group implements Serializable {
         this.current = current;
     }
 
+    public ArrayList<String> getPlayersId() {
+        return this.playersId;
+    }
+
+    public void setPlayersId(ArrayList<String> playersId) {
+        this.playersId = playersId;
+    }
+
     @NonNull
     public String toString(){
         return this.current + "/" + this.max;
