@@ -1,0 +1,17 @@
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/tvUsername_matchGroupItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Username"
+            android:textColor="#285DC5"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

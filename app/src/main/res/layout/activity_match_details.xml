@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.MatchDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="56sp"
+            android:text="Title" />
+
+        <TextView
+            android:id="@+id/tvDescription_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/tvDate_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/tvTime_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Time" />
+
+        <TextView
+            android:id="@+id/tvAddress_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Address" />
+
+        <TextView
+            android:id="@+id/tvAgeRange_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Age Range" />
+
+        <TextView
+            android:id="@+id/tvHost_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Host" />
+
+        <TextView
+            android:id="@+id/tvPlayers_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="56sp"
+            android:text="Players" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlayers_matchDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
