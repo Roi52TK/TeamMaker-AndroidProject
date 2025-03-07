@@ -1,6 +1,7 @@
 package com.roi.teammeet.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
+import com.roi.teammeet.screens.MatchDetailsActivity;
+import com.roi.teammeet.screens.MyMatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -50,14 +53,15 @@ public class JoinedMatchAdapter extends RecyclerView.Adapter<JoinedMatchAdapter.
 
         // Handle button click to show the dialog
         holder.btnDetails.setOnClickListener(v -> {
-            // Create and show the dialog with more match details
-            showDetailsDialog(match);
+            Intent matchDetailsIntent = new Intent(context, MatchDetailsActivity.class);
+            matchDetailsIntent.putExtra("matchId", match.getId());
+            context.startActivity(matchDetailsIntent);
         });
 
         holder.btnLeave.setOnClickListener(v -> {
             holder.btnLeave.setEnabled(false);
             currentUser = SharedPreferencesUtil.getUser(context);
-            match.leave(currentUser);
+            match.kick(currentUser);
 
             databaseService.getMatch(match.getId(), new DatabaseService.DatabaseCallback<Match>() {
                 @Override

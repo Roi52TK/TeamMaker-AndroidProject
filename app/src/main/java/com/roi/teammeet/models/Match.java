@@ -1,7 +1,5 @@
 package com.roi.teammeet.models;
 
-import java.util.ArrayList;
-
 public class Match {
     protected String id;
     protected String title;
@@ -45,7 +43,7 @@ public class Match {
         this.group.add(userId);
     }
 
-    public void leave(User user){
+    public void kick(User user){
         this.group.remove(user.getId());
     }
 

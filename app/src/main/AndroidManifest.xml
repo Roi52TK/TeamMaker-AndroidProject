@@ -18,6 +18,9 @@
         android:theme="@style/Theme.TeamMeet"
         tools:targetApi="31">
         <activity
+            android:name=".screens.MyMatchDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.MyProfileActivity"
             android:exported="false" />
         <activity

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnAdminUserEdit;
     private Button btnAdminMatchEdit;
     private Button btnSignOut;
+    private Button btnProfile;
     private String welcomeMsg;
     private User currentUser;
 
@@ -55,12 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         initViews();
-        btnAvailableMatches.setOnClickListener(this);
-        btnMyMatches.setOnClickListener(this);
-        btnCreateMatch.setOnClickListener(this);
-        btnAdminUserEdit.setOnClickListener(this);
-        btnAdminMatchEdit.setOnClickListener(this);
-        btnSignOut.setOnClickListener(this);
+        setListeners();
 
         currentUser = SharedPreferencesUtil.getUser(this);
         if (currentUser != null) {
@@ -82,6 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnAdminUserEdit = findViewById(R.id.btnAdminUserEdit_main);
         btnAdminMatchEdit = findViewById(R.id.btnAdminMatchEdit_main);
         btnSignOut = findViewById(R.id.btnSignOut_main);
+        btnProfile = findViewById(R.id.btnProfile_main);
+    }
+
+    private void setListeners(){
+        btnAvailableMatches.setOnClickListener(this);
+        btnMyMatches.setOnClickListener(this);
+        btnCreateMatch.setOnClickListener(this);
+        btnAdminUserEdit.setOnClickListener(this);
+        btnAdminMatchEdit.setOnClickListener(this);
+        btnSignOut.setOnClickListener(this);
+        btnProfile.setOnClickListener(this);
     }
 
     @Override
@@ -97,23 +104,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(v == btnCreateMatch){
             Intent createMatchIntent = new Intent(this, NewMatchActivity.class);
             startActivity(createMatchIntent);
-            finish();
         }
         else if(v == btnAdminUserEdit){
             Intent adminUserEditIntent = new Intent(this, AdminUserEditActivity.class);
             startActivity(adminUserEditIntent);
-            finish();
         }
         else if(v == btnAdminMatchEdit){
             Intent adminMatchEditIntent = new Intent(this, AdminMatchEditActivity.class);
             startActivity(adminMatchEditIntent);
-            finish();
         }
         else if(v == btnSignOut){
             SignOut();
             Intent landingIntent = new Intent(this, LandingActivity.class);
             startActivity(landingIntent);
             finish();
+        }
+        else if(v == btnProfile){
+            Intent profileIntent = new Intent(this, MyProfileActivity.class);
+            startActivity(profileIntent);
         }
     }
 

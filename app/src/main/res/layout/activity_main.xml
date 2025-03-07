@@ -71,15 +71,33 @@
         android:backgroundTint="#CD7E1D"
         android:text="מנהל מפגשים" />
 
-    <Button
-        android:id="@+id/btnSignOut_main"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:textSize="36sp"
-        android:paddingHorizontal="40dp"
-        android:backgroundTint="#A10000"
-        android:text="התנתק" />
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:id="@+id/btnSignOut_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:textSize="36sp"
+            android:paddingHorizontal="40dp"
+            android:backgroundTint="#A10000"
+            android:text="התנתק" />
+
+        <Button
+            android:id="@+id/btnProfile_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:textSize="36sp"
+            android:paddingHorizontal="40dp"
+            android:backgroundTint="@color/btnBG"
+            android:text="פרופיל" />
+
+    </LinearLayout>
 </LinearLayout>

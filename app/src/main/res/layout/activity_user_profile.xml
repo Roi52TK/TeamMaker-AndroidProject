@@ -7,4 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".screens.UserProfileActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="56sp"
+            android:text="דף פרופיל" />
+
+        <TextView
+            android:id="@+id/tvUsername_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Username" />
+
+        <TextView
+            android:id="@+id/tvBirthYear_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Birth Year" />
+
+        <TextView
+            android:id="@+id/tvGender_userProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Gender" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

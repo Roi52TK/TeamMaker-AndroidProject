@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.MatchDetailsActivity">
+    tools:context=".screens.MyMatchDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvTitle_matchDetails"
+            android:id="@+id/tvTitle_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -23,7 +23,7 @@
             android:text="Title" />
 
         <TextView
-            android:id="@+id/tvDescription_matchDetails"
+            android:id="@+id/tvDescription_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -32,7 +32,7 @@
             android:text="Description" />
 
         <TextView
-            android:id="@+id/tvDate_matchDetails"
+            android:id="@+id/tvDate_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -41,7 +41,7 @@
             android:text="Date" />
 
         <TextView
-            android:id="@+id/tvTime_matchDetails"
+            android:id="@+id/tvTime_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -50,7 +50,7 @@
             android:text="Time" />
 
         <TextView
-            android:id="@+id/tvAddress_matchDetails"
+            android:id="@+id/tvAddress_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -59,7 +59,7 @@
             android:text="Address" />
 
         <TextView
-            android:id="@+id/tvAgeRange_matchDetails"
+            android:id="@+id/tvAgeRange_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -68,7 +68,7 @@
             android:text="Age Range" />
 
         <TextView
-            android:id="@+id/tvHost_matchDetails"
+            android:id="@+id/tvHost_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#285DC5"
@@ -78,7 +78,7 @@
             android:text="Host" />
 
         <TextView
-            android:id="@+id/tvPlayers_matchDetails"
+            android:id="@+id/tvPlayers_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
@@ -88,10 +88,11 @@
             android:text="Players" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPlayers_matchDetails"
+            android:id="@+id/rvPlayers_myMatchDetails"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,14 +18,14 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.MatchGroupAdapter;
+import com.roi.teammeet.utils.MyMatchGroupAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyMatchDetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "MatchDetailsActivity";
+    private static final String TAG = "MyMatchDetailsActivity";
 
     Match match;
     TextView tvTitle;
@@ -37,7 +37,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
     TextView tvHost;
 
     RecyclerView rvPlayers;
-    MatchGroupAdapter matchGroupAdapter;
+    MyMatchGroupAdapter myMatchGroupAdapter;
     List<String> usersId;
     List<User> players;
 
@@ -45,7 +45,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_match_details);
+        setContentView(R.layout.activity_my_match_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -72,15 +72,15 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initViews() {
-        tvTitle = findViewById(R.id.tvTitle_matchDetails);
-        tvDescription = findViewById(R.id.tvDescription_matchDetails);
-        tvDate = findViewById(R.id.tvDate_matchDetails);
-        tvTime = findViewById(R.id.tvTime_matchDetails);
-        tvAddress = findViewById(R.id.tvAddress_matchDetails);
-        tvAgeRange = findViewById(R.id.tvAgeRange_matchDetails);
-        tvHost = findViewById(R.id.tvHost_matchDetails);
+        tvTitle = findViewById(R.id.tvTitle_myMatchDetails);
+        tvDescription = findViewById(R.id.tvDescription_myMatchDetails);
+        tvDate = findViewById(R.id.tvDate_myMatchDetails);
+        tvTime = findViewById(R.id.tvTime_myMatchDetails);
+        tvAddress = findViewById(R.id.tvAddress_myMatchDetails);
+        tvAgeRange = findViewById(R.id.tvAgeRange_myMatchDetails);
+        tvHost = findViewById(R.id.tvHost_myMatchDetails);
 
-        rvPlayers = findViewById(R.id.rvPlayers_matchDetails);
+        rvPlayers = findViewById(R.id.rvPlayers_myMatchDetails);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
 
         usersId = new ArrayList<>();
@@ -100,7 +100,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
             public void onCompleted(User user) {
                 Log.d(TAG, "onCompleted: Host user received successfully");
                 tvHost.setText("Host: " + user.getUsername());
-                tvHost.setOnClickListener(MatchDetailsActivity.this);
+                tvHost.setOnClickListener(MyMatchDetailsActivity.this);
             }
 
             @Override
@@ -121,8 +121,8 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
 
-                matchGroupAdapter = new MatchGroupAdapter(MatchDetailsActivity.this, players);
-                rvPlayers.setAdapter(matchGroupAdapter);
+                myMatchGroupAdapter = new MyMatchGroupAdapter(MyMatchDetailsActivity.this, match, players);
+                rvPlayers.setAdapter(myMatchGroupAdapter);
             }
 
             @Override
