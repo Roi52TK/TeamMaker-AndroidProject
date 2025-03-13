@@ -68,6 +68,15 @@
             android:text="Age Range" />
 
         <TextView
+            android:id="@+id/tvGroup_matchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Group" />
+
+        <TextView
             android:id="@+id/tvHost_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -121,20 +121,5 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
             btnJoin = itemView.findViewById(R.id.btnJoin_itemCard);
         }
     }
-
-    // Method to show the custom dialog with match details
-    private void showDetailsDialog(Match match) {
-        // Create the dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(match.getTitle())
-                .setMessage("Description: " + match.getDescription() +
-                        "\nDate: " + match.getDate() + " at " + match.getTime() +
-                        "\nAddress: " + match.getAddress() +
-                        "\nAge Range: " + match.getAgeRange() +
-                        "\nGroup Size: " + match.getGroup())
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .setCancelable(true)
-                .show();
-    }
 }
 

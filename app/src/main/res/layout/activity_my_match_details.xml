@@ -68,14 +68,22 @@
             android:text="Age Range" />
 
         <TextView
+            android:id="@+id/tvGroup_myMatchDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColor"
+            android:layout_marginTop="20dp"
+            android:textSize="28sp"
+            android:text="Group" />
+
+        <TextView
             android:id="@+id/tvHost_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#285DC5"
             android:layout_marginTop="20dp"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:text="Host" />
+            android:text="Host: You" />
 
         <TextView
             android:id="@+id/tvPlayers_myMatchDetails"

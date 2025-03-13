@@ -34,6 +34,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
     TextView tvTime;
     TextView tvAddress;
     TextView tvAgeRange;
+    TextView tvGroup;
     TextView tvHost;
 
     RecyclerView rvPlayers;
@@ -78,6 +79,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
         tvTime = findViewById(R.id.tvTime_matchDetails);
         tvAddress = findViewById(R.id.tvAddress_matchDetails);
         tvAgeRange = findViewById(R.id.tvAgeRange_matchDetails);
+        tvGroup = findViewById(R.id.tvGroup_matchDetails);
         tvHost = findViewById(R.id.tvHost_matchDetails);
 
         rvPlayers = findViewById(R.id.rvPlayers_matchDetails);
@@ -94,6 +96,7 @@ public class MatchDetailsActivity extends AppCompatActivity implements View.OnCl
         tvTime.setText("Time: " + match.getTime().toString());
         tvAddress.setText("Address: " + match.getAddress().toString());
         tvAgeRange.setText("Age Range: "+ match.getAgeRange().toString());
+        tvGroup.setText("Group: " + match.getGroup().toString());
 
         DatabaseService.getInstance().getUser(match.getHostUserId(), new DatabaseService.DatabaseCallback<User>() {
             @Override

@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
@@ -23,7 +24,7 @@ import com.roi.teammeet.utils.MyMatchGroupAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyMatchDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyMatchDetailsActivity extends AppCompatActivity {
 
     private static final String TAG = "MyMatchDetailsActivity";
 
@@ -34,12 +35,15 @@ public class MyMatchDetailsActivity extends AppCompatActivity implements View.On
     TextView tvTime;
     TextView tvAddress;
     TextView tvAgeRange;
+    TextView tvGroup;
     TextView tvHost;
 
     RecyclerView rvPlayers;
     MyMatchGroupAdapter myMatchGroupAdapter;
     List<String> usersId;
     List<User> players;
+    DatabaseService databaseService;
+    ValueEventListener userListRealtime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,12 @@ public class MyMatchDetailsActivity extends AppCompatActivity implements View.On
             return insets;
         });
 
+        databaseService = DatabaseService.getInstance();
+
         initViews();
 
         String matchId = getIntent().getStringExtra("matchId");
-        DatabaseService.getInstance().getMatch(matchId, new DatabaseService.DatabaseCallback<Match>() {
+        databaseService.getMatch(matchId, new DatabaseService.DatabaseCallback<Match>() {
             @Override
             public void onCompleted(Match object) {
                 Log.d(TAG, "onCompleted: Match received successfully");
@@ -78,13 +84,13 @@ public class MyMatchDetailsActivity extends AppCompatActivity implements View.On
         tvTime = findViewById(R.id.tvTime_myMatchDetails);
         tvAddress = findViewById(R.id.tvAddress_myMatchDetails);
         tvAgeRange = findViewById(R.id.tvAgeRange_myMatchDetails);
+        tvGroup = findViewById(R.id.tvGroup_myMatchDetails);
         tvHost = findViewById(R.id.tvHost_myMatchDetails);
 
         rvPlayers = findViewById(R.id.rvPlayers_myMatchDetails);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
 
         usersId = new ArrayList<>();
-        players = new ArrayList<>();
     }
 
     private void initData() {
@@ -94,25 +100,13 @@ public class MyMatchDetailsActivity extends AppCompatActivity implements View.On
         tvTime.setText("Time: " + match.getTime().toString());
         tvAddress.setText("Address: " + match.getAddress().toString());
         tvAgeRange.setText("Age Range: "+ match.getAgeRange().toString());
+        tvGroup.setText("Group: " + match.getGroup().toString());
 
-        DatabaseService.getInstance().getUser(match.getHostUserId(), new DatabaseService.DatabaseCallback<User>() {
-            @Override
-            public void onCompleted(User user) {
-                Log.d(TAG, "onCompleted: Host user received successfully");
-                tvHost.setText("Host: " + user.getUsername());
-                tvHost.setOnClickListener(MyMatchDetailsActivity.this);
-            }
-
-            @Override
-            public void onFailed(Exception e) {
-                Log.e(TAG, "onFailed: Failed to receive host user", e);
-            }
-        });
-
-        DatabaseService.getInstance().getUserList(new DatabaseService.DatabaseCallback<List<User>>() {
+        userListRealtime = databaseService.getUserListRealtime(new DatabaseService.DatabaseCallback<List<User>>() {
             @Override
             public void onCompleted(List<User> userList) {
                 Log.d(TAG, "onCompleted: Users received successfully");
+                players = new ArrayList<>();
 
                 for (User user : userList){
                     if(match.hasJoined(user)){
@@ -133,11 +127,8 @@ public class MyMatchDetailsActivity extends AppCompatActivity implements View.On
     }
 
     @Override
-    public void onClick(View v) {
-        if(v == tvHost){
-            Intent hostProfileIntent = new Intent(this, UserProfileActivity.class);
-            hostProfileIntent.putExtra("userId", match.getHostUserId());
-            startActivity(hostProfileIntent);
-        }
+    protected void onDestroy() {
+        databaseService.stopListenUserRealtime(this.userListRealtime);
+        super.onDestroy();
     }
 }
