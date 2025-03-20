@@ -52,13 +52,17 @@ public class MyMatchGroupAdapter extends RecyclerView.Adapter<MyMatchGroupAdapte
         });
 
         holder.btnKick.setOnClickListener(v -> {
-            match.kick(user);
+            int pos = match.kick(user);
+            if (pos == -1) {
+                return;
+            }
             DatabaseService.getInstance().createNewMatch(match, new DatabaseService.DatabaseCallback<Object>() {
                 @Override
                 public void onCompleted(Object object) {
                     Toast.makeText(context, "Kicked " + user.getUsername() + " from the match!", Toast.LENGTH_SHORT).show();
-                    notifyDataSetChanged();
-                    //TODO: not working: the recycler view doesn't get updated
+                    int position = userList.indexOf(user);
+                    userList.remove(user);
+                    notifyItemRemoved(position);
                 }
 
                 @Override

@@ -7,39 +7,35 @@ import java.util.ArrayList;
 
 public class Group implements Serializable {
     private int max;
-    private int current;
     private ArrayList<String> playersId;
 
     public Group() {
         this.max = 0;
-        this.current = 0;
         playersId = new ArrayList<>();
     }
 
     public Group(int max){
         this.max = max;
-        this.current = 0;
         this.playersId = new ArrayList<>();
     }
 
     public void add(String userId){
         if(!isFull()){
             this.playersId.add(userId);
-            this.current += 1;
         }
     }
 
-    public void remove(String userId){
-        if(this.current > 0){
-            if(playersId.contains(userId)){
-                playersId.remove(userId);
-                this.current -= 1;
-            }
+    public int remove(String userId){
+        if(!playersId.contains(userId)){
+            return -1;
         }
+        int pos = playersId.indexOf(userId);
+        playersId.remove(userId);
+        return pos;
     }
 
     public boolean isFull(){
-        return this.current == this.max;
+        return this.playersId.size() == this.max;
     }
 
     public boolean contains(String userId){
@@ -47,7 +43,7 @@ public class Group implements Serializable {
     }
 
     public int getCurrent(){
-        return this.current;
+        return this.playersId.size();
     }
 
     public int getMax(){
@@ -56,10 +52,6 @@ public class Group implements Serializable {
 
     public void setMax(int max){
         this.max = Math.max(this.getCurrent(), max);
-    }
-
-    public void setCurrent(int current) {
-        this.current = current;
     }
 
     public ArrayList<String> getPlayersId() {
@@ -72,6 +64,6 @@ public class Group implements Serializable {
 
     @NonNull
     public String toString(){
-        return this.current + "/" + this.max;
+        return this.playersId.size() + "/" + this.max;
     }
 }

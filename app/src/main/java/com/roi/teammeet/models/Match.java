@@ -43,8 +43,8 @@ public class Match {
         this.group.add(userId);
     }
 
-    public void kick(User user){
-        this.group.remove(user.getId());
+    public int kick(User user){
+        return this.group.remove(user.getId());
     }
 
     private boolean canJoin(User user){
