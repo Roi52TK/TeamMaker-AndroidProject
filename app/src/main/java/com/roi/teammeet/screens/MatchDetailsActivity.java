@@ -18,7 +18,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.MatchGroupAdapter;
+import com.roi.teammeet.adapters.MatchGroupAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

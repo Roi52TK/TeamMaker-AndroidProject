@@ -1,6 +1,7 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
+import com.roi.teammeet.screens.AdminMatchUpdateActivity;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -51,7 +53,9 @@ public class MatchEditAdapter extends RecyclerView.Adapter<MatchEditAdapter.Matc
 
 
         holder.btnUpdate.setOnClickListener(v -> {
-            //TODO: intent go to a Match Updating activity
+            Intent updateIntent = new Intent(context, AdminMatchUpdateActivity.class);
+            updateIntent.putExtra("matchId", match.getId());
+            context.startActivity(updateIntent);
         });
 
         holder.btnDelete.setOnClickListener(v -> {

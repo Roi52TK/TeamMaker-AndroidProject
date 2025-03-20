@@ -1,4 +1,4 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,12 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
-import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 

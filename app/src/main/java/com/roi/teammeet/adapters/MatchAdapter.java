@@ -1,4 +1,4 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
@@ -17,6 +16,7 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.screens.MatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 import java.util.List;
 

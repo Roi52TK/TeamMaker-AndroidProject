@@ -1,4 +1,4 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;

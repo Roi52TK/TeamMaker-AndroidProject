@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Group implements Serializable {
-    private final int max;
+    private int max;
     private int current;
     private ArrayList<String> playersId;
 
@@ -52,6 +52,10 @@ public class Group implements Serializable {
 
     public int getMax(){
         return this.max;
+    }
+
+    public void setMax(int max){
+        this.max = Math.max(this.getCurrent(), max);
     }
 
     public void setCurrent(int current) {

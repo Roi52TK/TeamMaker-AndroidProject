@@ -1,9 +1,7 @@
 package com.roi.teammeet.screens;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +17,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.MyMatchGroupAdapter;
+import com.roi.teammeet.adapters.MyMatchGroupAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

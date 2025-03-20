@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.UserEditAdapter;
+import com.roi.teammeet.adapters.UserEditAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

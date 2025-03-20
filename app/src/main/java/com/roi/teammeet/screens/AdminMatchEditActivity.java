@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
-import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
-import com.roi.teammeet.utils.MatchEditAdapter;
-import com.roi.teammeet.utils.UserEditAdapter;
+import com.roi.teammeet.adapters.MatchEditAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

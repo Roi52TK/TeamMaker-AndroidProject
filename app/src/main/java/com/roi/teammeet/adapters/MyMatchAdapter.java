@@ -1,4 +1,4 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.content.Intent;

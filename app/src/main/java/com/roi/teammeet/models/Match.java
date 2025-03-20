@@ -59,6 +59,10 @@ public class Match {
         return user.getId().equals(hostUserId);
     }
 
+    public int getSize(){
+        return this.group.getMax();
+    }
+
     public String getId() {
         return id;
     }

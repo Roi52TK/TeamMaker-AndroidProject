@@ -1,4 +1,4 @@
-package com.roi.teammeet.utils;
+package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.screens.MatchDetailsActivity;
-import com.roi.teammeet.screens.MyMatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 import java.util.List;
 
