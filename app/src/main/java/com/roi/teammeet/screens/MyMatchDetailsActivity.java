@@ -38,7 +38,6 @@ public class MyMatchDetailsActivity extends AppCompatActivity {
 
     RecyclerView rvPlayers;
     MyMatchGroupAdapter myMatchGroupAdapter;
-    List<String> usersId;
     List<User> players;
     DatabaseService databaseService;
     ValueEventListener userListRealtime;
@@ -64,7 +63,6 @@ public class MyMatchDetailsActivity extends AppCompatActivity {
             public void onCompleted(Match object) {
                 Log.d(TAG, "onCompleted: Match received successfully");
                 match = object;
-                usersId = match.getGroup().getPlayersId();
                 initData();
             }
 
@@ -87,8 +85,6 @@ public class MyMatchDetailsActivity extends AppCompatActivity {
 
         rvPlayers = findViewById(R.id.rvPlayers_myMatchDetails);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
-
-        usersId = new ArrayList<>();
     }
 
     private void initData() {

@@ -11,20 +11,28 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.ValueEventListener;
 import com.roi.teammeet.R;
+import com.roi.teammeet.adapters.MyMatchGroupAdapter;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.Range;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminMatchUpdateActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,6 +59,10 @@ public class AdminMatchUpdateActivity extends AppCompatActivity implements View.
     private User hostUser;
     private String ogMatchId;
     private Match ogMatch;
+    private RecyclerView rvPlayers;
+    List<User> players;
+    private MyMatchGroupAdapter myMatchGroupAdapter;
+    ValueEventListener userListRealtime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +115,9 @@ public class AdminMatchUpdateActivity extends AppCompatActivity implements View.
         btnMap = findViewById(R.id.btnMap_adminMatchUpdate);
         tvAddress = findViewById(R.id.tvAddress_adminMatchUpdate);
         btnUpdate = findViewById(R.id.btnCreate_adminMatchUpdate);
+
+        rvPlayers = findViewById(R.id.rvPlayers_adminMatchUpdate);
+        rvPlayers.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void initData() {
@@ -135,6 +150,29 @@ public class AdminMatchUpdateActivity extends AppCompatActivity implements View.
             @Override
             public void onFailed(Exception e) {
                 Log.e(TAG, "onFailed: Failed to receive user", e);
+            }
+        });
+
+        userListRealtime = databaseService.getUserListRealtime(new DatabaseService.DatabaseCallback<List<User>>() {
+            @Override
+            public void onCompleted(List<User> userList) {
+                Log.d(TAG, "onCompleted: Users received successfully");
+                players = new ArrayList<>();
+
+                for (User user : userList){
+                    if(ogMatch.hasJoined(user)){
+                        if(!ogMatch.isHost(user))
+                            players.add(user);
+                    }
+                }
+
+                myMatchGroupAdapter = new MyMatchGroupAdapter(AdminMatchUpdateActivity.this, ogMatch, players);
+                rvPlayers.setAdapter(myMatchGroupAdapter);
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+                Log.e(TAG, "onFailed: Failed to receive users", e);
             }
         });
     }
@@ -311,8 +349,7 @@ public class AdminMatchUpdateActivity extends AppCompatActivity implements View.
             @Override
             public void onCompleted(Object object) {
                 Log.d(TAG, "onCompleted: Updated a match");
-
-                //TODO: need to add the og players group too - need to add a recycler view of the players
+                Toast.makeText(AdminMatchUpdateActivity.this, "Updated the match!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -321,5 +358,11 @@ public class AdminMatchUpdateActivity extends AppCompatActivity implements View.
                 Log.e(TAG, "onFailed: Failed to update match", e);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        databaseService.stopListenUserRealtime(this.userListRealtime);
+        super.onDestroy();
     }
 }
