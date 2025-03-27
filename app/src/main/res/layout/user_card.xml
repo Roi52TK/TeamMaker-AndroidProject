@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tvUsername_userCard"
+            android:id="@+id/tvUsernameTitle_userCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
@@ -19,58 +19,135 @@
             android:layout_marginBottom="8dp"
             android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/etUsername_userCard"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Username" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etBirthYear_userCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:text="Birth Year" />
+            <EditText
+                android:id="@+id/etUsername_userCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:text="Username" />
 
-        <EditText
-            android:id="@+id/etGender_userCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Gender" />
+            <TextView
+                android:id="@+id/tvUsername_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="שם משתמש:" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/etPhone_userCard"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="phone"
-            android:text="Phone" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/etEmail_userCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:text="Email" />
+            <EditText
+                android:id="@+id/etBirthYear_userCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="Birth Year" />
 
-        <EditText
-            android:id="@+id/etPassword_userCard"
+            <TextView
+                android:id="@+id/tvBirthYear_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="שנת לידה:" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textVisiblePassword"
-            android:text="Password" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerGender_userCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tvGender_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="מין:" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPhone_userCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:text="Phone" />
+
+            <TextView
+                android:id="@+id/tvPhone_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="טלפון:" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etEmail_userCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textEmailAddress"
+                android:text="Email" />
+
+            <TextView
+                android:id="@+id/tvEmail_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="אימייל:" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPassword_userCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textVisiblePassword"
+                android:text="Password" />
+
+            <TextView
+                android:id="@+id/tvPassword_userCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="סיסמה:" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchAdmin_userCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:text="Admin" />
 
         <LinearLayout
