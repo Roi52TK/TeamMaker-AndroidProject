@@ -15,6 +15,7 @@ osmdroidAndroid = "6.1.14"
 osmdroidAndroidVersion = "6.1.15"
 playServicesLocation = "18.0.0"
 playServicesMaps = "18.1.0"
+workRuntime = "2.10.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +31,7 @@ osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "os
 osmdroid-android-v6115 = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroidVersion" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+work-runtime = { module = "androidx.work:work-runtime", version.ref = "workRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

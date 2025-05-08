@@ -48,4 +48,5 @@ dependencies {
     implementation libs.play.services.maps
     implementation libs.play.services.location
     implementation libs.osmdroid.android.v6115
+    implementation libs.work.runtime
 }
