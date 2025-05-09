@@ -30,17 +30,29 @@ public class MatchNotificationWorker extends Worker {
     }
 
     private void showNotification(String matchTitle, String matchTime, String userName, String matchId) {
+        // Check if the channel is created only once
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            android.app.NotificationChannel channel = new android.app.NotificationChannel(
+                    "match_notifications_channel",
+                    "Match Notifications",
+                    android.app.NotificationManager.IMPORTANCE_DEFAULT
+            );
+            android.app.NotificationManager manager = getApplicationContext().getSystemService(android.app.NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+
+        // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "match_notifications_channel")
-                .setSmallIcon(R.drawable.ic_notification)
+                //.setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Match Reminder: " + matchTitle)
                 .setContentText(userName + ", your match is scheduled at " + matchTime)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        // Use the match ID's hashCode as a unique notification ID
         int notificationId = matchId.hashCode();
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
-        notificationManager.notify(notificationId, builder.build());
+        NotificationManagerCompat.from(getApplicationContext()).notify(notificationId, builder.build());
     }
 }

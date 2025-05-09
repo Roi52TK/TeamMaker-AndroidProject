@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
+import com.roi.teammeet.screens.AvailableMatchesActivity;
 import com.roi.teammeet.screens.MatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ReminderUtils;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 import java.util.List;
@@ -75,6 +77,11 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                                 @Override
                                 public void onCompleted(Object object) {
                                     Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
+                                    //long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(match.getDate(), match.getTime());
+                                    //ReminderUtils.scheduleMeetingReminder(context, meetingTimeMillis, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
+
+
+                                    ReminderUtils.scheduleMeetingReminder(context, 10 * 1000, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
                                 }
 
                                 @Override
