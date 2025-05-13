@@ -19,7 +19,7 @@ import com.roi.teammeet.utils.SharedPreferencesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyMatchesActivity extends AppCompatActivity {
+public class MyMatchesActivity extends BaseActivity {
 
     private static final String TAG = "MyMatchesActivity";
 

@@ -17,7 +17,7 @@ import com.roi.teammeet.adapters.UserEditAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminUserEditActivity extends AppCompatActivity {
+public class AdminUserEditActivity extends BaseActivity {
 
     private static final String TAG = "AdminUserEditActivity";
 

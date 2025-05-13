@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -27,13 +26,13 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
     private AuthenticationService authenticationService;
     private TextView tvWelcome;
 
-    private Button btnAvailableMatches;
+    private Button btnSearchMatches;
     private Button btnMyMatches;
     private Button btnCreateMatch;
     private Button btnAdminUserEdit;
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initViews() {
         tvWelcome = findViewById(R.id.tvWelcome_main);
-        btnAvailableMatches = findViewById(R.id.btnAvailableMatches_main);
+        btnSearchMatches = findViewById(R.id.btnSearchMatches_main);
         btnMyMatches = findViewById(R.id.btnMyMatches_main);
         btnCreateMatch = findViewById(R.id.btnCreateMatch_main);
         btnAdminUserEdit = findViewById(R.id.btnAdminUserEdit_main);
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setListeners(){
-        btnAvailableMatches.setOnClickListener(this);
+        btnSearchMatches.setOnClickListener(this);
         btnMyMatches.setOnClickListener(this);
         btnCreateMatch.setOnClickListener(this);
         btnAdminUserEdit.setOnClickListener(this);
@@ -112,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(v == btnAvailableMatches){
-            Intent availableMatchesIntent = new Intent(this, AvailableMatchesActivity.class);
+        if(v == btnSearchMatches){
+            Intent availableMatchesIntent = new Intent(this, SearchMatchesActivity.class);
             startActivity(availableMatchesIntent);
         }
         else if(v == btnMyMatches){
@@ -142,11 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent profileIntent = new Intent(this, MyProfileActivity.class);
             startActivity(profileIntent);
         }
-    }
-
-    private void SignOut(){
-        authenticationService.signOut();
-        SharedPreferencesUtil.signOutUser(this);
     }
 
     // Create a notification channel for devices running API 26 (Oreo) and above

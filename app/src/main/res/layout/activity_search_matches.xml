@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     android:weightSum="10"
     android:orientation="vertical"
-    tools:context=".screens.AvailableMatchesActivity">
+    tools:context=".screens.SearchMatchesActivity">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_availableMatches"
+        android:id="@+id/sv_searchMatches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:queryHint="Search matches..."/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_availableMatches"
+        android:id="@+id/rv_searchMatches"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

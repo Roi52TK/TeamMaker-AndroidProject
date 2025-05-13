@@ -34,7 +34,7 @@ import com.roi.teammeet.utils.MatchValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminMatchUpdateActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdminMatchUpdateActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "AdminMatchUpdateActivity";
 

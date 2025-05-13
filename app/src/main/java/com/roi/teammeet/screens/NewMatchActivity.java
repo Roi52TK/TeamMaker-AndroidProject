@@ -25,7 +25,7 @@ import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
-public class NewMatchActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewMatchActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "NewMatchActivity";
 

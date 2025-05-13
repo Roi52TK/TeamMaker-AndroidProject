@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="מסך בית"
+        android:id="@+id/home_menu" />
+
+    <item
+        android:title="חיפוש מפגשים"
+        android:id="@+id/searchMatches_menu" />
+
+    <item
+        android:title="המפגשים שלי"
+        android:id="@+id/myMatches_menu" />
+
+    <item
+        android:title="הפרופיל שלי"
+        android:id="@+id/myProfile_menu" />
+
+    <item
+        android:title="התנתק"
+        android:id="@+id/logout_menu" />
+
+</menu>

@@ -22,7 +22,7 @@ import com.roi.teammeet.adapters.MyMatchGroupAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyMatchDetailsActivity extends AppCompatActivity {
+public class MyMatchDetailsActivity extends BaseActivity {
 
     private static final String TAG = "MyMatchDetailsActivity";
 

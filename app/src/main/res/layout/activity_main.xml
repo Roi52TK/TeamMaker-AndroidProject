@@ -19,7 +19,7 @@
         android:text="Welcome back!" />
 
     <Button
-        android:id="@+id/btnAvailableMatches_main"
+        android:id="@+id/btnSearchMatches_main"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,7 +27,7 @@
         android:textSize="36sp"
         android:paddingHorizontal="40dp"
         android:backgroundTint="@color/btnBG"
-        android:text="מפגשים זמינים" />
+        android:text="חיפוש מפגשים" />
 
     <Button
         android:id="@+id/btnMyMatches_main"

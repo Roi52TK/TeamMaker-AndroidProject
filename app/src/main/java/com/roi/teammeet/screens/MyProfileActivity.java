@@ -19,7 +19,7 @@ import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
-public class MyProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MyProfileActivity";
     TextView tvUsername, tvBirthYear, tvGender, tvPhone, tvEmail;

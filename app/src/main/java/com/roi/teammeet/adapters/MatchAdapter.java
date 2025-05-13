@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
-import com.roi.teammeet.screens.AvailableMatchesActivity;
 import com.roi.teammeet.screens.MatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.ReminderUtils;
@@ -80,7 +79,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                                     //long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(match.getDate(), match.getTime());
                                     //ReminderUtils.scheduleMeetingReminder(context, meetingTimeMillis, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
 
-
+                                    //TODO: change the meeting time
                                     ReminderUtils.scheduleMeetingReminder(context, 10 * 1000, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
                                 }
 

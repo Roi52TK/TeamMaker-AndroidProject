@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.roi.teammeet.R;
+import com.roi.teammeet.screens.BaseActivity;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -30,7 +31,7 @@ import java.util.Locale;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.Marker;
 
-public abstract class GeneralMapsActivity extends AppCompatActivity implements MapListener, GpsStatus.Listener {
+public abstract class GeneralMapsActivity extends BaseActivity implements MapListener, GpsStatus.Listener {
 
     private static final String TAG = "GeneralMapsActivity";
 

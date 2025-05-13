@@ -23,7 +23,7 @@ import com.roi.teammeet.adapters.MatchGroupAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MatchDetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class MatchDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MatchDetailsActivity";
 

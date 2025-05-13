@@ -17,7 +17,7 @@ import com.roi.teammeet.adapters.MatchEditAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminMatchEditActivity extends AppCompatActivity {
+public class AdminMatchEditActivity extends BaseActivity {
 
     private static final String TAG = "AdminMatchEditActivity";
 

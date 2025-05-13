@@ -3,7 +3,6 @@ package com.roi.teammeet.screens;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ import com.roi.teammeet.adapters.MatchAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvailableMatchesActivity extends AppCompatActivity {
+public class SearchMatchesActivity extends BaseActivity {
 
     private static final String TAG = "AvailableMatchesActivity";
 
@@ -32,11 +31,11 @@ public class AvailableMatchesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_available_matches);
+        setContentView(R.layout.activity_search_matches);
 
         databaseService = DatabaseService.getInstance();
 
-        searchView = findViewById(R.id.sv_availableMatches);
+        searchView = findViewById(R.id.sv_searchMatches);
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -51,7 +50,7 @@ public class AvailableMatchesActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rv_availableMatches);
+        recyclerView = findViewById(R.id.rv_searchMatches);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         matchList = new ArrayList<>();
@@ -60,7 +59,7 @@ public class AvailableMatchesActivity extends AppCompatActivity {
             public void onCompleted(List<Match> object) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
                 matchList = object;
-                matchAdapter = new MatchAdapter(AvailableMatchesActivity.this, matchList);
+                matchAdapter = new MatchAdapter(SearchMatchesActivity.this, matchList);
                 recyclerView.setAdapter(matchAdapter);
             }
 
