@@ -1,5 +1,7 @@
 package com.roi.teammeet.models;
 
+import com.roi.teammeet.utils.DateUtil;
+
 public class Match {
     protected String id;
     protected String title;
@@ -61,6 +63,10 @@ public class Match {
 
     public int getSize(){
         return this.group.getMax();
+    }
+
+    public boolean isExpired() {
+        return DateUtil.isExpired(date, time);
     }
 
     public String getId() {

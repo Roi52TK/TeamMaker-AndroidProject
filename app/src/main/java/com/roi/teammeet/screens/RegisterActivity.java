@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,13 +19,11 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
-import java.lang.reflect.Array;
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         btnRegister.setOnClickListener(this);
 
-        initBirthYearSpinner();
+        initBirthYearsSpinner();
         initGenderSpinner();
     }
 
@@ -72,19 +69,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spinnerGender.setAdapter(genderSpinnerAdapter);
     }
 
-    private void initBirthYearSpinner() {
-        int currentYear;
-        currentYear = Year.now().getValue();
-
-        ArrayList<String> birthYearArrayList = new ArrayList<>();
-
-        for(int i = currentYear - 12; i >= currentYear - 80; i--){
-            birthYearArrayList.add(String.valueOf(i));
-        }
-
-        ArrayAdapter<String> birthYearSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, birthYearArrayList);
-        birthYearSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBirthYear.setAdapter(birthYearSpinnerAdapter);
+    private void initBirthYearsSpinner() {
+        ArrayAdapter<String> birthYearsSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DateUtil.birthYearsArray());
+        birthYearsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBirthYear.setAdapter(birthYearsSpinnerAdapter);
     }
 
     private void initViews(){
@@ -94,8 +82,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etPassword = findViewById(R.id.etPassword_register);
         btnRegister = findViewById(R.id.btnSignUp_register);
 
-        spinnerBirthYear = findViewById(R.id.spinnerBirthYear);
-        spinnerGender = findViewById(R.id.spinnerGender);
+        spinnerBirthYear = findViewById(R.id.spinnerBirthYear_register);
+        spinnerGender = findViewById(R.id.spinnerGender_register);
     }
 
     @Override

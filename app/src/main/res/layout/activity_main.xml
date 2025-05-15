@@ -1,103 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="10"
     android:orientation="vertical"
-    tools:context=".screens.MainActivity">
+    android:background="@drawable/bg_gradient"
+    android:padding="24dp"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/tvWelcome_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Welcome back!"
         android:textColor="@color/textColor"
-        android:textSize="26sp"
-        android:layout_gravity="center"
-        android:text="Welcome back!" />
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="36dp" />
 
     <Button
         android:id="@+id/btnSearchMatches_main"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textSize="36sp"
-        android:paddingHorizontal="40dp"
+        android:text="חיפוש מפגשים"
+        android:textSize="24sp"
         android:backgroundTint="@color/btnBG"
-        android:text="חיפוש מפגשים" />
+        android:textColor="@android:color/white"
+        android:padding="14dp"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/btnMyMatches_main"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textSize="36sp"
-        android:paddingHorizontal="40dp"
+        android:text="המפגשים שלי"
+        android:textSize="24sp"
         android:backgroundTint="@color/btnBG"
-        android:text="המפגשים שלי" />
+        android:textColor="@android:color/white"
+        android:padding="14dp"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/btnCreateMatch_main"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textSize="36sp"
-        android:paddingHorizontal="40dp"
+        android:text="צור מפגש!"
+        android:textSize="24sp"
         android:backgroundTint="@color/btnBG"
-        android:text="צור מפגש!" />
+        android:textColor="@android:color/white"
+        android:padding="14dp"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/btnAdminUserEdit_main"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:text="מנהל משתמשים"
         android:textSize="18sp"
-        android:paddingHorizontal="40dp"
         android:backgroundTint="#CD7E1D"
-        android:text="מנהל משתמשים" />
+        android:textColor="@android:color/white"
+        android:padding="14dp"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/btnAdminMatchEdit_main"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:text="מנהל מפגשים"
         android:textSize="18sp"
-        android:paddingHorizontal="40dp"
         android:backgroundTint="#CD7E1D"
-        android:text="מנהל מפגשים" />
+        android:textColor="@android:color/white"
+        android:padding="14dp"
+        android:layout_marginBottom="32dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/bottomButtons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:gravity="center"
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btnSignOut_main"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginEnd="10dp"
-            android:textSize="36sp"
-            android:paddingHorizontal="40dp"
+            android:layout_weight="1"
+            android:text="התנתק"
+            android:textSize="24sp"
             android:backgroundTint="#A10000"
-            android:text="התנתק" />
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="10dp"
+            android:paddingHorizontal="16dp" />
 
         <Button
             android:id="@+id/btnProfile_main"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginEnd="10dp"
-            android:textSize="36sp"
-            android:paddingHorizontal="40dp"
+            android:layout_weight="1"
+            android:text="פרופיל"
+            android:textSize="24sp"
             android:backgroundTint="@color/btnBG"
-            android:text="פרופיל" />
-
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="16dp" />
     </LinearLayout>
+
 </LinearLayout>

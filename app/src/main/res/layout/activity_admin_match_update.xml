@@ -1,170 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
 
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
         tools:context=".screens.AdminMatchUpdateActivity">
 
-            <TextView
-                android:id="@+id/tvTitle_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:textSize="42sp"
-                android:layout_gravity="center"
-                android:text="עדכן מפגש!" />
+        <TextView
+            android:id="@+id/tvTitle_adminMatchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="עדכן מפגש!"
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etTitle_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="כותרת"
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <EditText
+            android:id="@+id/etDescription_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="תיאור"
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnDate_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="בחר תאריך"
+            android:textSize="16sp"
+            android:backgroundTint="@color/btnBG"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvDate_adminMatchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnTime_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="בחר שעה"
+            android:textSize="16sp"
+            android:backgroundTint="@color/btnBG"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvTime_adminMatchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnMap_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="בחר מיקום"
+            android:textSize="16sp"
+            android:backgroundTint="@color/accent"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/tvAddress_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:weightSum="2"
+            android:gravity="center">
 
             <EditText
-                android:id="@+id/etTitle_adminMatchUpdate"
-                android:layout_marginTop="15dp"
-                android:layout_width="300dp"
+                android:id="@+id/etMinAge_adminMatchUpdate"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="text"
-                android:textColorHint="@color/etHintTextColor"
-                android:hint="כותרת" />
-
-            <EditText
-                android:id="@+id/etDescription_adminMatchUpdate"
-                android:layout_marginTop="15dp"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
-                android:inputType="text"
-                android:textColorHint="@color/etHintTextColor"
-                android:hint="תיאור" />
-
-            <Button
-                android:id="@+id/btnDate_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
-                android:text="בחר תאריך"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/tvDate_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:text="" />
-
-            <Button
-                android:id="@+id/btnTime_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
-                android:text="בחר שעה"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/tvTime_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:text="" />
-
-            <Button
-                android:id="@+id/btnMap_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:textSize="24sp"
-                android:backgroundTint="#974100"
-                android:text="בחר מיקום" />
-
-            <TextView
-                android:id="@+id/tvAddress_adminMatchUpdate"
-                android:layout_width="300dp"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                android:text="" />
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/etMinAge_adminMatchUpdate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:ems="10"
-                    android:hint="גיל מינימלי"
-                    android:textAlignment="center"
-                    android:inputType="number"
-                    android:textColorHint="@color/etHintTextColor" />
-
-                <EditText
-                    android:id="@+id/etMaxAge_adminMatchUpdate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:ems="10"
-                    android:hint="גיל מקסימלי"
-                    android:textAlignment="center"
-                    android:inputType="number"
-                    android:textColorHint="@color/etHintTextColor" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/etSize_adminMatchUpdate"
-                android:layout_marginTop="15dp"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ems="10"
+                android:layout_weight="1"
                 android:inputType="number"
+                android:hint="גיל מינימלי"
+                android:textAlignment="center"
                 android:textColorHint="@color/etHintTextColor"
-                android:hint="גודל" />
+                android:background="@drawable/edittext_background"
+                android:padding="8dp"
+                android:layout_marginEnd="6dp" />
 
-            <TextView
-                android:id="@+id/tvPlayers_adminMatchUpdate"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/etMaxAge_adminMatchUpdate"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:textSize="56sp"
-                android:text="Players" />
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="גיל מקסימלי"
+                android:textAlignment="center"
+                android:textColorHint="@color/etHintTextColor"
+                android:background="@drawable/edittext_background"
+                android:padding="8dp"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPlayers_adminMatchUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <EditText
+            android:id="@+id/etSize_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="גודל"
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:padding="8dp"
+            android:layout_marginBottom="24dp" />
 
-            <Button
-                android:id="@+id/btnCreate_adminMatchUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:textSize="36sp"
-                android:paddingHorizontal="40dp"
-                android:backgroundTint="#CD7E1D"
-                android:text="עדכן" />
+        <TextView
+            android:id="@+id/tvPlayers_adminMatchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שחקנים"
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPlayers_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnCreate_adminMatchUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="עדכן"
+            android:textSize="20sp"
+            android:backgroundTint="@color/btnBG"
+            android:textColor="@android:color/white"
+            android:padding="10dp" />
+
+    </LinearLayout>
 
 </ScrollView>

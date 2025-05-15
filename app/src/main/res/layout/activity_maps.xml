@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:padding="24dp"
     tools:context=".screens.MapsActivity">
 
     <org.osmdroid.views.MapView
@@ -18,50 +20,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="16dp">
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp">
 
         <EditText
             android:id="@+id/etStreet_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Street"
-            android:inputType="text" />
+            android:inputType="text"
+            android:backgroundTint="@color/btnBG"
+            android:textSize="20sp"
+            android:padding="14dp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/etStreetNumber_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Number"
-            android:inputType="number" />
+            android:inputType="number"
+            android:backgroundTint="@color/btnBG"
+            android:textSize="20sp"
+            android:padding="14dp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
             android:id="@+id/etCity_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="City"
-            android:inputType="text" />
+            android:inputType="text"
+            android:backgroundTint="@color/btnBG"
+            android:textSize="20sp"
+            android:padding="14dp"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="20dp"/>
 
         <Button
             android:id="@+id/btnSetMarker_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Set Marker"
-            android:layout_marginTop="8dp" />
+            android:textSize="24sp"
+            android:backgroundTint="@color/btnBG"
+            android:textColor="@android:color/white"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/btnGetAddress_maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Set Address"
-            android:layout_marginTop="8dp" />
+            android:textSize="24sp"
+            android:backgroundTint="@color/btnBG"
+            android:textColor="@android:color/white"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/btnFinish_maps"
-            android:backgroundTint="#5DAA19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Finish"
-            android:layout_marginTop="8dp" />
+            android:textSize="24sp"
+            android:backgroundTint="#5DAA19"
+            android:textColor="@android:color/white"
+            android:padding="14dp" />
+
     </LinearLayout>
 
 </LinearLayout>

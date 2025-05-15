@@ -1,14 +1,18 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="16dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/bg">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/tvUsernameTitle_userCard"
@@ -16,59 +20,79 @@
             android:layout_height="wrap_content"
             android:text="Username"
             android:textSize="24sp"
-            android:layout_marginBottom="8dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:layout_marginBottom="16dp" />
 
+        <!-- Username -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <EditText
                 android:id="@+id/etUsername_userCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:text="Username" />
+                android:hint="שם משתמש"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColorHint="@color/etHintTextColor"
+                android:inputType="text" />
 
             <TextView
                 android:id="@+id/tvUsername_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="שם משתמש:" />
+                android:text="שם משתמש:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Birth Year -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <EditText
                 android:id="@+id/etBirthYear_userCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="number"
-                android:text="Birth Year" />
+                android:hint="שנת לידה"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColorHint="@color/etHintTextColor"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/tvBirthYear_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="שנת לידה:" />
+                android:text="שנת לידה:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Gender -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <Spinner
                 android:id="@+id/spinnerGender_userCard"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -76,105 +100,145 @@
                 android:id="@+id/tvGender_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="מין:" />
+                android:text="מגדר:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Phone -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <EditText
                 android:id="@+id/etPhone_userCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="phone"
-                android:text="Phone" />
+                android:hint="טלפון"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColorHint="@color/etHintTextColor"
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/tvPhone_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="טלפון:" />
+                android:text="טלפון:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Email -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <EditText
                 android:id="@+id/etEmail_userCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:hint="אימייל"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColorHint="@color/etHintTextColor"
                 android:inputType="textEmailAddress"
-                android:text="Email" />
+                android:textDirection="ltr" />
 
             <TextView
                 android:id="@+id/tvEmail_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="אימייל:" />
+                android:text="אימייל:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Password -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <EditText
                 android:id="@+id/etPassword_userCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="textVisiblePassword"
-                android:text="Password" />
+                android:hint="סיסמה"
+                android:background="@drawable/edittext_background"
+                android:padding="12dp"
+                android:textColorHint="@color/etHintTextColor"
+                android:inputType="textPassword"
+                android:textDirection="ltr" />
 
             <TextView
                 android:id="@+id/tvPassword_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="סיסמה:" />
+                android:text="סיסמה:"
+                android:textColor="@color/textColor"
+                android:layout_marginStart="12dp"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <!-- Admin switch -->
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchAdmin_userCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="מנהל"
+            android:textColor="@color/textColor"
             android:textSize="16sp"
-            android:text="Admin" />
+            android:layout_marginTop="12dp" />
 
+        <!-- Action buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/btnDelete_userCard"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="מחק"
+                android:textColor="@android:color/white"
                 android:backgroundTint="#E60000"
-                android:text="Delete"/>
+                android:padding="12dp"
+                android:elevation="4dp" />
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
 
             <Button
                 android:id="@+id/btnUpdate_userCard"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#42A800"
-                android:text="Update"/>
-
+                android:layout_weight="1"
+                android:text="עדכן"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/btnBG"
+                android:padding="12dp"
+                android:elevation="4dp" />
         </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -3,9 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="bg">#FFFFFF</color>
-    <color name="textColor">#000000</color>
-    <color name="btnBG">#000000</color>
+    <color name="bg">#E6F2F1</color>
+    <color name="textColor">#004D40</color>
+    <color name="etHintTextColor">#00796B</color>
+    <color name="btnBG">#26A69A</color>
     <color name="btnText">#FFFFFF</color>
-    <color name="etHintTextColor">#9F9F9F</color>
+    <color name="accent">#80CBC4</color>
+
 </resources>

@@ -4,17 +4,61 @@ import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.work.Configuration;
+import androidx.work.Data;
 import androidx.work.WorkManager;
 
+import com.roi.teammeet.models.Match;
+import com.roi.teammeet.services.DatabaseService;
+
+import java.util.List;
+
 public class MyApplication extends Application implements Configuration.Provider {
+
+    private static final String TAG = "MyApplication";
+    public static final int AGE_LIMIT = 12;
+    private DatabaseService databaseService;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        databaseService = DatabaseService.getInstance();
+
         // Create the notification channel
         createNotificationChannel();
+        deleteExpiredMatches();
+    }
+
+    private void deleteExpiredMatches() {
+        databaseService.getMatchList(new DatabaseService.DatabaseCallback<List<Match>>() {
+            @Override
+            public void onCompleted(List<Match> object) {
+                Log.d(TAG, "onCompleted: Matches received successfully");
+                for(Match m: object){
+                    if(m.isExpired()){
+                        databaseService.deleteMatch(m.getId(), new DatabaseService.DatabaseCallback<Void>() {
+                            @Override
+                            public void onCompleted(Void object) {
+                                Log.d(TAG, "onCompleted: Deleted expired match successfully");
+                            }
+
+                            @Override
+                            public void onFailed(Exception e) {
+                                Log.e(TAG, "onFailed: Failed to delete match", e);
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(Exception e) {
+
+            }
+        });
     }
 
     private void createNotificationChannel() {

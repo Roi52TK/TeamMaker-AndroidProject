@@ -1,12 +1,15 @@
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="16dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/bg">
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +20,8 @@
             android:layout_gravity="right"
             android:text="Title"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="@color/textColor"/>
 
         <TextView
             android:id="@+id/tvDescription_itemCard"
@@ -26,7 +30,8 @@
             android:layout_gravity="right"
             android:text="Description"
             android:textSize="18sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="12dp"
+            android:textColor="@color/textColor"/>
 
         <TextView
             android:id="@+id/tvDate_itemCard"
@@ -35,7 +40,8 @@
             android:layout_gravity="right"
             android:text="Date and Time"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="12dp"
+            android:textColor="@color/textColor"/>
 
         <TextView
             android:id="@+id/tvGroupSize_itemCard"
@@ -44,31 +50,41 @@
             android:layout_gravity="right"
             android:text="Group Size"
             android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="12dp"
+            android:textColor="@color/textColor"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/btnJoin_itemCard"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Join"
                 android:backgroundTint="#2AC318"
-                android:text="Join"/>
+                android:textColor="@color/white"
+                android:padding="12dp"
+                android:elevation="4dp"/>
 
             <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
 
             <Button
                 android:id="@+id/btnDetails_itemCard"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Details"/>
+                android:layout_weight="1"
+                android:text="Details"
+                android:backgroundTint="@color/btnBG"
+                android:textColor="@color/white"
+                android:padding="12dp"
+                android:elevation="4dp"/>
 
         </LinearLayout>
     </LinearLayout>

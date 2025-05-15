@@ -1,126 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".screens.RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הרשמה"
+        android:textColor="@color/textColor"
+        android:textSize="36sp"
+        android:layout_marginBottom="24dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUsername_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="שם משתמש"
+        android:inputType="text"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <Spinner
+            android:id="@+id/spinnerBirthYear_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:textSize="56sp"
-            android:text="הרשמה" />
-
-        <EditText
-            android:id="@+id/etUsername_register"
-            android:layout_marginTop="30dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:inputType="text"
-            android:textColorHint="@color/etHintTextColor"
-            android:hint="שם משתמש"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spinnerBirthYear"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="שנת לידה" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-
-            <Spinner
-                android:id="@+id/spinnerGender"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="מגדר" />
-
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/etPhone_register"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:inputType="phone"
-            android:textColorHint="@color/etHintTextColor"
-            android:hint="מספר טלפון" />
-
-
-        <EditText
-            android:id="@+id/etEmail_register"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:textDirection="ltr"
-            android:textColorHint="@color/etHintTextColor"
-            android:hint="אימייל" />
-
-        <EditText
-            android:id="@+id/etPassword_register"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:textDirection="ltr"
-            android:textColorHint="@color/etHintTextColor"
-            android:hint="סיסמה" />
-
-        <Button
-            android:id="@+id/btnSignUp_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:textSize="36sp"
-            android:paddingHorizontal="40dp"
-            android:backgroundTint="@color/btnBG"
-            android:text="הרשם" />
+            android:text="שנת לידה"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/textColor"/>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <Spinner
+            android:id="@+id/spinnerGender_register"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="מגדר"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/textColor"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etPhone_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="מספר טלפון"
+        android:inputType="phone"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp" />
+
+    <EditText
+        android:id="@+id/etEmail_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="אימייל"
+        android:inputType="textEmailAddress"
+        android:textDirection="ltr"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp" />
+
+    <EditText
+        android:id="@+id/etPassword_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:hint="סיסמה"
+        android:inputType="textPassword"
+        android:textDirection="ltr"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btnSignUp_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="הרשם"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/btnBG"
+        android:padding="14dp"
+        android:elevation="4dp" />
+
+</LinearLayout>

@@ -52,8 +52,8 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
     EditText etSize;
     String chosenDate;
     String chosenTime;
-    Button btnUpdate;
     Button btnMap;
+    Button btnUpdate;
     boolean isDatePicked;
     private DatabaseService databaseService;
     private User hostUser;

@@ -54,6 +54,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         holder.etUsername.setText(user.getUsername());
         holder.etBirthYear.setText(user.getBirthYear());
 
+        //TODO: Place it in another class as static / change to enum
         ArrayList<String> genderArrayList = new ArrayList<>();
         genderArrayList.add("male");
         genderArrayList.add("female");
@@ -67,6 +68,9 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         holder.etEmail.setText(user.getEmail());
         holder.etPassword.setText(user.getPassword());
         holder.switchAdmin.setChecked(user.isAdmin());
+
+        holder.etEmail.setEnabled(false);
+        holder.etPassword.setEnabled(false);
 
         databaseService = DatabaseService.getInstance();
 

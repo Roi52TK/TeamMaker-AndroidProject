@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tvTitle_myMatchDetails"
@@ -18,8 +20,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:textSize="56sp"
+            android:textStyle="bold"
             android:text="Title" />
 
         <TextView
@@ -27,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Description" />
 
@@ -36,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Date" />
 
@@ -45,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Time" />
 
@@ -54,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Address" />
 
@@ -63,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Age Range" />
 
@@ -72,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:text="Group" />
 
@@ -80,7 +83,7 @@
             android:id="@+id/tvHost_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:textStyle="bold"
             android:text="Host: You" />
@@ -91,15 +94,17 @@
             android:layout_height="wrap_content"
             android:textColor="@color/textColor"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="32dp"
             android:textSize="56sp"
+            android:textStyle="bold"
             android:text="Players" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlayers_myMatchDetails"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never" />
 
     </LinearLayout>
 
