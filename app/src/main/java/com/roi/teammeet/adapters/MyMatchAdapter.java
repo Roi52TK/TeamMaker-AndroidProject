@@ -41,9 +41,9 @@ public class MyMatchAdapter extends RecyclerView.Adapter<MyMatchAdapter.MyMatchV
     public void onBindViewHolder(@NonNull MyMatchViewHolder holder, int position) {
         Match match = matchList.get(position);
         holder.tvTitle.setText(match.getTitle());
-        holder.tvDescription.setText(match.getDescription());
-        holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroup().toString());
+        holder.tvDescription.setText("תיאור: " + match.getDescription());
+        holder.tvDate.setText("תאריך ושעה: " + match.getDate() + " ב- " + match.getTime());
+        holder.tvGroupSize.setText("מספר משתתפים: " + match.getGroup().toString());
 
         // Handle button click to show the dialog
         holder.btnDetails.setOnClickListener(v -> {
@@ -91,21 +91,6 @@ public class MyMatchAdapter extends RecyclerView.Adapter<MyMatchAdapter.MyMatchV
             btnDetails = itemView.findViewById(R.id.btnDetails_myMatchCard);
             btnDelete = itemView.findViewById(R.id.btnDelete_myMatchCard);
         }
-    }
-
-    // Method to show the custom dialog with match details
-    private void showDetailsDialog(Match match) {
-        // Create the dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(match.getTitle())
-                .setMessage("Description: " + match.getDescription() +
-                        "\nDate: " + match.getDate() + " at " + match.getTime() +
-                        "\nAddress: " + match.getAddress() +
-                        "\nAge Range: " + match.getAgeRange() +
-                        "\nGroup Size: " + match.getGroup())
-                .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
-                .setCancelable(true)
-                .show();
     }
 }
 

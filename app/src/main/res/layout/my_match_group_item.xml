@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Username"
-        android:textColor="#285DC5"
+        android:text="שם משתמש"
+        android:textColor="@color/textColor"
         android:textSize="24sp"
         android:textStyle="bold"/>
 
@@ -26,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FF0000"
-        android:text="Kick" />
+        android:textColorHint="@color/white"
+        android:text="העף" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

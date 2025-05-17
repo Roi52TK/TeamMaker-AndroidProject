@@ -14,7 +14,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.ValueEventListener;
+import com.roi.teammeet.MyApplication;
 import com.roi.teammeet.R;
 import com.roi.teammeet.adapters.MyMatchGroupAdapter;
 import com.roi.teammeet.models.Match;
@@ -34,9 +34,9 @@ import com.roi.teammeet.utils.MatchValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminMatchUpdateActivity extends BaseActivity implements View.OnClickListener {
+public class MatchUpdateActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final String TAG = "AdminMatchUpdateActivity";
+    private static final String TAG = "MatchUpdateActivity";
 
     EditText etTitle;
     EditText etDescription;
@@ -68,7 +68,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_match_update);
+        setContentView(R.layout.activity_match_update);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -103,20 +103,20 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
     }
 
     private void initViews() {
-        etTitle = findViewById(R.id.etTitle_adminMatchUpdate);
-        etDescription = findViewById(R.id.etDescription_adminMatchUpdate);
-        btnDate = findViewById(R.id.btnDate_adminMatchUpdate);
-        tvDate = findViewById(R.id.tvDate_adminMatchUpdate);
-        btnTime = findViewById(R.id.btnTime_adminMatchUpdate);
-        tvTime = findViewById(R.id.tvTime_adminMatchUpdate);
-        etMinAge = findViewById(R.id.etMinAge_adminMatchUpdate);
-        etMaxAge = findViewById(R.id.etMaxAge_adminMatchUpdate);
-        etSize = findViewById(R.id.etSize_adminMatchUpdate);
-        btnMap = findViewById(R.id.btnMap_adminMatchUpdate);
-        tvAddress = findViewById(R.id.tvAddress_adminMatchUpdate);
-        btnUpdate = findViewById(R.id.btnCreate_adminMatchUpdate);
+        etTitle = findViewById(R.id.etTitle_matchUpdate);
+        etDescription = findViewById(R.id.etDescription_matchUpdate);
+        btnDate = findViewById(R.id.btnDate_matchUpdate);
+        tvDate = findViewById(R.id.tvDate_matchUpdate);
+        btnTime = findViewById(R.id.btnTime_matchUpdate);
+        tvTime = findViewById(R.id.tvTime_matchUpdate);
+        etMinAge = findViewById(R.id.etMinAge_matchUpdate);
+        etMaxAge = findViewById(R.id.etMaxAge_matchUpdate);
+        etSize = findViewById(R.id.etSize_matchUpdate);
+        btnMap = findViewById(R.id.btnMap_matchUpdate);
+        tvAddress = findViewById(R.id.tvAddress_matchUpdate);
+        btnUpdate = findViewById(R.id.btnCreate_matchUpdate);
 
-        rvPlayers = findViewById(R.id.rvPlayers_adminMatchUpdate);
+        rvPlayers = findViewById(R.id.rvPlayers_matchUpdate);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -166,7 +166,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
                     }
                 }
 
-                myMatchGroupAdapter = new MyMatchGroupAdapter(AdminMatchUpdateActivity.this, ogMatch, players);
+                myMatchGroupAdapter = new MyMatchGroupAdapter(MatchUpdateActivity.this, ogMatch, players);
                 rvPlayers.setAdapter(myMatchGroupAdapter);
             }
 
@@ -197,53 +197,64 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
     }
 
     private void createDateDialog(){
-        DatePickerDialog dialog = new DatePickerDialog(AdminMatchUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                chosenDate = dayOfMonth + "/" + (month+1) + "/" + year;
-                isDatePicked = true;
-                tvDate.setText(chosenDate);
-            }
-        }, DateUtil.getYear(chosenDate), DateUtil.getMonth(chosenDate), DateUtil.getDay(chosenDate));
+        DatePickerDialog dialog = new DatePickerDialog(
+                MatchUpdateActivity.this,
+                R.style.CustomDatePickerDialog, // Apply custom style here
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        chosenDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        isDatePicked = true;
+                        tvDate.setText(chosenDate);
+                    }
+                },
+                DateUtil.getYear(chosenDate),
+                DateUtil.getMonth(chosenDate),
+                DateUtil.getDay(chosenDate)
+        );
 
         dialog.show();
     }
 
     private void createTimeDialog(){
-        TimePickerDialog dialog = new TimePickerDialog(AdminMatchUpdateActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                chosenTime = String.format("%d:%02d", i, i1);
-                tvTime.setText(chosenTime);
-            }
-        }, 12, 0, true);
+        TimePickerDialog dialog = new TimePickerDialog(
+                MatchUpdateActivity.this,
+                R.style.CustomTimePickerDialog, // Apply custom style here
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                        chosenTime = String.format("%d:%02d", hourOfDay, minute);
+                        tvTime.setText(chosenTime);
+                    }
+                },
+                12, 0, true
+        );
 
         dialog.show();
     }
 
     private boolean checkInput(String title, String description, String date, String time, String min, String max, String size, int ogGroupCurrent){
         if (!MatchValidator.isTitleValid(title)) {
-            Log.e(TAG, "checkInput: Title must be between 4-16 characters long");
-            etTitle.setError("Title must be between 4-16 characters long");
+            String range = MatchValidator.TITLE_MIN_LENGTH + "-" + MatchValidator.TITLE_MAX_LENGTH;
+            Log.e(TAG, "checkInput: Title must be between " + range + " characters long");
+            etTitle.setError("Title must be between " + range + " characters long");
             etTitle.requestFocus();
             return false;
         }
 
         if(!MatchValidator.isDescriptionValid(description)){
-            Log.e(TAG, "checkInput: Description must be 50 characters long at most");
-            etDescription.setError("Description must be 50 characters long at most");
+            Log.e(TAG, "checkInput: Description must be " + MatchValidator.DESCRIPTION_MAX_LENGTH + " characters long at most");
+            etDescription.setError("Description must be " + MatchValidator.DESCRIPTION_MAX_LENGTH + " characters long at most");
             etDescription.requestFocus();
             return false;
         }
 
-        /*if(!MatchValidator.isDateValid(date)){
-
+        if(!MatchValidator.isDateTimeValid(chosenDate, chosenTime)){
+            Log.e(TAG, "checkInput: Date or time have already passed");
+            tvDate.setError("Date or time have already passed");
+            tvDate.requestFocus();
+            return false;
         }
-
-        if(!MatchValidator.isTimeValid(time)){
-
-        }*/
 
         if(!MatchValidator.isAddressValid(address)){
             Log.e(TAG, "checkInput: Address cannot be empty");
@@ -253,7 +264,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
         }
 
         if(!MatchValidator.isMinAgeValid(min)){
-            int minAge = MatchValidator.MIN_AGE;
+            int minAge = MyApplication.AGE_LIMIT;
             Log.e(TAG, "checkInput: Minimum age must be at least " + minAge);
             etMinAge.setError("Minimum age must be at least " + minAge);
             etMinAge.requestFocus();
@@ -267,7 +278,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
             return false;
         }
 
-        if(!MatchValidator.isUserAgeValid(min, max, hostUser.getBirthYear())){
+        if(!MatchValidator.isUserAgeValid(min, max, hostUser.getBirthDate())){
             Log.e(TAG, "checkInput: Your age is not in range");
             etMaxAge.setError("Your age is not in range");
             etMaxAge.requestFocus();
@@ -287,8 +298,6 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
             etSize.requestFocus();
             return false;
         }
-
-        //TODO more MatchValidator input checks (if date and time are valid)
 
         return true;
     }
@@ -341,7 +350,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
         ogMatch.setTime(chosenTime);
         ogMatch.setLat(lat);
         ogMatch.setLang(lang);
-        ogMatch.setAddress(chosenDate);
+        ogMatch.setAddress(address);
         ogMatch.setAgeRange(new Range(min, max));
         ogMatch.getGroup().setMax(size);
 
@@ -349,7 +358,7 @@ public class AdminMatchUpdateActivity extends BaseActivity implements View.OnCli
             @Override
             public void onCompleted(Object object) {
                 Log.d(TAG, "onCompleted: Updated a match");
-                Toast.makeText(AdminMatchUpdateActivity.this, "Updated the match!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MatchUpdateActivity.this, "Updated the match!", Toast.LENGTH_SHORT).show();
             }
 
             @Override

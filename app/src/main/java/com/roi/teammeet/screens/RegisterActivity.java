@@ -1,20 +1,22 @@
 package com.roi.teammeet.screens;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.roi.teammeet.MyApplication;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
@@ -23,14 +25,15 @@ import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
-import java.util.ArrayList;
-
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private static final String TAG = "RegisterActivity";
 
-    private EditText etUsername, etPhone, etEmail, etPassword;
-    private Spinner spinnerBirthYear, spinnerGender;
+    private EditText etUsername, etBirthDate, etPhone, etEmail, etPassword;
+    private RadioGroup rgGender;
+    private RadioButton rbMale, rbFemale, rbOther;
+    private String chosenDate;
+    private String chosenGender;
     private Button btnRegister;
 
     private AuthenticationService authenticationService;
@@ -39,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_register);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -53,48 +56,59 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initViews();
 
         btnRegister.setOnClickListener(this);
-
-        initBirthYearsSpinner();
-        initGenderSpinner();
-    }
-
-    private void initGenderSpinner() {
-        ArrayList<String> genderArrayList = new ArrayList<>();
-        genderArrayList.add("male");
-        genderArrayList.add("female");
-        genderArrayList.add("other");
-
-        ArrayAdapter<String> genderSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, genderArrayList);
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerGender.setAdapter(genderSpinnerAdapter);
-    }
-
-    private void initBirthYearsSpinner() {
-        ArrayAdapter<String> birthYearsSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DateUtil.birthYearsArray());
-        birthYearsSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerBirthYear.setAdapter(birthYearsSpinnerAdapter);
     }
 
     private void initViews(){
         etUsername = findViewById(R.id.etUsername_register);
+        etBirthDate = findViewById(R.id.etBirthDate_register);
+        etBirthDate.setOnClickListener(this);
+
+        rgGender = findViewById(R.id.rgGender_register);
+        rgGender.setOnCheckedChangeListener(this);
+        rbMale = findViewById(R.id.rbMaleGender_register);
+        rbFemale = findViewById(R.id.rbFemaleGender_register);
+        rbOther = findViewById(R.id.rbOtherGender_register);
+
         etPhone = findViewById(R.id.etPhone_register);
         etEmail = findViewById(R.id.etEmail_register);
         etPassword = findViewById(R.id.etPassword_register);
         btnRegister = findViewById(R.id.btnSignUp_register);
 
-        spinnerBirthYear = findViewById(R.id.spinnerBirthYear_register);
-        spinnerGender = findViewById(R.id.spinnerGender_register);
+        rgGender.check(rbOther.getId());
+    }
+
+    private void createDateDialog(){
+        String today = DateUtil.getToday();
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                RegisterActivity.this,
+                R.style.CustomDatePickerDialog, // Apply custom style here
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        chosenDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        etBirthDate.setText(chosenDate);
+                    }
+                },
+                DateUtil.getYear(today),
+                DateUtil.getMonth(today),
+                DateUtil.getDay(today)
+        );
+
+        dialog.show();
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == btnRegister.getId()) {
+        if(v == etBirthDate){
+            createDateDialog();
+        }
+        else if (v == btnRegister) {
             Log.d(TAG, "onClick: Register button clicked");
 
             String username = etUsername.getText().toString();
             String phone = etPhone.getText().toString();
-            String birthYear = spinnerBirthYear.getSelectedItem().toString();
-            String gender = spinnerGender.getSelectedItem().toString();
+            String birthDate = etBirthDate.getText().toString();
             String email = etEmail.getText().toString();
             String password = etPassword.getText().toString();
 
@@ -112,8 +126,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Log.d(TAG, "onClick: Registering user...");
 
             // Register user
-            registerUser(username,birthYear, gender, phone, email, password);
-            return;
+            registerUser(username,birthDate, phone, email, password);
         }
     }
 
@@ -122,6 +135,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Log.e(TAG, "checkInput: Username must be at least 3 characters long");
             etUsername.setError("Username must be at least 3 characters long");
             etUsername.requestFocus();
+            return false;
+        }
+
+        if(!Validator.isBirthDateValid(chosenDate)){
+            Log.e(TAG, "checkInput: Age must be at least " + MyApplication.AGE_LIMIT);
+            etBirthDate.setError("Age must be at least " + MyApplication.AGE_LIMIT);
+            etBirthDate.requestFocus();
             return false;
         }
 
@@ -149,7 +169,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return true;
     }
 
-    private void registerUser(String username, String birthYear, String gender, String phone, String email, String password) {
+    private void registerUser(String username, String birthDate, String phone, String email, String password) {
         // Register user
         Log.d(TAG, "registerUser: Registering user...");
 
@@ -159,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onCompleted(Object object) {
                 Log.d(TAG, "onCompleted: User registered successfully");
                 String uid = authenticationService.getCurrentUser().getUid();
-                User user = new User(uid, username, birthYear, gender, phone, email, password, false);
+                User user = new User(uid, username, birthDate, chosenGender, phone, email, password, false);
                 databaseService.createNewUser(user, new DatabaseService.DatabaseCallback<Object>() {
                     @Override
                     public void onCompleted(Object object) {
@@ -188,5 +208,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         });
 
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int id) {
+        if(id == rbMale.getId()){
+            chosenGender = "זכר";
+        }
+        else if(id == rbFemale.getId()){
+            chosenGender = "נקבה";
+        }
+        else if(id == rbOther.getId()){
+            chosenGender = "אחר";
+        }
     }
 }

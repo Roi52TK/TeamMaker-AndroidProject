@@ -29,6 +29,7 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:textDirection="ltr"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:hint="אימייל"
             android:background="@drawable/edittext_background"
@@ -44,6 +45,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:textDirection="ltr"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:hint="סיסמה"
             android:background="@drawable/edittext_background"
@@ -59,6 +61,7 @@
             android:layout_marginTop="48dp"
             android:textSize="36sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:paddingHorizontal="48dp"
             android:backgroundTint="@color/btnBG"
             android:text="התחבר" />

@@ -16,7 +16,7 @@
         android:textColor="@color/textColor"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="24dp" />
 
     <EditText
         android:id="@+id/etTitle_newMatch"
@@ -24,10 +24,11 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="כותרת"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/etHintTextColor"
         android:background="@drawable/edittext_background"
         android:padding="8dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="24dp" />
 
     <EditText
         android:id="@+id/etDescription_newMatch"
@@ -35,77 +36,68 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="תיאור"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/etHintTextColor"
         android:background="@drawable/edittext_background"
         android:padding="8dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="24dp" />
 
-    <Button
-        android:id="@+id/btnDate_newMatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="בחר תאריך"
-        android:textSize="16sp"
-        android:backgroundTint="@color/btnBG"
-        android:textColor="@android:color/white"
+    <EditText
+        android:id="@+id/etDate_newMatch"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
         android:padding="10dp"
-        android:layout_marginBottom="6dp" />
-
-    <TextView
-        android:id="@+id/tvDate_newMatch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@color/textColor"
-        android:text=""
-        android:layout_marginBottom="12dp" />
-
-    <Button
-        android:id="@+id/btnTime_newMatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="בחר שעה"
-        android:textSize="16sp"
-        android:backgroundTint="@color/btnBG"
-        android:textColor="@android:color/white"
-        android:padding="10dp"
-        android:layout_marginBottom="6dp" />
-
-    <TextView
-        android:id="@+id/tvTime_newMatch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/textColor"
-        android:text=""
-        android:layout_marginBottom="12dp" />
-
-    <Button
-        android:id="@+id/btnMap_newMatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="בחר מיקום"
-        android:textSize="16sp"
-        android:backgroundTint="@color/accent"
-        android:textColor="@android:color/white"
-        android:padding="10dp"
-        android:layout_marginBottom="6dp" />
-
-    <TextView
-        android:id="@+id/tvAddress_newMatch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:focusable="false"
+        android:clickable="true"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:hint="בחר תאריך"
         android:textColor="@color/textColor"
-        android:text=""
-        android:layout_marginBottom="12dp" />
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/etTime_newMatch"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:hint="בחר שעה"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:drawableEnd="@drawable/ic_time"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/etLocation_newMatch"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:textAlignment="center"
+        android:hint="בחר מיקום"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/etHintTextColor"
+        android:background="@drawable/edittext_background"
+        android:drawableEnd="@drawable/ic_location"
+        android:inputType="none" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="24dp"
         android:weightSum="2"
         android:gravity="center">
 
@@ -117,6 +109,7 @@
             android:inputType="number"
             android:hint="גיל מינימלי"
             android:textAlignment="center"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:background="@drawable/edittext_background"
             android:padding="8dp"
@@ -130,6 +123,7 @@
             android:inputType="number"
             android:hint="גיל מקסימלי"
             android:textAlignment="center"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:background="@drawable/edittext_background"
             android:padding="8dp"
@@ -138,18 +132,19 @@
 
     <EditText
         android:id="@+id/etSize_newMatch"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="גודל"
+        android:hint="מספר משתתפים"
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/etHintTextColor"
-        android:background="@drawable/edittext_background"
         android:padding="8dp"
         android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/btnCreate_newMatch"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="צור"
         android:textSize="20sp"

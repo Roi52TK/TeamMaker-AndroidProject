@@ -2,6 +2,7 @@ package com.roi.teammeet.screens;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,11 +19,12 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.MyMatchGroupAdapter;
+import com.roi.teammeet.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyMatchDetailsActivity extends BaseActivity {
+public class MyMatchDetailsActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MyMatchDetailsActivity";
 
@@ -89,12 +91,13 @@ public class MyMatchDetailsActivity extends BaseActivity {
 
     private void initData() {
         tvTitle.setText(match.getTitle().toString());
-        tvDescription.setText(match.getDescription().toString());
-        tvDate.setText("Date: " + match.getDate().toString());
-        tvTime.setText("Time: " + match.getTime().toString());
-        tvAddress.setText("Address: " + match.getAddress().toString());
-        tvAgeRange.setText("Age Range: "+ match.getAgeRange().toString());
-        tvGroup.setText("Group: " + match.getGroup().toString());
+        tvDescription.setText("תיאור: " + match.getDescription().toString());
+        tvDate.setText("תאריך: " + match.getDate().toString());
+        tvTime.setText("שעה: " + match.getTime().toString());
+        tvAddress.setText("כתובת: " + match.getAddress().toString());
+        tvAddress.setOnClickListener(this);
+        tvAgeRange.setText("טווח גילים: "+ match.getAgeRange().toString());
+        tvGroup.setText("מספר משתתפים: " + match.getGroup().toString());
 
         userListRealtime = databaseService.getUserListRealtime(new DatabaseService.DatabaseCallback<List<User>>() {
             @Override
@@ -124,5 +127,12 @@ public class MyMatchDetailsActivity extends BaseActivity {
     protected void onDestroy() {
         databaseService.stopListenUserRealtime(this.userListRealtime);
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == tvAddress){
+            DialogUtil.openMapOptions(this, match.getLat(), match.getLang());
+        }
     }
 }

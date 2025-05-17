@@ -30,15 +30,6 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvUsername_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username:"
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
-
         <EditText
             android:id="@+id/etUsername_myProfile"
             android:layout_width="0dp"
@@ -50,7 +41,16 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/btnBG"
             android:padding="12dp"
-            android:hint="Username" />
+            android:hint="שם משתמש" />
+
+        <TextView
+            android:id="@+id/tvUsername_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="שם משתמש: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,26 +61,13 @@
         android:gravity="center_vertical">
 
         <TextView
-            android:id="@+id/tvBirthYear_myProfile"
+            android:id="@+id/tvBirthDate_myProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Birth Year:"
+            android:text="תאריך לידה: "
             android:textColor="@color/textColor"
             android:textSize="28sp"
             android:layout_marginEnd="12dp" />
-
-        <EditText
-            android:id="@+id/etBirthYear_myProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/btnBG"
-            android:padding="12dp"
-            android:hint="Birth year" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,28 +76,43 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
+
+        <RadioGroup
+            android:id="@+id/rgGender_myProfile"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/rbMaleGender_myProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:text="זכר" />
+
+            <RadioButton
+                android:id="@+id/rbFemaleGender_myProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:text="נקבה" />
+
+            <RadioButton
+                android:id="@+id/rbOtherGender_myProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor"
+                android:text="אחר" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/tvGender_myProfile"
+            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gender:"
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
-
-        <EditText
-            android:id="@+id/etGender_myProfile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="text"
-            android:textSize="28sp"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/btnBG"
-            android:padding="12dp"
-            android:hint="Gender" />
+            android:text="מגדר"
+            android:textSize="18sp"
+            android:textColor="@color/textColor"/>
     </LinearLayout>
 
     <LinearLayout
@@ -119,15 +121,6 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/tvPhone_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone:"
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
 
         <EditText
             android:id="@+id/etPhone_myProfile"
@@ -140,7 +133,16 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/btnBG"
             android:padding="12dp"
-            android:hint="Phone number" />
+            android:hint="מספר טלפון" />
+
+        <TextView
+            android:id="@+id/tvPhone_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="טלפון: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -149,15 +151,6 @@
         android:orientation="horizontal"
         android:layout_marginBottom="40dp"
         android:gravity="center_vertical">
-
-        <TextView
-            android:id="@+id/tvEmail_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
 
         <EditText
             android:id="@+id/etEmail_myProfile"
@@ -170,18 +163,28 @@
             android:textColor="@color/black"
             android:backgroundTint="@color/btnBG"
             android:padding="12dp"
-            android:hint="Email" />
+            android:hint="אימייל" />
+
+        <TextView
+            android:id="@+id/tvEmail_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="אימייל: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnConfirm_myProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:paddingHorizontal="50dp"
-        android:paddingVertical="16dp"
         android:text="אישור"
-        android:textSize="40sp"
+        android:textSize="36sp"
         android:textColor="@android:color/white"
-        android:backgroundTint="#2F9E18" />
+        android:backgroundTint="@color/btnBG"
+        android:padding="14dp"
+        android:elevation="4dp" />
+
 </LinearLayout>

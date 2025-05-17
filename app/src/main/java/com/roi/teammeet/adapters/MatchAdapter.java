@@ -2,6 +2,7 @@ package com.roi.teammeet.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,9 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
     public void onBindViewHolder(MatchViewHolder holder, int position) {
         Match match = matchList.get(position);
         holder.tvTitle.setText(match.getTitle());
-        holder.tvDescription.setText(match.getDescription());
-        holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroup().toString());
+        holder.tvDescription.setText("תיאור: " + match.getDescription());
+        holder.tvDate.setText("תאריך ושעה: " + match.getDate() + " ב- " + match.getTime());
+        holder.tvGroupSize.setText("מספר משתתפים: " + match.getGroup().toString());
 
         databaseService = DatabaseService.getInstance();
 

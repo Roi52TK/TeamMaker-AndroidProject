@@ -5,6 +5,10 @@
         android:id="@+id/home_menu" />
 
     <item
+        android:title="מפגש חדש"
+        android:id="@+id/newMatch_menu" />
+
+    <item
         android:title="חיפוש מפגשים"
         android:id="@+id/searchMatches_menu" />
 

@@ -1,0 +1,15 @@
+<resources>
+    <!-- Custom DatePicker Dialog Theme -->
+    <style name="CustomDatePickerDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorPrimary">@color/textColor</item>
+        <item name="colorOnPrimary">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+    </style>
+
+    <!-- Custom TimePicker Dialog Theme -->
+    <style name="CustomTimePickerDialog" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="colorPrimary">@color/textColor</item>
+        <item name="colorOnPrimary">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+    </style>
+</resources>

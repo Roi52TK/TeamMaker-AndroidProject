@@ -15,12 +15,11 @@ import com.roi.teammeet.R;
 
 public class LandingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnReg, btnLogin;
+    Button btnReg, btnLogin, btnAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_landing);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -34,9 +33,11 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
     private void initViews() {
         btnReg = findViewById(R.id.btnSignUp_landing);
         btnLogin = findViewById(R.id.btnLogin_landing);
+        btnAbout = findViewById(R.id.btnAbout_landing);
 
         btnReg.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
+        btnAbout.setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +49,9 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
         else if(v == btnLogin)
         {
             goToLogin();
+        }
+        else if(v == btnAbout){
+            goToAbout();
         }
     }
 
@@ -61,6 +65,11 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
         Intent go = new Intent(this, LoginActivity.class);
         startActivity(go);
         finish();
+    }
+
+    private void goToAbout() {
+        Intent go = new Intent(this, AboutActivity.class);
+        startActivity(go);
     }
 
     @Override

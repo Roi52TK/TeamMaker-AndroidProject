@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     tools:context=".screens.MatchDetailsActivity">
 
     <LinearLayout
@@ -22,71 +23,78 @@
             android:layout_marginTop="24dp"
             android:textSize="56sp"
             android:textStyle="bold"
-            android:text="Title" />
+            android:text="כותרת" />
 
         <TextView
             android:id="@+id/tvDescription_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Description" />
+            android:text="תיאור" />
 
         <TextView
             android:id="@+id/tvDate_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Date" />
+            android:text="תאריך" />
 
         <TextView
             android:id="@+id/tvTime_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Time" />
+            android:text="שעה" />
 
         <TextView
             android:id="@+id/tvAddress_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Address" />
+            android:text="כתובת" />
 
         <TextView
             android:id="@+id/tvAgeRange_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Age Range" />
+            android:text="טווח גילים" />
 
         <TextView
             android:id="@+id/tvGroup_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Group" />
+            android:text="מספר משתתפים" />
 
         <TextView
             android:id="@+id/tvHost_matchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#285DC5"
+            android:layout_gravity="right"
+            android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:text="Host" />
+            android:text="יוצר" />
 
         <TextView
             android:id="@+id/tvPlayers_matchDetails"
@@ -97,7 +105,7 @@
             android:layout_marginTop="32dp"
             android:textSize="56sp"
             android:textStyle="bold"
-            android:text="Players" />
+            android:text="משתתפים" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlayers_matchDetails"

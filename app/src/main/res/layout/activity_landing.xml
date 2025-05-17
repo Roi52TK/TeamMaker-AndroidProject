@@ -5,29 +5,27 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     android:weightSum="10"
     android:orientation="vertical"
     tools:context=".screens.LandingActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="TeamMaker"
-        android:textColor="@color/textColor"
-        android:textSize="56sp"
-        android:layout_weight="2"
-        />
 
-
+    <ImageView
+        android:id="@+id/imgLogo_landing"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:contentDescription="Teammaker logo"
+        app:srcCompat="@drawable/teammaker_logo_foreground" />
 
     <Button
         android:id="@+id/btnLogin_landing"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="התחברות"
+        android:textColor="@color/white"
         android:textSize="56sp"
         android:layout_gravity="center"
         android:layout_weight="1"
@@ -37,10 +35,25 @@
 
     <Button
         android:id="@+id/btnSignUp_landing"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:text="הרשמה"
+        android:textColor="@color/white"
+        android:textSize="56sp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:backgroundTint="@color/btnBG"
+        />
+
+    <Button
+        android:id="@+id/btnAbout_landing"
+        android:layout_marginTop="40dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="אודות"
+        android:textColor="@color/white"
         android:textSize="56sp"
         android:layout_gravity="center"
         android:layout_weight="1"

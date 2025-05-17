@@ -46,7 +46,7 @@ public class MatchNotificationWorker extends Worker {
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "match_notifications_channel")
                 //.setSmallIcon(R.drawable.ic_notification)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Match Reminder: " + matchTitle)
                 .setContentText(userName + ", your match is scheduled at " + matchTime)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

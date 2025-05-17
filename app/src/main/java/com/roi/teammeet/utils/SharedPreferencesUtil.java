@@ -63,7 +63,7 @@ public class SharedPreferencesUtil {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("uid", user.getId());
         editor.putString("username", user.getUsername());
-        editor.putString("birthYear", user.getBirthYear());
+        editor.putString("birthDate", user.getBirthDate());
         editor.putBoolean("isAdmin", user.isAdmin());
         editor.apply();
     }
@@ -77,9 +77,9 @@ public class SharedPreferencesUtil {
         }
         String uid = sharedPreferences.getString("uid", "");
         String username = sharedPreferences.getString("username", "");
-        String birthYear = sharedPreferences.getString("birthYear", "");
+        String birthDate = sharedPreferences.getString("birthDate", "");
         boolean isAdmin = sharedPreferences.getBoolean("isAdmin", false);
-        return new User(uid, username, birthYear, isAdmin);
+        return new User(uid, username, birthDate, isAdmin);
     }
 
     public static void signOutUser(Context context) {
@@ -87,7 +87,7 @@ public class SharedPreferencesUtil {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("uid");
         editor.remove("username");
-        editor.remove("birthYear");
+        editor.remove("birthDate");
         editor.remove("isAdmin");
         editor.apply();
     }

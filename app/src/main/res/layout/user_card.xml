@@ -18,7 +18,8 @@
             android:id="@+id/tvUsernameTitle_userCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:layout_gravity="end"
+            android:text="שם משתמש"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/textColor"
@@ -62,21 +63,26 @@
             android:gravity="center_vertical">
 
             <EditText
-                android:id="@+id/etBirthYear_userCard"
+                android:id="@+id/etBirthDate_userCard"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1"
-                android:hint="שנת לידה"
-                android:background="@drawable/edittext_background"
-                android:padding="12dp"
+                android:padding="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:textAlignment="center"
+                android:hint="בחר תאריך"
+                android:textColor="@color/textColor"
                 android:textColorHint="@color/etHintTextColor"
-                android:inputType="number" />
+                android:background="@drawable/edittext_background"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:inputType="none" />
 
             <TextView
                 android:id="@+id/tvBirthYear_userCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="שנת לידה:"
+                android:text="תאריך לידה:"
                 android:textColor="@color/textColor"
                 android:layout_marginStart="12dp"
                 android:textSize="16sp" />
@@ -93,7 +99,7 @@
             <Spinner
                 android:id="@+id/spinnerGender_userCard"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_weight="1" />
 
             <TextView

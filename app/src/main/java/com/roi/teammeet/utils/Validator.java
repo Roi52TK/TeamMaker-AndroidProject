@@ -2,6 +2,8 @@ package com.roi.teammeet.utils;
 
 import android.util.Patterns;
 
+import com.roi.teammeet.MyApplication;
+
 public class Validator {
 
     public static boolean isEmailValid(String email) {
@@ -18,5 +20,9 @@ public class Validator {
 
     public static boolean isPhoneValid(String phone){
         return phone.length() == 10;
+    }
+
+    public static boolean isBirthDateValid(String chosenDate) {
+        return DateUtil.getAge(chosenDate) >= MyApplication.AGE_LIMIT;
     }
 }

@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">TeamMeet</string>
+    <string name="app_name">TeamMaker</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_maps2">MapsActivity2</string>
+
+    <string name="about">
+        ברוכים הבאים לאפליקציה TeamMaker!
+        אם אי פעם רציתם שותפים למשחקי כדור או להכיר חברים חדשים - הגעתם למקום הנכון!
+        באפליקציה זו תוכלו ליזום מפגשים ולשתף אותם בקלות בכל זמן ובכל מקום, וכן להצטרף אל מפגשים של אחרים כמוכם המחכים להיפגש איתכם!
+    </string>
 </resources>

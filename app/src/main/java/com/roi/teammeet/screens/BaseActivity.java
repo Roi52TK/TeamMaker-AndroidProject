@@ -16,6 +16,17 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
         return true;
     }
 
@@ -24,31 +35,37 @@ public class BaseActivity extends AppCompatActivity {
 
         Intent goIntent;
 
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+
         if(item.getItemId() == R.id.home_menu){
             goIntent = new Intent(this, MainActivity.class);
             startActivity(goIntent);
-            finish();
+            //finish();
+        }
+        else if(item.getItemId() == R.id.newMatch_menu){
+            goIntent = new Intent(this, NewMatchActivity.class);
+            startActivity(goIntent);
         }
         else if(item.getItemId() == R.id.searchMatches_menu){
             goIntent = new Intent(this, SearchMatchesActivity.class);
             startActivity(goIntent);
-            finish();
         }
         else if(item.getItemId() == R.id.myMatches_menu){
             goIntent = new Intent(this, MyMatchesActivity.class);
             startActivity(goIntent);
-            finish();
         }
         else if(item.getItemId() == R.id.myProfile_menu){
             goIntent = new Intent(this, MyProfileActivity.class);
             startActivity(goIntent);
-            finish();
         }
         else if(item.getItemId() == R.id.logout_menu){
             SignOut();
             goIntent = new Intent(this, LandingActivity.class);
             startActivity(goIntent);
-            finish();
+            //finish();
         }
 
         return  true;

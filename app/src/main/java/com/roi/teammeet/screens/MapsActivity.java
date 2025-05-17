@@ -1,40 +1,21 @@
 package com.roi.teammeet.screens;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.location.GpsStatus;
 import android.os.Bundle;
 import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.databinding.ActivityMapsBinding;
 import com.roi.teammeet.utils.GeneralMapsActivity;
 
-import org.osmdroid.api.IMapController;
-import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapListener;
-import org.osmdroid.events.ScrollEvent;
-import org.osmdroid.events.ZoomEvent;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.overlay.Marker;
 
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.events.MapEventsReceiver;
@@ -108,7 +89,7 @@ public class MapsActivity extends GeneralMapsActivity implements MapListener, Gp
         etStreet = findViewById(R.id.etStreet_maps);
         etStreetNumber = findViewById(R.id.etStreetNumber_maps);
         etCity = findViewById(R.id.etCity_maps);
-        btnSetAddress = findViewById(R.id.btnGetAddress_maps);
+        btnSetAddress = findViewById(R.id.btnSetAddress_maps);
         btnSetMarker = findViewById(R.id.btnSetMarker_maps);
         btnFinish = findViewById(R.id.btnFinish_maps);
     }
@@ -122,7 +103,10 @@ public class MapsActivity extends GeneralMapsActivity implements MapListener, Gp
             onClickSetMarker();
         }
         if(view == btnFinish){
-            if(!currentAddress.isEmpty()){
+            if(currentAddress == null){
+                finish();
+            }
+            else if(!currentAddress.isEmpty()){
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("lat", String.valueOf(activeMarker.getPosition().getLatitude()));
                 resultIntent.putExtra("lang", String.valueOf(activeMarker.getPosition().getLongitude()));

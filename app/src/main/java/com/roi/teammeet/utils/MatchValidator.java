@@ -1,38 +1,34 @@
 package com.roi.teammeet.utils;
 
+import com.roi.teammeet.MyApplication;
+
 import java.time.Year;
 import java.util.Date;
 
 public class MatchValidator {
-    public static final int MIN_AGE = 12;
+
+    public static final int TITLE_MIN_LENGTH = 4;
+    public static final int TITLE_MAX_LENGTH = 20;
+    public static final int DESCRIPTION_MAX_LENGTH = 50;
 
     public static boolean isTitleValid(String title){
         int length = title.length();
-        return length >= 4 && length <= 16;
+        return length >= TITLE_MIN_LENGTH && length <= TITLE_MAX_LENGTH;
     }
     public static boolean isDescriptionValid(String description){
-        return description.length() <= 50;
+        return description.length() <= DESCRIPTION_MAX_LENGTH;
     }
-    public static boolean isDateValid(Date date){
-        Date today = new Date();
-        return date.after(today) || date == today;
-    }
-    /*public static boolean isDateValid(String date){
 
+    public static boolean isDateTimeValid(String chosenDate, String chosenTime) {
+        return !DateUtil.isExpired(chosenDate, chosenTime);
     }
-    public static boolean isTimeValid(String time){
-
-    }*/
 
     public static boolean isAddressValid(String address){
-        return !address.isEmpty();
+        return address != null;
     }
 
-    /*public static boolean isCityValid(String city){
-        return city.length() >= 3;
-    }*/
     public static boolean isMinAgeValid(String min){
-        return !min.isEmpty() && Integer.parseInt(min) >= MIN_AGE;
+        return !min.isEmpty() && Integer.parseInt(min) >= MyApplication.AGE_LIMIT;
     }
     public static boolean isAgeRangeValid(String min, String max){
         if(max.isEmpty()){

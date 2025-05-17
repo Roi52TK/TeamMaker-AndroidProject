@@ -3,8 +3,6 @@ package com.roi.teammeet.screens;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -13,7 +11,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends BaseActivity {
 
     TextView tvUsername;
     TextView tvBirthYear;
@@ -23,7 +21,6 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -55,8 +52,8 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        tvUsername.setText("Username: " + user.getUsername().toString());
-        tvBirthYear.setText("Birth Year: " + user.getBirthYear().toString());
-        tvGender.setText("Gender: " + user.getGender().toString());
+        tvUsername.setText("שם משתמש: " + user.getUsername().toString());
+        tvBirthYear.setText("גיל: " + user.getAge());
+        tvGender.setText("מין: " + user.getGender().toString());
     }
 }

@@ -1,9 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.TeamMeet" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.TeamMaker" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/textColor</item>
     </style>
 
-    <style name="Theme.TeamMeet" parent="Base.Theme.TeamMeet" />
+    <style name="Theme.TeamMaker" parent="Base.Theme.TeamMaker" />
 </resources>

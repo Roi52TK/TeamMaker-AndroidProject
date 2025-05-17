@@ -5,14 +5,15 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
+
     tools:context=".screens.MyMatchDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/white">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvTitle_myMatchDetails"
@@ -23,70 +24,78 @@
             android:layout_marginTop="24dp"
             android:textSize="56sp"
             android:textStyle="bold"
-            android:text="Title" />
+            android:text="כותרת" />
 
         <TextView
             android:id="@+id/tvDescription_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Description" />
+            android:text="תיאור" />
 
         <TextView
             android:id="@+id/tvDate_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Date" />
+            android:text="תאריך" />
 
         <TextView
             android:id="@+id/tvTime_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Time" />
+            android:text="שעה" />
 
         <TextView
             android:id="@+id/tvAddress_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Address" />
+            android:text="כתובת" />
 
         <TextView
             android:id="@+id/tvAgeRange_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Age Range" />
+            android:text="טווח גילים" />
 
         <TextView
             android:id="@+id/tvGroup_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:textColor="@color/textColor"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
-            android:text="Group" />
+            android:text="מספר משתתפים" />
 
         <TextView
             android:id="@+id/tvHost_myMatchDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:layout_marginTop="16dp"
             android:textSize="28sp"
+            android:textColor="@color/textColor"
             android:textStyle="bold"
-            android:text="Host: You" />
+            android:text="יוצר: את/ה" />
 
         <TextView
             android:id="@+id/tvPlayers_myMatchDetails"
@@ -97,14 +106,13 @@
             android:layout_marginTop="32dp"
             android:textSize="56sp"
             android:textStyle="bold"
-            android:text="Players" />
+            android:text="משתתפים" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlayers_myMatchDetails"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:overScrollMode="never" />
+            android:layout_height="100dp"
+            android:overScrollMode="always" />
 
     </LinearLayout>
 

@@ -1,21 +1,24 @@
 package com.roi.teammeet.models;
 
+import com.roi.teammeet.R;
+import com.roi.teammeet.utils.DateUtil;
+
 import java.time.Year;
 import java.util.Objects;
 
 public class User {
     String id;
-    String username, birthYear, gender, phone, email, password;
+    String username, birthDate, gender, phone, email, password;
     boolean isAdmin;
 
     public User(){
 
     }
 
-    public User(String id, String username, String birthYear, String gender, String phone, String email, String password, boolean isAdmin) {
+    public User(String id, String username, String birthDate, String gender, String phone, String email, String password, boolean isAdmin) {
         this.id = id;
         this.username = username;
-        this.birthYear = birthYear;
+        this.birthDate = birthDate;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
@@ -23,28 +26,27 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User(String id, String username, String birthYear, boolean isAdmin) {
+    public User(String id, String username, String birthDate, boolean isAdmin) {
         this.id = id;
         this.username = username;
-        this.birthYear = birthYear;
-        this.gender = "";
+        this.birthDate = birthDate;
+        this.gender = null;
         this.phone = "";
         this.email = "";
         this.password = "";
         this.isAdmin = isAdmin;
     }
 
-    public int getCalculatedAge(){
-        return Year.now().getValue() - Integer.parseInt(this.birthYear);
+    public int getAge(){
+        return DateUtil.getAge(birthDate);
     }
 
-
-    public String getBirthYear() {
-        return birthYear;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthYear(String birthYear) {
-        this.birthYear = birthYear;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getGender() {
@@ -54,8 +56,6 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-
 
     public String getEmail() {
         return email;
@@ -110,7 +110,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", birthYear='" + birthYear + '\'' +
+                ", birthYear='" + birthDate + '\'' +
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +

@@ -12,8 +12,8 @@ public class Range implements Serializable {
     }
 
     public Range(int min, int max){
-        this.min = Math.max(0, min);
-        this.max = Math.max(0, max);
+        this.min = Math.max(0, Math.min(min, max));
+        this.max = Math.max(0, Math.max(min, max));
     }
 
     public int getMin() {

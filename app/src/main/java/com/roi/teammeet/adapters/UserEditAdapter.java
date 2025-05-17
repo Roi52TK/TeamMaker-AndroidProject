@@ -1,5 +1,6 @@
 package com.roi.teammeet.adapters;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,16 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.roi.teammeet.MyApplication;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
+import com.roi.teammeet.screens.RegisterActivity;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.Validator;
 
 import java.util.ArrayList;
@@ -52,7 +58,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         User user = userList.get(position);
         holder.tvUsername.setText(user.getUsername());
         holder.etUsername.setText(user.getUsername());
-        holder.etBirthYear.setText(user.getBirthYear());
+        holder.etBirthDate.setText(user.getBirthDate());
 
         //TODO: Place it in another class as static / change to enum
         ArrayList<String> genderArrayList = new ArrayList<>();
@@ -72,11 +78,15 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
         holder.etEmail.setEnabled(false);
         holder.etPassword.setEnabled(false);
 
+        holder.etBirthDate.setOnClickListener(view -> {
+            holder.createDateDialog(context);
+        });
+
         databaseService = DatabaseService.getInstance();
 
         holder.btnUpdate.setOnClickListener(v -> {
             String username = holder.etUsername.getText().toString();
-            String birthYear = holder.etBirthYear.getText().toString();
+            String birthDate = holder.etBirthDate.getText().toString();
             String gender = holder.spinnerGender.getSelectedItem().toString();
             String phone = holder.etPhone.getText().toString();
             String email = holder.etEmail.getText().toString();
@@ -88,12 +98,12 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
                 return;
             }
 
-            User updatedUser = new User(user.getId(), username, birthYear, gender, phone, email, password, isAdmin);
+            User updatedUser = new User(user.getId(), username, birthDate, gender, phone, email, password, isAdmin);
 
             databaseService.createNewUser(updatedUser, new DatabaseService.DatabaseCallback<Object>() {
                 @Override
                 public void onCompleted(Object object) {
-
+                    Toast.makeText(context, "Successfully updated user.", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -126,7 +136,8 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView tvUsername;
         EditText etUsername;
-        EditText etBirthYear;
+        EditText etBirthDate;
+        String chosenDate;
         Spinner spinnerGender;
         EditText etPhone;
         EditText etEmail;
@@ -139,7 +150,7 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsernameTitle_userCard);
             etUsername = itemView.findViewById(R.id.etUsername_userCard);
-            etBirthYear = itemView.findViewById(R.id.etBirthYear_userCard);
+            etBirthDate = itemView.findViewById(R.id.etBirthDate_userCard);
             spinnerGender = itemView.findViewById(R.id.spinnerGender_userCard);
             etPhone = itemView.findViewById(R.id.etPhone_userCard);
             etEmail = itemView.findViewById(R.id.etEmail_userCard);
@@ -149,11 +160,40 @@ public class UserEditAdapter extends RecyclerView.Adapter<UserEditAdapter.UserVi
             btnDelete = itemView.findViewById(R.id.btnDelete_userCard);
         }
 
+        private void createDateDialog(Context context){
+
+            chosenDate = etBirthDate.getText().toString();
+
+            DatePickerDialog dialog = new DatePickerDialog(
+                    context,
+                    R.style.CustomDatePickerDialog, // Apply custom style here
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            chosenDate = dayOfMonth + "/" + (month + 1) + "/" + year;
+                            etBirthDate.setText(chosenDate);
+                        }
+                    },
+                    DateUtil.getYear(chosenDate),
+                    DateUtil.getMonth(chosenDate),
+                    DateUtil.getDay(chosenDate)
+            );
+
+            dialog.show();
+        }
+
         private boolean checkInput(String username, String phone, String email, String password) {
             if (!Validator.isUsernameValid(username)) {
                 Log.e(TAG, "checkInput: Username must be at least 3 characters long");
                 etUsername.setError("Username must be at least 3 characters long");
                 etUsername.requestFocus();
+                return false;
+            }
+
+            if(!Validator.isBirthDateValid(chosenDate)){
+                Log.e(TAG, "checkInput: Age must be at least " + MyApplication.AGE_LIMIT);
+                etBirthDate.setError("Age must be at least " + MyApplication.AGE_LIMIT);
+                etBirthDate.requestFocus();
                 return false;
             }
 

@@ -1,6 +1,7 @@
 package com.roi.teammeet.screens;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +20,11 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.MatchGroupAdapter;
+import com.roi.teammeet.utils.DialogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MatchDetailsActivity extends BaseActivity implements View.OnClickListener {
 
@@ -91,18 +94,21 @@ public class MatchDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private void initData() {
         tvTitle.setText(match.getTitle().toString());
-        tvDescription.setText(match.getDescription().toString());
-        tvDate.setText("Date: " + match.getDate().toString());
-        tvTime.setText("Time: " + match.getTime().toString());
-        tvAddress.setText("Address: " + match.getAddress().toString());
-        tvAgeRange.setText("Age Range: "+ match.getAgeRange().toString());
-        tvGroup.setText("Group: " + match.getGroup().toString());
+        tvDescription.setText("תיאור: " + match.getDescription().toString());
+        tvDate.setText("תאריך: " + match.getDate().toString());
+        tvTime.setText("שעה: " + match.getTime().toString());
+        tvAddress.setText("כתובת: " + match.getAddress().toString());
+
+        tvAddress.setOnClickListener(this);
+
+        tvAgeRange.setText("טווח גילים: "+ match.getAgeRange().toString());
+        tvGroup.setText("מספר משתתפים: " + match.getGroup().toString());
 
         DatabaseService.getInstance().getUser(match.getHostUserId(), new DatabaseService.DatabaseCallback<User>() {
             @Override
             public void onCompleted(User user) {
                 Log.d(TAG, "onCompleted: Host user received successfully");
-                tvHost.setText("Host: " + user.getUsername());
+                tvHost.setText("יוצר: " + user.getUsername());
                 tvHost.setOnClickListener(MatchDetailsActivity.this);
             }
 
@@ -135,12 +141,16 @@ public class MatchDetailsActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+
     @Override
     public void onClick(View v) {
         if(v == tvHost){
             Intent hostProfileIntent = new Intent(this, UserProfileActivity.class);
             hostProfileIntent.putExtra("userId", match.getHostUserId());
             startActivity(hostProfileIntent);
+        }
+        else if(v == tvAddress){
+            DialogUtil.openMapOptions(this, match.getLat(), match.getLang());
         }
     }
 }

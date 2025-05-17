@@ -5,10 +5,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,11 +19,14 @@ import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
-public class MyProfileActivity extends BaseActivity implements View.OnClickListener {
+public class MyProfileActivity extends BaseActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
     private static final String TAG = "MyProfileActivity";
-    TextView tvUsername, tvBirthYear, tvGender, tvPhone, tvEmail;
-    EditText etUsername, etBirthYear, etGender, etPhone, etEmail;
+    TextView tvUsername, tvBirthDate, tvPhone, tvEmail;
+    EditText etUsername, etPhone, etEmail;
+    RadioGroup rgGender;
+    RadioButton rbMale, rbFemale, rbOther;
+    String chosenGender;
     Button btnConfirm;
     User user;
     DatabaseService databaseService;
@@ -31,7 +34,6 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_my_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -62,18 +64,20 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
     private void initViews() {
         tvUsername = findViewById(R.id.tvUsername_myProfile);
-        tvBirthYear = findViewById(R.id.tvBirthYear_myProfile);
-        tvGender = findViewById(R.id.tvGender_myProfile);
+        tvBirthDate = findViewById(R.id.tvBirthDate_myProfile);
         tvPhone = findViewById(R.id.tvPhone_myProfile);
         tvEmail = findViewById(R.id.tvEmail_myProfile);
 
         etUsername = findViewById(R.id.etUsername_myProfile);
-        etBirthYear = findViewById(R.id.etBirthYear_myProfile);
-        etGender = findViewById(R.id.etGender_myProfile);
+
+        rgGender = findViewById(R.id.rgGender_myProfile);
+        rbMale = findViewById(R.id.rbMaleGender_myProfile);
+        rbFemale = findViewById(R.id.rbFemaleGender_myProfile);
+        rbOther = findViewById(R.id.rbOtherGender_myProfile);
+
         etPhone = findViewById(R.id.etPhone_myProfile);
         etEmail = findViewById(R.id.etEmail_myProfile);
 
-        etBirthYear.setEnabled(false);
         etEmail.setEnabled(false);
 
         btnConfirm = findViewById(R.id.btnConfirm_myProfile);
@@ -82,10 +86,29 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
     private void initData() {
         etUsername.setText(user.getUsername());
-        etBirthYear.setText(user.getBirthYear());
-        etGender.setText(user.getGender());
+        tvBirthDate.setText("תאריך לידה: " + user.getBirthDate());
+        setCheckedGender();
         etPhone.setText(user.getPhone());
         etEmail.setText(user.getEmail());
+
+        chosenGender = user.getGender();
+        rgGender.setOnCheckedChangeListener(this);
+    }
+
+    private void setCheckedGender() {
+        int id;
+
+        if(user.getGender().equals("זכר")){
+            id = rbMale.getId();
+        }
+        else if(user.getGender().equals("נקבה")){
+            id = rbFemale.getId();
+        }
+        else{
+            id = rbOther.getId();
+        }
+
+        rgGender.check(id);
     }
 
     private boolean checkInput(String username, String phone) {
@@ -103,7 +126,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             return false;
         }
 
-        //TODO: add spinner for Gender instead of edit text
+        //TODO: add radio button for Gender instead of edit text
 
         return true;
     }
@@ -126,6 +149,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
 
         user.setUsername(username);
         user.setPhone(phone);
+        user.setGender(chosenGender);
 
         databaseService.createNewUser(user, new DatabaseService.DatabaseCallback<Object>() {
             @Override
@@ -140,5 +164,19 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int id) {
+
+        if(id == rbMale.getId()){
+            chosenGender = "זכר";
+        }
+        else if(id == rbFemale.getId()){
+            chosenGender = "נקבה";
+        }
+        else if(id == rbOther.getId()){
+            chosenGender = "אחר";
+        }
     }
 }

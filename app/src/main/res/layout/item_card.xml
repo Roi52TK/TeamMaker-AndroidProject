@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Title"
+            android:text="כותרת"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/textColor"/>
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Description"
+            android:text="תיאור"
             android:textSize="18sp"
             android:layout_marginTop="12dp"
             android:textColor="@color/textColor"/>
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Date and Time"
+            android:text="תאריך ושעה"
             android:textSize="16sp"
             android:layout_marginTop="12dp"
             android:textColor="@color/textColor"/>
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="Group Size"
+            android:text="מספר משתתפים"
             android:textSize="16sp"
             android:layout_marginTop="12dp"
             android:textColor="@color/textColor"/>
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Join"
+                android:text="הצטרף"
                 android:backgroundTint="#2AC318"
                 android:textColor="@color/white"
                 android:padding="12dp"
@@ -80,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Details"
+                android:text="פרטים"
                 android:backgroundTint="@color/btnBG"
                 android:textColor="@color/white"
                 android:padding="12dp"

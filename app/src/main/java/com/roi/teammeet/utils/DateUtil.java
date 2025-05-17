@@ -108,4 +108,22 @@ public class DateUtil {
 
         return birthYearsArrayList;
     }
+
+    public static int getAge(String birthDateStr) {
+        Date birthDate = convertStringToDate(birthDateStr);
+        if (birthDate == null) return -1;
+
+        Calendar birthCal = Calendar.getInstance();
+        birthCal.setTime(birthDate);
+
+        Calendar todayCal = Calendar.getInstance();
+
+        int age = todayCal.get(Calendar.YEAR) - birthCal.get(Calendar.YEAR);
+
+        if (todayCal.get(Calendar.DAY_OF_YEAR) < birthCal.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+
+        return age;
+    }
 }

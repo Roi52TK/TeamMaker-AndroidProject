@@ -3,9 +3,12 @@ package com.roi.teammeet;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.work.Configuration;
 import androidx.work.Data;
 import androidx.work.WorkManager;
@@ -81,4 +84,5 @@ public class MyApplication extends Application implements Configuration.Provider
                 .setMinimumLoggingLevel(android.util.Log.DEBUG)
                 .build();
     }
+
 }

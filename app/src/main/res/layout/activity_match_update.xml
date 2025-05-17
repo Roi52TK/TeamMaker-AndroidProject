@@ -12,43 +12,45 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:gravity="center_horizontal"
-        tools:context=".screens.AdminMatchUpdateActivity">
+        tools:context=".screens.MatchUpdateActivity">
 
         <TextView
-            android:id="@+id/tvTitle_adminMatchUpdate"
+            android:id="@+id/tvTitle_matchUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="עדכן מפגש!"
+            android:text="עדכן מפגש"
             android:textColor="@color/textColor"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
         <EditText
-            android:id="@+id/etTitle_adminMatchUpdate"
+            android:id="@+id/etTitle_matchUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="כותרת"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:background="@drawable/edittext_background"
             android:padding="8dp"
             android:layout_marginBottom="12dp" />
 
         <EditText
-            android:id="@+id/etDescription_adminMatchUpdate"
+            android:id="@+id/etDescription_matchUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:hint="תיאור"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
             android:background="@drawable/edittext_background"
             android:padding="8dp"
             android:layout_marginBottom="12dp" />
 
         <Button
-            android:id="@+id/btnDate_adminMatchUpdate"
-            android:layout_width="match_parent"
+            android:id="@+id/btnDate_matchUpdate"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="בחר תאריך"
             android:textSize="16sp"
@@ -58,7 +60,7 @@
             android:layout_marginBottom="6dp" />
 
         <TextView
-            android:id="@+id/tvDate_adminMatchUpdate"
+            android:id="@+id/tvDate_matchUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -67,8 +69,8 @@
             android:layout_marginBottom="12dp" />
 
         <Button
-            android:id="@+id/btnTime_adminMatchUpdate"
-            android:layout_width="match_parent"
+            android:id="@+id/btnTime_matchUpdate"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="בחר שעה"
             android:textSize="16sp"
@@ -78,7 +80,7 @@
             android:layout_marginBottom="6dp" />
 
         <TextView
-            android:id="@+id/tvTime_adminMatchUpdate"
+            android:id="@+id/tvTime_matchUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
@@ -87,8 +89,8 @@
             android:layout_marginBottom="12dp" />
 
         <Button
-            android:id="@+id/btnMap_adminMatchUpdate"
-            android:layout_width="match_parent"
+            android:id="@+id/btnMap_matchUpdate"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="בחר מיקום"
             android:textSize="16sp"
@@ -98,7 +100,7 @@
             android:layout_marginBottom="6dp" />
 
         <TextView
-            android:id="@+id/tvAddress_adminMatchUpdate"
+            android:id="@+id/tvAddress_matchUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
@@ -116,26 +118,28 @@
             android:gravity="center">
 
             <EditText
-                android:id="@+id/etMinAge_adminMatchUpdate"
+                android:id="@+id/etMinAge_matchUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
                 android:hint="גיל מינימלי"
                 android:textAlignment="center"
+                android:textColor="@color/textColor"
                 android:textColorHint="@color/etHintTextColor"
                 android:background="@drawable/edittext_background"
                 android:padding="8dp"
                 android:layout_marginEnd="6dp" />
 
             <EditText
-                android:id="@+id/etMaxAge_adminMatchUpdate"
+                android:id="@+id/etMaxAge_matchUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
                 android:hint="גיל מקסימלי"
                 android:textAlignment="center"
+                android:textColor="@color/textColor"
                 android:textColorHint="@color/etHintTextColor"
                 android:background="@drawable/edittext_background"
                 android:padding="8dp"
@@ -143,35 +147,36 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/etSize_adminMatchUpdate"
-            android:layout_width="match_parent"
+            android:id="@+id/etSize_matchUpdate"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="גודל"
+            android:hint="מספר משתתפים"
+            android:textAlignment="center"
+            android:textColor="@color/textColor"
             android:textColorHint="@color/etHintTextColor"
-            android:background="@drawable/edittext_background"
             android:padding="8dp"
             android:layout_marginBottom="24dp" />
 
         <TextView
-            android:id="@+id/tvPlayers_adminMatchUpdate"
+            android:id="@+id/tvPlayers_matchUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="שחקנים"
+            android:text="משתתפים"
             android:textColor="@color/textColor"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPlayers_adminMatchUpdate"
+            android:id="@+id/rvPlayers_matchUpdate"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="24dp" />
 
         <Button
-            android:id="@+id/btnCreate_adminMatchUpdate"
-            android:layout_width="match_parent"
+            android:id="@+id/btnCreate_matchUpdate"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="עדכן"
             android:textSize="20sp"

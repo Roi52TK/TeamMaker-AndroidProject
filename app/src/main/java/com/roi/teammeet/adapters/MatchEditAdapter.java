@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
-import com.roi.teammeet.screens.AdminMatchUpdateActivity;
+import com.roi.teammeet.screens.MatchUpdateActivity;
 import com.roi.teammeet.services.DatabaseService;
 
 import java.util.List;
@@ -47,13 +47,13 @@ public class MatchEditAdapter extends RecyclerView.Adapter<MatchEditAdapter.Matc
     public void onBindViewHolder(@NonNull MatchEditAdapter.MatchEditViewHolder holder, int position) {
         Match match = matchList.get(position);
         holder.tvTitle.setText(match.getTitle());
-        holder.tvDescription.setText(match.getDescription());
-        holder.tvDate.setText(match.getDate() + " at " + match.getTime());
-        holder.tvGroupSize.setText(match.getGroup().toString());
+        holder.tvDescription.setText("תיאור: " + match.getDescription());
+        holder.tvDate.setText("תאריך ושעה: " + match.getDate() + " ב- " + match.getTime());
+        holder.tvGroupSize.setText("מספר משתתפים: " + match.getGroup().toString());
 
 
         holder.btnUpdate.setOnClickListener(v -> {
-            Intent updateIntent = new Intent(context, AdminMatchUpdateActivity.class);
+            Intent updateIntent = new Intent(context, MatchUpdateActivity.class);
             updateIntent.putExtra("matchId", match.getId());
             context.startActivity(updateIntent);
         });

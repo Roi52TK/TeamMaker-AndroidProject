@@ -50,7 +50,7 @@ public class Match {
     }
 
     private boolean canJoin(User user){
-        return !hasJoined(user) && ageRange.isInRange(user.getCalculatedAge()) && !group.isFull();
+        return !hasJoined(user) && ageRange.isInRange(user.getAge()) && !group.isFull();
     }
 
     public boolean hasJoined(User user){
