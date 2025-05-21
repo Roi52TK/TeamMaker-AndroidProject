@@ -40,19 +40,14 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
 
     EditText etTitle;
     EditText etDescription;
-    Button btnDate;
-    TextView tvDate;
-    Button btnTime;
-    TextView tvTime;
+    EditText etDate, etTime, etLocation;
     double lang, lat;
     String address;
-    TextView tvAddress;
     EditText etMinAge;
     EditText etMaxAge;
     EditText etSize;
     String chosenDate;
     String chosenTime;
-    Button btnMap;
     Button btnUpdate;
     boolean isDatePicked;
     private DatabaseService databaseService;
@@ -94,9 +89,9 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
         });
 
         initViews();
-        btnDate.setOnClickListener(this);
-        btnTime.setOnClickListener(this);
-        btnMap.setOnClickListener(this);
+        etDate.setOnClickListener(this);
+        etTime.setOnClickListener(this);
+        etLocation.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
 
 
@@ -105,15 +100,12 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
     private void initViews() {
         etTitle = findViewById(R.id.etTitle_matchUpdate);
         etDescription = findViewById(R.id.etDescription_matchUpdate);
-        btnDate = findViewById(R.id.btnDate_matchUpdate);
-        tvDate = findViewById(R.id.tvDate_matchUpdate);
-        btnTime = findViewById(R.id.btnTime_matchUpdate);
-        tvTime = findViewById(R.id.tvTime_matchUpdate);
+        etDate = findViewById(R.id.etDate_matchUpdate);
+        etTime = findViewById(R.id.etTime_matchUpdate);
+        etLocation = findViewById(R.id.etLocation_matchUpdate);
         etMinAge = findViewById(R.id.etMinAge_matchUpdate);
         etMaxAge = findViewById(R.id.etMaxAge_matchUpdate);
         etSize = findViewById(R.id.etSize_matchUpdate);
-        btnMap = findViewById(R.id.btnMap_matchUpdate);
-        tvAddress = findViewById(R.id.tvAddress_matchUpdate);
         btnUpdate = findViewById(R.id.btnCreate_matchUpdate);
 
         rvPlayers = findViewById(R.id.rvPlayers_matchUpdate);
@@ -125,15 +117,15 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
         etDescription.setText(ogMatch.getDescription());
 
         chosenDate = ogMatch.getDate();
-        tvDate.setText(chosenDate);
+        etDate.setText(chosenDate);
         chosenTime = ogMatch.getTime();
-        tvTime.setText(chosenTime);
+        etTime.setText(chosenTime);
 
         lang = ogMatch.getLang();
         lat = ogMatch.getLat();
 
         address = ogMatch.getAddress();
-        tvAddress.setText(address);
+        etLocation.setText(address);
 
         etMinAge.setText(String.valueOf(ogMatch.getAgeRange().getMin()));
         etMaxAge.setText(String.valueOf(ogMatch.getAgeRange().getMax()));
@@ -191,7 +183,7 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
                 lat = Double.parseDouble(latSt);
                 lang = Double.parseDouble(langSt);
 
-                tvAddress.setText(address);
+                etLocation.setText(address);
             }
         }
     }
@@ -205,7 +197,7 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         chosenDate = dayOfMonth + "/" + (month + 1) + "/" + year;
                         isDatePicked = true;
-                        tvDate.setText(chosenDate);
+                        etDate.setText(chosenDate);
                     }
                 },
                 DateUtil.getYear(chosenDate),
@@ -224,7 +216,7 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
                         chosenTime = String.format("%d:%02d", hourOfDay, minute);
-                        tvTime.setText(chosenTime);
+                        etTime.setText(chosenTime);
                     }
                 },
                 12, 0, true
@@ -251,15 +243,15 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
 
         if(!MatchValidator.isDateTimeValid(chosenDate, chosenTime)){
             Log.e(TAG, "checkInput: Date or time have already passed");
-            tvDate.setError("Date or time have already passed");
-            tvDate.requestFocus();
+            etDate.setError("Date or time have already passed");
+            etDate.requestFocus();
             return false;
         }
 
         if(!MatchValidator.isAddressValid(address)){
             Log.e(TAG, "checkInput: Address cannot be empty");
-            tvAddress.setError("Address cannot be empty");
-            tvAddress.requestFocus();
+            etLocation.setError("Address cannot be empty");
+            etLocation.requestFocus();
             return false;
         }
 
@@ -304,13 +296,13 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v == btnDate){
+        if(v == etDate){
             createDateDialog();
         }
-        if(v == btnTime){
+        if(v == etTime){
             createTimeDialog();
         }
-        if(v == btnMap){
+        if(v == etLocation){
             Intent mapsIntent = new Intent(this, MapsActivity.class);
             mapsIntent.putExtra("lat", String.valueOf(lat));
             mapsIntent.putExtra("lang", String.valueOf(lang));

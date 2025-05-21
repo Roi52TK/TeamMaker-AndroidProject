@@ -1,0 +1,113 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+    String id;
+    String username, birthDate, gender, phone, email, password;
+    boolean isAdmin;
+
+    public User()
+    public User(String id, String username, String birthDate, String gender, String phone, String email, String password, boolean isAdmin)
+    public User(String id, String username, String birthDate, boolean isAdmin)
+    public int getAge()
+    public String getBirthDate()
+    public void setBirthDate(String birthDate)
+    public String getGender()
+    public void setGender(String gender)
+    public String getEmail()
+    public void setEmail(String email)
+    public String getUsername()
+    public void setUsername(String username)
+    public String getId()
+    public void setId(String id)
+    public String getPhone()
+    public void setPhone(String phone)
+    public String getPassword()
+    public void setPassword(String password)
+    public boolean isAdmin()
+    public void setAdmin(boolean admin)
+    @Override public String toString()
+    @Override public boolean equals(Object o)
+    @Override public int hashCode()
+}
+
+class Match {
+    protected String id;
+    protected String title;
+    protected String description;
+    private String hostUserId;
+    private String date;
+    private String time;
+    protected double lat, lang;
+    private String address;
+    private Range ageRange;
+    private Group group;
+
+    public Match()
+    public Match(String id, String title, String description, String hostUserId, String date, String time, double lat, double lang, String address, int minAge, int maxAge, int groupSize)
+    public boolean join(User user)
+    private void add(String userId)
+    public int kick(User user)
+    private boolean canJoin(User user)
+    public boolean hasJoined(User user)
+    public boolean isHost(User user)
+    public int getSize()
+    public boolean isExpired()
+    public String getId()
+    public void setId(String id)
+    public String getTitle()
+    public void setTitle(String title)
+    public String getDescription()
+    public void setDescription(String description)
+    public String getHostUserId()
+    public void setHostUserId(String hostUserId)
+    public String getDate()
+    public void setDate(String date)
+    public String getTime()
+    public void setTime(String time)
+    public double getLat()
+    public void setLat(double lat)
+    public double getLang()
+    public void setLang(double lang)
+    public String getAddress()
+    public void setAddress(String address)
+    public Range getAgeRange()
+    public void setAgeRange(Range ageRange)
+    public Group getGroup()
+    public void setGroup(Group group)
+    @Override public String toString()
+}
+
+class Range implements Serializable {
+    int min;
+    int max;
+
+    public Range()
+    public Range(int min, int max)
+    public int getMin()
+    public void setMin(int min)
+    public int getMax()
+    public void setMax(int max)
+    public boolean isInRange(int x)
+    @NonNull public String toString()
+}
+
+class Group implements Serializable{
+
+    private int max;
+    private ArrayList<String> playersId;
+    public Group()
+    public Group(int max)
+    public void add(String userId)
+    public int remove(String userId)
+    public boolean isFull()
+    public boolean contains(String userId)
+    public int getCurrent()
+    public int getMax()
+    public void setMax(int max)
+    public ArrayList<String> getPlayersId()
+    public void setPlayersId(ArrayList<String> playersId)
+    @NonNull public String toString()
+}
+
+@enduml

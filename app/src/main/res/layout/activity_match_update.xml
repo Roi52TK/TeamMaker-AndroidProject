@@ -48,66 +48,56 @@
             android:padding="8dp"
             android:layout_marginBottom="12dp" />
 
-        <Button
-            android:id="@+id/btnDate_matchUpdate"
+        <EditText
+            android:id="@+id/etDate_matchUpdate"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="בחר תאריך"
-            android:textSize="16sp"
-            android:backgroundTint="@color/btnBG"
-            android:textColor="@android:color/white"
+            android:layout_height="40dp"
             android:padding="10dp"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:id="@+id/tvDate_matchUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
             android:textSize="16sp"
-            android:textColor="@color/textColor"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnTime_matchUpdate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="בחר שעה"
-            android:textSize="16sp"
-            android:backgroundTint="@color/btnBG"
-            android:textColor="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:id="@+id/tvTime_matchUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="16sp"
-            android:textColor="@color/textColor"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnMap_matchUpdate"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="בחר מיקום"
-            android:textSize="16sp"
-            android:backgroundTint="@color/accent"
-            android:textColor="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:id="@+id/tvAddress_matchUpdate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
+            android:layout_marginBottom="24dp"
+            android:focusable="false"
+            android:clickable="true"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:hint="בחר תאריך"
             android:textColor="@color/textColor"
-            android:layout_marginBottom="12dp" />
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:inputType="none" />
+
+        <EditText
+            android:id="@+id/etTime_matchUpdate"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:hint="בחר שעה"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:drawableEnd="@drawable/ic_time"
+            android:inputType="none" />
+
+        <EditText
+            android:id="@+id/etLocation_matchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:hint="בחר מיקום"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/etHintTextColor"
+            android:background="@drawable/edittext_background"
+            android:drawableEnd="@drawable/ic_location"
+            android:inputType="none" />
 
         <LinearLayout
             android:layout_width="match_parent"
