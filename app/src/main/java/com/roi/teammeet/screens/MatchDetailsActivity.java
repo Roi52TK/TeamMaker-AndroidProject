@@ -20,6 +20,7 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.MatchGroupAdapter;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class MatchDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_match_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -152,5 +154,11 @@ public class MatchDetailsActivity extends BaseActivity implements View.OnClickLi
         else if(v == tvAddress){
             DialogUtil.openMapOptions(this, match.getLat(), match.getLang());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

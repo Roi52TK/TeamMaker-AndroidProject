@@ -96,11 +96,33 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <Spinner
-                android:id="@+id/spinnerGender_userCard"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1" />
+            <RadioGroup
+                android:id="@+id/rgGender_userCard"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/rbMaleGender_userCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor"
+                    android:text="זכר" />
+
+                <RadioButton
+                    android:id="@+id/rbFemaleGender_userCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor"
+                    android:text="נקבה" />
+
+                <RadioButton
+                    android:id="@+id/rbOtherGender_userCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColor"
+                    android:text="אחר" />
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/tvGender_userCard"

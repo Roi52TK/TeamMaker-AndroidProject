@@ -22,7 +22,6 @@
         android:textSize="56sp"
         android:textStyle="bold" />
 
-    <!-- Repeat this block for each label + input pair -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -107,12 +106,12 @@
 
         <TextView
             android:id="@+id/tvGender_myProfile"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="מגדר"
-            android:textSize="18sp"
-            android:textColor="@color/textColor"/>
+            android:text="מגדר:"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="120dp"
+            android:textSize="28sp" />
     </LinearLayout>
 
     <LinearLayout

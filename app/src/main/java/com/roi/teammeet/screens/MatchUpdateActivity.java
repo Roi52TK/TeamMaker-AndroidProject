@@ -28,6 +28,7 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.Range;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
 
@@ -62,6 +63,7 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_match_update);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -365,5 +367,6 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
     protected void onDestroy() {
         databaseService.stopListenUserRealtime(this.userListRealtime);
         super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

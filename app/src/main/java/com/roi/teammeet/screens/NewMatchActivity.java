@@ -23,6 +23,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.DateUtil;
 import com.roi.teammeet.utils.MatchValidator;
 import com.roi.teammeet.utils.ReminderUtils;
@@ -53,6 +54,7 @@ public class NewMatchActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_new_match);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -276,5 +278,11 @@ public class NewMatchActivity extends BaseActivity implements View.OnClickListen
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

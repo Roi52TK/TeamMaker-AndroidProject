@@ -19,6 +19,7 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.MyMatchGroupAdapter;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.DialogUtil;
 
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class MyMatchDetailsActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_my_match_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -127,6 +129,7 @@ public class MyMatchDetailsActivity extends BaseActivity implements View.OnClick
     protected void onDestroy() {
         databaseService.stopListenUserRealtime(this.userListRealtime);
         super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     @Override

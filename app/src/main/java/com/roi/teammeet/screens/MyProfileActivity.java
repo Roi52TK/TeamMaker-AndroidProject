@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
@@ -34,6 +35,7 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_my_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -98,10 +100,10 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     private void setCheckedGender() {
         int id;
 
-        if(user.getGender().equals("זכר")){
+        if(user.getGender().equals("male")){
             id = rbMale.getId();
         }
-        else if(user.getGender().equals("נקבה")){
+        else if(user.getGender().equals("female")){
             id = rbFemale.getId();
         }
         else{
@@ -125,8 +127,6 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
             etPhone.requestFocus();
             return false;
         }
-
-        //TODO: add radio button for Gender instead of edit text
 
         return true;
     }
@@ -170,13 +170,19 @@ public class MyProfileActivity extends BaseActivity implements View.OnClickListe
     public void onCheckedChanged(RadioGroup radioGroup, int id) {
 
         if(id == rbMale.getId()){
-            chosenGender = "זכר";
+            chosenGender = "male";
         }
         else if(id == rbFemale.getId()){
-            chosenGender = "נקבה";
+            chosenGender = "female";
         }
         else if(id == rbOther.getId()){
-            chosenGender = "אחר";
+            chosenGender = "other";
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

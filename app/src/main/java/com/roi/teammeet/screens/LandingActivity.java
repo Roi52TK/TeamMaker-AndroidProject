@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.roi.teammeet.R;
+import com.roi.teammeet.utils.ActivityCollector;
 
 public class LandingActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,6 +21,7 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_landing);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -58,13 +60,11 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
     private void goToRegister() {
         Intent go = new Intent(this, RegisterActivity.class);
         startActivity(go);
-        finish();
     }
 
     private void goToLogin() {
         Intent go = new Intent(this, LoginActivity.class);
         startActivity(go);
-        finish();
     }
 
     private void goToAbout() {
@@ -75,5 +75,11 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

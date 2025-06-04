@@ -13,6 +13,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.Match;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.MatchEditAdapter;
+import com.roi.teammeet.utils.ActivityCollector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class AdminMatchEditActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_admin_match_edit);
 
         databaseService = DatabaseService.getInstance();
@@ -87,5 +89,6 @@ public class AdminMatchEditActivity extends BaseActivity {
     protected void onDestroy() {
         databaseService.stopListenUserRealtime(this.matchListRealtime);
         super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

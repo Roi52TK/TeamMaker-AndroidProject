@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.databinding.ActivityMapsBinding;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.GeneralMapsActivity;
 
 import org.osmdroid.events.MapListener;
@@ -38,6 +39,7 @@ public class MapsActivity extends GeneralMapsActivity implements MapListener, Gp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
 
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
@@ -123,5 +125,11 @@ public class MapsActivity extends GeneralMapsActivity implements MapListener, Gp
         city = etCity.getText().toString();
 
         setMarker(street, streetNumber, city);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

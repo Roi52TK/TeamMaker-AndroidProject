@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.roi.teammeet.R;
 import com.roi.teammeet.services.AuthenticationService;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 public class BaseActivity extends AppCompatActivity {
@@ -63,9 +64,9 @@ public class BaseActivity extends AppCompatActivity {
         }
         else if(item.getItemId() == R.id.logout_menu){
             SignOut();
+            ActivityCollector.finishAll();
             goIntent = new Intent(this, LandingActivity.class);
             startActivity(goIntent);
-            //finish();
         }
 
         return  true;

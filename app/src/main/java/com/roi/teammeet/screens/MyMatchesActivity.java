@@ -14,6 +14,7 @@ import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.adapters.JoinedMatchAdapter;
 import com.roi.teammeet.adapters.MyMatchAdapter;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MyMatchesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_my_matches);
         databaseService = DatabaseService.getInstance();
         currentUser = SharedPreferencesUtil.getUser(this);
@@ -79,5 +81,6 @@ public class MyMatchesActivity extends BaseActivity {
     protected void onDestroy() {
         databaseService.stopListenMatchRealtime(this.matchListRealtime);
         super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

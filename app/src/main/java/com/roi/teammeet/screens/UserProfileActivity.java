@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ActivityCollector;
 
 public class UserProfileActivity extends BaseActivity {
 
@@ -21,6 +22,7 @@ public class UserProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
         setContentView(R.layout.activity_user_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -55,5 +57,11 @@ public class UserProfileActivity extends BaseActivity {
         tvUsername.setText("שם משתמש: " + user.getUsername().toString());
         tvBirthYear.setText("גיל: " + user.getAge());
         tvGender.setText("מין: " + user.getGender().toString());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 }

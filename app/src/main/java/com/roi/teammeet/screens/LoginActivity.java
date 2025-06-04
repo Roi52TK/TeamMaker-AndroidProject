@@ -17,6 +17,7 @@ import com.roi.teammeet.R;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.AuthenticationService;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 import com.roi.teammeet.utils.Validator;
 
@@ -120,6 +121,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
                 finish();
+                ActivityCollector.finishAll();
             }
 
             @Override
