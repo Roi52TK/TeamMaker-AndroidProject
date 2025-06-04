@@ -55,6 +55,7 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
     private User hostUser;
     private String ogMatchId;
     private Match ogMatch;
+    private TextView tvHost;
     private RecyclerView rvPlayers;
     List<User> players;
     private MyMatchGroupAdapter myMatchGroupAdapter;
@@ -110,6 +111,8 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
         etSize = findViewById(R.id.etSize_matchUpdate);
         btnUpdate = findViewById(R.id.btnCreate_matchUpdate);
 
+        tvHost = findViewById(R.id.tvHost_matchUpdate);
+
         rvPlayers = findViewById(R.id.rvPlayers_matchUpdate);
         rvPlayers.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -139,6 +142,9 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
             public void onCompleted(User object) {
                 Log.d(TAG, "onCompleted: User received successfully");
                 hostUser = object;
+
+                tvHost.setText(tvHost.getText().toString() + hostUser.getUsername());
+                tvHost.setOnClickListener(MatchUpdateActivity.this);
             }
 
             @Override
@@ -273,8 +279,8 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
         }
 
         if(!MatchValidator.isUserAgeValid(min, max, hostUser.getBirthDate())){
-            Log.e(TAG, "checkInput: Your age is not in range");
-            etMaxAge.setError("Your age is not in range");
+            Log.e(TAG, "checkInput: Host's age is not in range");
+            etMaxAge.setError("Host's age is not in range");
             etMaxAge.requestFocus();
             return false;
         }
@@ -301,17 +307,22 @@ public class MatchUpdateActivity extends BaseActivity implements View.OnClickLis
         if(v == etDate){
             createDateDialog();
         }
-        if(v == etTime){
+        else if(v == etTime){
             createTimeDialog();
         }
-        if(v == etLocation){
+        else if(v == etLocation){
             Intent mapsIntent = new Intent(this, MapsActivity.class);
             mapsIntent.putExtra("lat", String.valueOf(lat));
             mapsIntent.putExtra("lang", String.valueOf(lang));
             startActivityForResult(mapsIntent, 200);
         }
-        if(v == btnUpdate){
+        else if(v == btnUpdate){
             onClickUpdate();
+        }
+        else if(v == tvHost){
+            Intent userProfileIntent = new Intent(this, UserProfileActivity.class);
+            userProfileIntent.putExtra("userId", hostUser.getId());
+            startActivity(userProfileIntent);
         }
     }
 

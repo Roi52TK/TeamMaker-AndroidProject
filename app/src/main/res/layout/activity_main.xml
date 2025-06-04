@@ -15,64 +15,76 @@
         android:layout_height="wrap_content"
         android:text="Welcome back!"
         android:textColor="@color/textColor"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="36dp" />
 
     <Button
         android:id="@+id/btnSearchMatches_main"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="חיפוש מפגשים"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:backgroundTint="@color/btnBG"
         android:textColor="@android:color/white"
-        android:padding="14dp"
+        android:padding="24dp"
         android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/btnMyMatches_main"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="המפגשים שלי"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:backgroundTint="@color/btnBG"
         android:textColor="@android:color/white"
-        android:padding="14dp"
+        android:padding="24dp"
         android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/btnCreateMatch_main"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="צור מפגש!"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:backgroundTint="@color/btnBG"
         android:textColor="@android:color/white"
-        android:padding="14dp"
+        android:padding="24dp"
         android:layout_marginBottom="20dp" />
 
-    <Button
-        android:id="@+id/btnAdminUserEdit_main"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="מנהל משתמשים"
-        android:textSize="18sp"
-        android:backgroundTint="#CD7E1D"
-        android:textColor="@android:color/white"
-        android:padding="14dp"
-        android:layout_marginBottom="8dp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="32dp" >
 
-    <Button
-        android:id="@+id/btnAdminMatchEdit_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="מנהל מפגשים"
-        android:textSize="18sp"
-        android:backgroundTint="#CD7E1D"
-        android:textColor="@android:color/white"
-        android:padding="14dp"
-        android:layout_marginBottom="32dp" />
+        <Button
+            android:id="@+id/btnAdminUserEdit_main"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="מנהל משתמשים"
+            android:textSize="22sp"
+            android:backgroundTint="#CD7E1D"
+            android:textColor="@android:color/white"
+            android:padding="24dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnAdminMatchEdit_main"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="מנהל מפגשים"
+            android:textSize="22sp"
+            android:backgroundTint="#CD7E1D"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:padding="24dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/bottomButtons"

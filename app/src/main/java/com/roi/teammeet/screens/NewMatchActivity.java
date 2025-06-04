@@ -25,6 +25,7 @@ import com.roi.teammeet.models.User;
 import com.roi.teammeet.services.DatabaseService;
 import com.roi.teammeet.utils.ActivityCollector;
 import com.roi.teammeet.utils.DateUtil;
+import com.roi.teammeet.utils.MatchNotificationWorker;
 import com.roi.teammeet.utils.MatchValidator;
 import com.roi.teammeet.utils.ReminderUtils;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
@@ -257,11 +258,12 @@ public class NewMatchActivity extends BaseActivity implements View.OnClickListen
             public void onCompleted(Object object) {
                 Log.d(TAG, "onCompleted: Created a match");
 
-                //long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(match.getDate(), match.getTime());
-                //ReminderUtils.scheduleMeetingReminder(context, meetingTimeMillis, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
+                //Immediate Notification
+                MatchNotificationWorker.createdMatchNotification(NewMatchActivity.this, title, chosenDate, chosenTime, matchId);
 
-                //TODO: change the meeting time
-                ReminderUtils.scheduleMeetingReminder(NewMatchActivity.this, 10 * 1000, title, chosenTime, currentUser.getUsername(), matchId);
+                //Timed Notification
+                long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(chosenDate, chosenTime);
+                ReminderUtils.scheduleMeetingReminder(NewMatchActivity.this, meetingTimeMillis, title, chosenTime, matchId);
             }
 
             @Override

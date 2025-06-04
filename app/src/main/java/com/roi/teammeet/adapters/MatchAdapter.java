@@ -17,6 +17,7 @@ import com.roi.teammeet.models.Match;
 import com.roi.teammeet.models.User;
 import com.roi.teammeet.screens.MatchDetailsActivity;
 import com.roi.teammeet.services.DatabaseService;
+import com.roi.teammeet.utils.MatchNotificationWorker;
 import com.roi.teammeet.utils.ReminderUtils;
 import com.roi.teammeet.utils.SharedPreferencesUtil;
 
@@ -77,11 +78,13 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.MatchViewHol
                                 @Override
                                 public void onCompleted(Object object) {
                                     Toast.makeText(context, "Joined the match!", Toast.LENGTH_SHORT).show();
-                                    //long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(match.getDate(), match.getTime());
-                                    //ReminderUtils.scheduleMeetingReminder(context, meetingTimeMillis, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
 
-                                    //TODO: change the meeting time
-                                    ReminderUtils.scheduleMeetingReminder(context, 10 * 1000, match.getTitle(), match.getTime(), currentUser.getUsername(), match.getId());
+                                    //Immediate Notification
+                                    MatchNotificationWorker.joinedMatchNotification(context, match.getTitle(), match.getDate(), match.getTime(), match.getId());
+
+                                    //Timed Notification
+                                    long meetingTimeMillis = ReminderUtils.dateTimeToMilliseconds(match.getDate(), match.getTime());
+                                    ReminderUtils.scheduleMeetingReminder(context, meetingTimeMillis, match.getTitle(), match.getTime(), match.getId());
                                 }
 
                                 @Override

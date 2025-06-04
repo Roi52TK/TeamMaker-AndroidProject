@@ -2,12 +2,8 @@ package com.roi.teammeet.utils;
 
 import android.util.Log;
 
-import com.roi.teammeet.MyApplication;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -70,7 +66,7 @@ public class DateUtil {
         if(current_date.after(expiration_date)){
             return true;
         }
-        else if(current_date.equals(expiration_date)){
+        if(current_date.equals(expiration_date)){
             return hasTimePassed(time);
         }
         return false;
@@ -94,19 +90,6 @@ public class DateUtil {
             e.printStackTrace();
             return false; // fallback if parsing fails
         }
-    }
-
-    public static ArrayList<String> birthYearsArray(){
-        int currentYear;
-        currentYear = Year.now().getValue();
-
-        ArrayList<String> birthYearsArrayList = new ArrayList<>();
-
-        for(int i = currentYear - MyApplication.AGE_LIMIT; i >= currentYear - 80; i--){
-            birthYearsArrayList.add(String.valueOf(i));
-        }
-
-        return birthYearsArrayList;
     }
 
     public static int getAge(String birthDateStr) {

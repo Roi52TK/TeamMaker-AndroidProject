@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ReminderUtils {
 
-    public static void scheduleMeetingReminder(Context context, long meetingTimeMillis, String title, String time, String username, String matchId) {
+    public static void scheduleMeetingReminder(Context context, long meetingTimeMillis, String title, String time, String matchId) {
         long currentTime = System.currentTimeMillis();
         //long delay = meetingTimeMillis - currentTime - 60 * 60 * 1000; // 1 hour before
 
@@ -24,7 +24,6 @@ public class ReminderUtils {
             Data inputData = new Data.Builder()
                     .putString("matchTitle", title)
                     .putString("matchTime", time)
-                    .putString("username", username)
                     .putString("matchId", matchId)
                     .build();
 

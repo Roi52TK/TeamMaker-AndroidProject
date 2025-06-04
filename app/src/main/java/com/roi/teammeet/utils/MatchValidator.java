@@ -37,8 +37,8 @@ public class MatchValidator {
         return Integer.parseInt(min) <= Integer.parseInt(max);
     }
 
-    public static boolean isUserAgeValid(String min, String max, String birthYear) {
-        int age = Year.now().getValue() - Integer.parseInt(birthYear);
+    public static boolean isUserAgeValid(String min, String max, String birthDate) {
+        int age = DateUtil.getAge(birthDate);
 
         return age >= Integer.parseInt(min) && age <= Integer.parseInt(max);
     }

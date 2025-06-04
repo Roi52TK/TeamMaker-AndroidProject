@@ -19,17 +19,16 @@ public class MatchNotificationWorker extends Worker {
         // Retrieve match data from input data
         String matchTitle = getInputData().getString("matchTitle");
         String matchTime = getInputData().getString("matchTime");
-        String userName = getInputData().getString("userName");
         String matchId = getInputData().getString("matchId");
 
         // Create and show the notification
-        showNotification(matchTitle, matchTime, userName, matchId);
+        showNotification(matchTitle, matchTime, matchId);
 
         // Indicate that the work has completed successfully
         return Result.success();
     }
 
-    private void showNotification(String matchTitle, String matchTime, String userName, String matchId) {
+    private void showNotification(String matchTitle, String matchTime, String matchId) {
         // Check if the channel is created only once
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             android.app.NotificationChannel channel = new android.app.NotificationChannel(
@@ -48,11 +47,37 @@ public class MatchNotificationWorker extends Worker {
                 //.setSmallIcon(R.drawable.ic_notification)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Match Reminder: " + matchTitle)
-                .setContentText(userName + ", your match is scheduled at " + matchTime)
+                .setContentText("Your match is scheduled at " + matchTime)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
         int notificationId = matchId.hashCode();
         NotificationManagerCompat.from(getApplicationContext()).notify(notificationId, builder.build());
+    }
+
+    public static void joinedMatchNotification(Context context, String matchTitle, String matchDate, String matchTime, String matchId){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "match_notifications_channel")
+                //.setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("Joined Match: " + matchTitle)
+                .setContentText("Your match is scheduled on " + matchDate + " at " + matchTime + ".")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        int notificationId = matchId.hashCode();
+        NotificationManagerCompat.from(context).notify(notificationId, builder.build());
+    }
+
+    public static void createdMatchNotification(Context context, String matchTitle, String matchDate, String matchTime, String matchId){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "match_notifications_channel")
+                //.setSmallIcon(R.drawable.ic_notification)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("Created Match: " + matchTitle)
+                .setContentText("Your match is scheduled on " + matchDate + " at " + matchTime + ".")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        int notificationId = matchId.hashCode();
+        NotificationManagerCompat.from(context).notify(notificationId, builder.build());
     }
 }

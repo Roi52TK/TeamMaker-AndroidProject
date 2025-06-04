@@ -158,6 +158,16 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
+        <TextView
+            android:id="@+id/tvHost_matchUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="יוצר: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPlayers_matchUpdate"
             android:layout_width="match_parent"
