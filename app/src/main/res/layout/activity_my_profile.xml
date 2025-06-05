@@ -29,6 +29,15 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
 
+        <TextView
+            android:id="@+id/tvUsername_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="שם משתמש: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp" />
+
         <EditText
             android:id="@+id/etUsername_myProfile"
             android:layout_width="0dp"
@@ -42,14 +51,6 @@
             android:padding="12dp"
             android:hint="שם משתמש" />
 
-        <TextView
-            android:id="@+id/tvUsername_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="שם משתמש: "
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,46 +73,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_vertical">
+        android:layout_marginBottom="16dp"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvGender_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="מגדר"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  " />
 
         <RadioGroup
             android:id="@+id/rgGender_myProfile"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/rbMaleGender_myProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:text="זכר" />
+                android:text="זכר"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textColor" />
 
             <RadioButton
                 android:id="@+id/rbFemaleGender_myProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:text="נקבה" />
+                android:text="נקבה"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textColor" />
 
             <RadioButton
                 android:id="@+id/rbOtherGender_myProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textColor"
-                android:text="אחר" />
+                android:text="אחר"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/textColor" />
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/tvGender_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="מגדר:"
-            android:textColor="@color/textColor"
-            android:layout_marginStart="120dp"
-            android:textSize="28sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -120,6 +132,15 @@
         android:orientation="horizontal"
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvPhone_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="טלפון: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp" />
 
         <EditText
             android:id="@+id/etPhone_myProfile"
@@ -134,14 +155,6 @@
             android:padding="12dp"
             android:hint="מספר טלפון" />
 
-        <TextView
-            android:id="@+id/tvPhone_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="טלפון: "
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -150,6 +163,15 @@
         android:orientation="horizontal"
         android:layout_marginBottom="40dp"
         android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvEmail_myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="אימייל: "
+            android:textColor="@color/textColor"
+            android:textSize="28sp" />
 
         <EditText
             android:id="@+id/etEmail_myProfile"
@@ -164,14 +186,6 @@
             android:padding="12dp"
             android:hint="אימייל" />
 
-        <TextView
-            android:id="@+id/tvEmail_myProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="אימייל: "
-            android:textColor="@color/textColor"
-            android:textSize="28sp"
-            android:layout_marginEnd="12dp" />
     </LinearLayout>
 
     <Button

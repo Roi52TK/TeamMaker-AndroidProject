@@ -61,6 +61,21 @@
             android:gravity="center_vertical">
 
             <Button
+                android:id="@+id/btnDetails_myMatchCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBG"
+                android:elevation="4dp"
+                android:padding="12dp"
+                android:text="פרטים"
+                android:textColor="@color/btnText" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="0dp" />
+
+            <Button
                 android:id="@+id/btnDelete_myMatchCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,21 +83,6 @@
                 android:text="מחק"
                 android:backgroundTint="#E60000"
                 android:textColor="@color/white"
-                android:padding="12dp"
-                android:elevation="4dp" />
-
-            <View
-                android:layout_width="16dp"
-                android:layout_height="0dp" />
-
-            <Button
-                android:id="@+id/btnDetails_myMatchCard"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="פרטים"
-                android:backgroundTint="@color/btnBG"
-                android:textColor="@color/btnText"
                 android:padding="12dp"
                 android:elevation="4dp" />
 

@@ -61,27 +61,27 @@
             android:gravity="center_vertical">
 
             <Button
-                android:id="@+id/btnJoin_itemCard"
+                android:id="@+id/btnDetails_itemCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="הצטרף"
-                android:backgroundTint="#2AC318"
-                android:textColor="@color/white"
+                android:backgroundTint="@color/btnBG"
+                android:elevation="4dp"
                 android:padding="12dp"
-                android:elevation="4dp"/>
+                android:text="פרטים"
+                android:textColor="@color/white" />
 
             <View
                 android:layout_width="16dp"
                 android:layout_height="0dp" />
 
             <Button
-                android:id="@+id/btnDetails_itemCard"
+                android:id="@+id/btnJoin_itemCard"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="פרטים"
-                android:backgroundTint="@color/btnBG"
+                android:text="הצטרף"
+                android:backgroundTint="#2AC318"
                 android:textColor="@color/white"
                 android:padding="12dp"
                 android:elevation="4dp"/>

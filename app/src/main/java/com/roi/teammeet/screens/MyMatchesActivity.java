@@ -2,6 +2,8 @@ package com.roi.teammeet.screens;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +33,7 @@ public class MyMatchesActivity extends BaseActivity {
     private JoinedMatchAdapter joinedMatchAdapter;
     private List<Match> myMatchList;
     private List<Match> joinedMatchList;
+    private TextView tvEmptyMatches;
     private User currentUser;
     ValueEventListener matchListRealtime;
 
@@ -42,6 +45,8 @@ public class MyMatchesActivity extends BaseActivity {
         databaseService = DatabaseService.getInstance();
         currentUser = SharedPreferencesUtil.getUser(this);
 
+        tvEmptyMatches = findViewById(R.id.tvEmptyMatches_myMatches);
+
         rvMyMatches = findViewById(R.id.rv_myMatches);
         rvMyMatches.setLayoutManager(new LinearLayoutManager(this));
 
@@ -50,12 +55,12 @@ public class MyMatchesActivity extends BaseActivity {
 
         matchListRealtime = databaseService.getMatchListRealtime(new DatabaseService.DatabaseCallback<List<Match>>() {
             @Override
-            public void onCompleted(List<Match> object) {
+            public void onCompleted(List<Match> matches) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
                 myMatchList = new ArrayList<>();
                 joinedMatchList = new ArrayList<>();
 
-                for (Match m: object) {
+                for (Match m: matches) {
                     if(m.isHost(currentUser)){
                         myMatchList.add(m);
                     }
@@ -63,11 +68,21 @@ public class MyMatchesActivity extends BaseActivity {
                         joinedMatchList.add(m);
                     }
                 }
-                myMatchAdapter = new MyMatchAdapter(MyMatchesActivity.this, myMatchList);
-                rvMyMatches.setAdapter(myMatchAdapter);
+                if (myMatchList.isEmpty() && joinedMatchList.isEmpty()) {
+                    rvMyMatches.setVisibility(View.GONE);
+                    rvJoinedMatches.setVisibility(View.GONE);
+                    tvEmptyMatches.setVisibility(View.VISIBLE);
+                } else {
+                    tvEmptyMatches.setVisibility(View.GONE);
+                    rvMyMatches.setVisibility(View.VISIBLE);
+                    rvJoinedMatches.setVisibility(View.VISIBLE);
 
-                joinedMatchAdapter = new JoinedMatchAdapter(MyMatchesActivity.this, joinedMatchList);
-                rvJoinedMatches.setAdapter(joinedMatchAdapter);
+                    myMatchAdapter = new MyMatchAdapter(MyMatchesActivity.this, myMatchList);
+                    rvMyMatches.setAdapter(myMatchAdapter);
+
+                    joinedMatchAdapter = new JoinedMatchAdapter(MyMatchesActivity.this, joinedMatchList);
+                    rvJoinedMatches.setAdapter(joinedMatchAdapter);
+                }
             }
 
             @Override

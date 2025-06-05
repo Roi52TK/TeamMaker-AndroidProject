@@ -60,6 +60,18 @@
         android:layout_marginBottom="32dp" >
 
         <Button
+            android:id="@+id/btnAdminMatchEdit_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#CD7E1D"
+            android:padding="24dp"
+            android:text="מנהל מפגשים"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <Button
             android:id="@+id/btnAdminUserEdit_main"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -72,18 +84,6 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="8dp" />
 
-        <Button
-            android:id="@+id/btnAdminMatchEdit_main"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="מנהל מפגשים"
-            android:textSize="22sp"
-            android:backgroundTint="#CD7E1D"
-            android:textColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:padding="24dp"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -95,6 +95,17 @@
         android:weightSum="2">
 
         <Button
+            android:id="@+id/btnProfile_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/btnBG"
+            android:paddingHorizontal="16dp"
+            android:text="פרופיל"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <Button
             android:id="@+id/btnSignOut_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,19 +114,9 @@
             android:textSize="24sp"
             android:backgroundTint="#A10000"
             android:textColor="@android:color/white"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:paddingHorizontal="16dp" />
 
-        <Button
-            android:id="@+id/btnProfile_main"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="פרופיל"
-            android:textSize="24sp"
-            android:backgroundTint="@color/btnBG"
-            android:textColor="@android:color/white"
-            android:paddingHorizontal="16dp" />
     </LinearLayout>
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.roi.teammeet.screens;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +25,8 @@ public class SearchMatchesActivity extends BaseActivity {
 
     private DatabaseService databaseService;
     private SearchView searchView;
-    private RecyclerView recyclerView;
+    private RecyclerView rvMatches;
+    private TextView tvEmptyMatches;
     private MatchAdapter matchAdapter;
     private List<Match> matchList;
 
@@ -52,17 +55,30 @@ public class SearchMatchesActivity extends BaseActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.rv_searchMatches);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tvEmptyMatches = findViewById(R.id.tvEmptyMatches_searchMatches);
+
+        rvMatches = findViewById(R.id.rv_searchMatches);
+        rvMatches.setLayoutManager(new LinearLayoutManager(this));
 
         matchList = new ArrayList<>();
         matchListRealtime = databaseService.getMatchListRealtime(new DatabaseService.DatabaseCallback<List<Match>>() {
             @Override
-            public void onCompleted(List<Match> object) {
+            public void onCompleted(List<Match> matches) {
                 Log.d(TAG, "onCompleted: Matches received successfully");
-                matchList = object;
-                matchAdapter = new MatchAdapter(SearchMatchesActivity.this, matchList);
-                recyclerView.setAdapter(matchAdapter);
+                matchList = matches;
+
+                if(matchList.isEmpty()){
+                    tvEmptyMatches.setVisibility(View.VISIBLE);
+                    rvMatches.setVisibility(View.GONE);
+                }
+                else{
+                    rvMatches.setVisibility(View.VISIBLE);
+                    tvEmptyMatches.setVisibility(View.GONE);
+
+                    matchAdapter = new MatchAdapter(SearchMatchesActivity.this, matchList);
+                    rvMatches.setAdapter(matchAdapter);
+                }
+
             }
 
             @Override
