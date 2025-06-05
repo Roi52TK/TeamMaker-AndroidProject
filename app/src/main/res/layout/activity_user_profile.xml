@@ -47,4 +47,13 @@
         android:textSize="24sp"
         android:layout_marginBottom="16dp" />
 
+    <TextView
+        android:id="@+id/tvPhone_userProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="מספר טלפון"
+        android:textColor="@color/textColor"
+        android:textSize="24sp"
+        android:layout_marginBottom="16dp" />
+
 </LinearLayout>

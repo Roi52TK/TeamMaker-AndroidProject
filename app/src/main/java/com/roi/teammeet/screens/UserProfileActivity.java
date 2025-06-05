@@ -17,6 +17,7 @@ public class UserProfileActivity extends BaseActivity {
     TextView tvUsername;
     TextView tvBirthYear;
     TextView tvGender;
+    TextView tvPhone;
     User user;
 
     @Override
@@ -51,12 +52,14 @@ public class UserProfileActivity extends BaseActivity {
         tvUsername = findViewById(R.id.tvUsername_userProfile);
         tvBirthYear = findViewById(R.id.tvBirthYear_userProfile);
         tvGender = findViewById(R.id.tvGender_userProfile);
+        tvPhone = findViewById(R.id.tvPhone_userProfile);
     }
 
     private void initData(){
         tvUsername.setText("שם משתמש: " + user.getUsername().toString());
         tvBirthYear.setText("גיל: " + user.getAge());
         tvGender.setText("מין: " + user.getGender().toString());
+        tvPhone.setText("מספר טלפון: " + user.getPhone().toString());
     }
 
     @Override
